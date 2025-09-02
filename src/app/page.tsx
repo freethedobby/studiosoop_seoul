@@ -6,7 +6,6 @@ import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import CustomerHeader from "@/components/CustomerHeader";
-import Logo from "@/components/Logo";
 import AnimatedText from "@/components/AnimatedText";
 import Footer from "@/components/Footer";
 
