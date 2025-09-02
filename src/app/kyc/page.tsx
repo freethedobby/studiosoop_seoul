@@ -352,40 +352,64 @@ export default function KYCPage() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">이름</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      이름
+                    </label>
                     <p className="text-gray-900 font-bold">{kycData.name}</p>
                   </div>
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">성별</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      성별
+                    </label>
                     <p className="text-gray-900 font-bold">
-                      {kycData.gender === "male" ? "남성" : 
-                       kycData.gender === "female" ? "여성" : "기타"}
+                      {kycData.gender === "male"
+                        ? "남성"
+                        : kycData.gender === "female"
+                        ? "여성"
+                        : "기타"}
                     </p>
                   </div>
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">생년</label>
-                    <p className="text-gray-900 font-bold">{kycData.birthYear}</p>
+                    <label className="text-gray-700 text-sm font-medium">
+                      생년
+                    </label>
+                    <p className="text-gray-900 font-bold">
+                      {kycData.birthYear}
+                    </p>
                   </div>
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">연락처</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      연락처
+                    </label>
                     <p className="text-gray-900 font-bold">{kycData.contact}</p>
                   </div>
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">주소</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      주소
+                    </label>
                     <p className="text-gray-900 font-bold">
                       {kycData.province} {kycData.district} {kycData.dong}
                       {kycData.detailedAddress && ` ${kycData.detailedAddress}`}
                     </p>
                   </div>
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">피부 타입</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      피부 타입
+                    </label>
                     <p className="text-gray-900 font-bold">
-                      {kycData.skinType === "oily" ? "지성" :
-                       kycData.skinType === "dry" ? "건성" :
-                       kycData.skinType === "normal" ? "중성" :
-                       kycData.skinType === "combination" ? "복합성" :
-                       kycData.skinType === "unknown" ? "모르겠음" :
-                       kycData.skinType === "other" ? "기타" : kycData.skinType}
+                      {kycData.skinType === "oily"
+                        ? "지성"
+                        : kycData.skinType === "dry"
+                        ? "건성"
+                        : kycData.skinType === "normal"
+                        ? "중성"
+                        : kycData.skinType === "combination"
+                        ? "복합성"
+                        : kycData.skinType === "unknown"
+                        ? "모르겠음"
+                        : kycData.skinType === "other"
+                        ? "기타"
+                        : kycData.skinType}
                       {kycData.skinTypeOther && ` (${kycData.skinTypeOther})`}
                     </p>
                   </div>
@@ -399,7 +423,9 @@ export default function KYCPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-gray-700 text-sm font-medium">이전 시술 경험</label>
+                  <label className="text-gray-700 text-sm font-medium">
+                    이전 시술 경험
+                  </label>
                   <p className="text-gray-900 font-bold">
                     {kycData.hasPreviousTreatment === "yes" ? "있음" : "없음"}
                   </p>
@@ -414,14 +440,18 @@ export default function KYCPage() {
               <CardContent>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">제출일</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      제출일
+                    </label>
                     <p className="text-gray-900 font-bold">
                       {kycData.submittedAt?.toDate?.()?.toLocaleDateString() ||
                         "날짜 정보 없음"}
                     </p>
                   </div>
                   <div>
-                    <label className="text-gray-700 text-sm font-medium">상태</label>
+                    <label className="text-gray-700 text-sm font-medium">
+                      상태
+                    </label>
                     <p className="text-gray-900 font-bold">
                       {kycData.status === "approved"
                         ? "승인됨"
