@@ -500,6 +500,27 @@ export default function KYCPage() {
   );
 }
 
+// Mock KYC data for testing
+const mockKYCData: KYCData = {
+  name: "홍길동",
+  email: "hong@example.com",
+  phone: "010-1234-5678",
+  birthDate: "1990-01-01",
+  gender: "male",
+  address: "서울시 강남구",
+  skinType: "combination",
+  hasPreviousTreatment: "no",
+  previousTreatmentDetails: "",
+  allergies: "없음",
+  medications: "없음",
+  medicalConditions: "없음",
+  pregnancyStatus: "not_applicable",
+  expectations: "자연스러운 눈썹을 원합니다",
+  status: "approved",
+  submittedAt: new Date().toISOString(),
+  reviewedAt: new Date().toISOString(),
+};
+
 // KYC 데이터 뷰어 컴포넌트
 function KYCDataViewer({ kycData }: { kycData: KYCData }) {
   const getGenderText = (gender: string) => {
@@ -725,7 +746,14 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
         </CardContent>
       </Card>
     </div>
+  );
+}
 
-    <Footer />
+export default function KYCPage() {
+  return (
+    <div>
+      <KYCDataViewer kycData={mockKYCData} />
+      <Footer />
+    </div>
   );
 }
