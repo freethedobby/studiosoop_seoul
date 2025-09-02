@@ -343,11 +343,8 @@ export default function AdminDashboard() {
             <div className="flex items-center gap-3">
               <div className="flex flex-col">
                 <h1 className="text-black text-xl font-light tracking-wide">
-                  nature.seoul
+                  studiosoop_seoul
                 </h1>
-                <p className="text-gray-400 text-[10px] tracking-wide">
-                  premium studio
-                </p>
               </div>
             </div>
 

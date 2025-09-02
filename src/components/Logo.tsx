@@ -26,9 +26,6 @@ export default function Logo({
         <span className="text-black font-light tracking-wide">
           studiosoop_seoul
         </span>
-        <span className="text-gray-400 text-[10px] tracking-wide">
-          premium studio
-        </span>
       </div>
     </Link>
   );

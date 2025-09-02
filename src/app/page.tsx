@@ -1,112 +1,148 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import CustomerHeader from "@/components/CustomerHeader";
 import Logo from "@/components/Logo";
 import AnimatedText from "@/components/AnimatedText";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const { user, loading } = useAuth();
+  const { t } = useLanguage();
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 min-h-screen to-white">
-      <CustomerHeader />
+    <div className="relative min-h-screen">
+      <div className="relative z-20">
+        <CustomerHeader variant="transparent" />
+      </div>
 
-      <main className="relative flex min-h-[90vh] items-start justify-center overflow-hidden md:min-h-screen md:items-center">
-        <div className="absolute bottom-16 right-0 z-0 h-2/5 w-3/4 md:right-0 md:top-0 md:bottom-0 md:h-full md:w-2/3">
-          <div className="relative h-full w-full">
-            <Image
-              src="/eyebrow_example.jpg"
-              alt="Studio Services Illustration"
-              fill
-              className="rounded-2xl object-cover object-center"
-              priority
-            />
-            <div className="bg-gradient-to-r absolute inset-0 rounded-2xl from-white/20 to-transparent"></div>
-            {/* Shining effect */}
-            <div className="absolute inset-0 overflow-hidden rounded-2xl">
-              <div className="bg-gradient-to-r animate-shine absolute inset-0 -skew-x-12 transform from-transparent via-white/30 to-transparent"></div>
+      <main className="relative z-10">
+        {/* Mobile: Full video with overlay, Desktop: Split layout */}
+        <div className="flex min-h-[calc(100vh-4rem)] flex-col md:flex-row md:justify-center">
+          {/* Mobile: Full video background, Desktop: Text on left */}
+          <div className="relative flex-1 md:w-1/2 md:max-w-2xl md:flex-none">
+            {/* Mobile: Video background */}
+            <div className="relative h-full md:hidden">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full w-full object-cover"
+              >
+                <source src="/studiosoop_seoul.mp4" type="video/mp4" />
+              </video>
+              {/* Dark overlay for text readability */}
+              <div className="bg-black/50 absolute inset-0"></div>
+            </div>
+
+            {/* Desktop: Text content with default background */}
+            <div className="bg-gray-50 hidden h-full md:flex md:items-center md:justify-center">
+              <div className="w-full max-w-2xl px-8 py-16">
+                <div className="text-left">
+                  {/* Main Heading */}
+                  <h1 className="text-gray-900 text-6xl font-black leading-tight tracking-tight lg:text-7xl">
+                    <span className="text-orange-400">{t("studio.title")}</span>
+                    <br />
+                    <span className="text-gray-900">
+                      <AnimatedText
+                        text={t("studio.subtitle")}
+                        delay={1000}
+                        speed={100}
+                        className="inline-block"
+                      />
+                    </span>
+                  </h1>
+
+                  {/* Description */}
+                  <p className="text-gray-600 mt-6 whitespace-pre-line text-xl font-medium leading-relaxed">
+                    {t("studio.description")}
+                  </p>
+
+                  {/* CTA Button */}
+                  <div className="mt-8 flex justify-start">
+                    {loading ? (
+                      <div className="w-48 animate-pulse bg-gray-200 h-14 rounded-2xl"></div>
+                    ) : (
+                      <Link href={user ? "/dashboard" : "/login"}>
+                        <Button
+                          size="lg"
+                          className="bg-orange-600 shadow-2xl hover:shadow-orange-500/25 w-48 text-base group relative h-14 transform font-bold text-white transition-all duration-300 hover:scale-105"
+                        >
+                          <div className="bg-orange-700 absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                          <div className="relative flex items-center justify-center">
+                            <ArrowRight className="mr-3 h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" />
+                            <span>{t("studio.button")}</span>
+                          </div>
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile: Title at very top */}
+            <div className="absolute top-8 left-0 right-0 flex justify-center md:hidden">
+              <div className="w-full max-w-2xl px-6">
+                <div className="text-center">
+                  <h1 className="text-3xl font-black leading-tight tracking-tight text-white drop-shadow-2xl">
+                    <span className="text-orange-400">{t("studio.title")}</span>
+                    <br />
+                    <span className="text-white">
+                      <AnimatedText
+                        text={t("studio.subtitle")}
+                        delay={1000}
+                        speed={100}
+                        className="inline-block"
+                      />
+                    </span>
+                  </h1>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile: Button at very bottom */}
+            <div className="absolute bottom-8 left-0 right-0 flex justify-center md:hidden">
+              {loading ? (
+                <div className="w-40 animate-pulse h-12 rounded-2xl bg-white/20"></div>
+              ) : (
+                <Link href={user ? "/dashboard" : "/login"}>
+                  <Button
+                    size="lg"
+                    className="bg-orange-600 shadow-2xl hover:shadow-orange-500/25 w-40 group relative h-12 transform text-sm font-bold text-white transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="bg-orange-700 absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                    <div className="relative flex items-center justify-center">
+                      <ArrowRight className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                      <span>{t("studio.button")}</span>
+                    </div>
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
-        </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-1 md:py-8">
-          <div className="grid min-h-[40vh] items-start gap-1 pt-12 md:min-h-[70vh] md:grid-cols-2 md:items-center md:gap-8 md:pt-0">
-            <div className="text-black space-y-2 md:space-y-8">
-              <div className="space-y-2 md:space-y-6">
-                <h2 className="text-4xl font-bold leading-tight tracking-tight drop-shadow-2xl md:text-6xl lg:text-7xl">
-                  <AnimatedText
-                    text="당신의 아름다움을"
-                    delay={500}
-                    speed={150}
-                    className="inline-block"
-                  />
-                  <br />
-                  <AnimatedText
-                    text="완성하세요"
-                    delay={2000}
-                    speed={150}
-                    className="inline-block font-bold"
-                  />
-                </h2>
-
-                <p className="text-gray-600 text-lg font-medium leading-relaxed drop-shadow-xl md:text-xl">
-                  프리미엄 뷰티 서비스로 당신만의 특별한 스타일을 만들어드립니다.
-                </p>
-              </div>
-
-              <div className="flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4">
-                {loading ? (
-                  <div className="w-32 animate-pulse bg-black/20 h-12 rounded-xl"></div>
-                ) : (
-                  <Link href={user ? "/dashboard" : "/login"}>
-                    <Button
-                      size="lg"
-                      className="bg-black shadow-lg hover:shadow-xl hover:-translate-y-0.5 group relative h-14 w-full transform text-white transition-all duration-300 sm:w-auto"
-                    >
-                      <div className="bg-gradient-to-r absolute inset-0 rounded-xl from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                      <div className="relative flex items-center justify-center">
-                        <ArrowRight className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                        <span>예약하기</span>
-                      </div>
-                    </Button>
-                  </Link>
-                )}
-              </div>
-
-              <div className="text-black text-sm">
-                <p className="font-light">서울 스튜디오</p>
-                <p className="text-gray-500 text-xs">예약제 운영</p>
-              </div>
-            </div>
+          {/* Desktop: Video on right with original aspect ratio */}
+          <div className="bg-gray-100 relative hidden md:flex md:w-1/2 md:max-w-2xl md:flex-none md:items-center md:justify-center">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="max-h-[80vh] max-w-full object-contain"
+            >
+              <source src="/studiosoop_seoul.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </main>
 
-      <footer className="border-gray-100 border-t py-8">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <div className="text-center md:text-left">
-              <Logo variant="footer" className="text-black" />
-              <p className="text-gray-400 mt-2 text-xs">
-                designed by{" "}
-                <a
-                  href="https://blacksheepwall.xyz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-gray-600 underline transition-colors"
-                >
-                  blacksheepwall
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

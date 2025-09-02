@@ -24,6 +24,7 @@ import React from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import CountdownTimer from "@/components/CountdownTimer";
+import Footer from "@/components/Footer";
 import {
   Calendar,
   Clock,
@@ -1425,6 +1426,8 @@ export default function UserReservePage() {
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 }

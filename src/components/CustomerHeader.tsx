@@ -14,8 +14,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User, Calendar, LogOut, Menu } from "lucide-react";
 import { signOutUser } from "@/lib/firebase";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function CustomerHeader() {
+interface CustomerHeaderProps {
+  variant?: "default" | "transparent";
+}
+
+export default function CustomerHeader({
+  variant = "default",
+}: CustomerHeaderProps) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
@@ -28,9 +35,14 @@ export default function CustomerHeader() {
     }
   };
 
+  const headerClasses =
+    variant === "transparent"
+      ? "bg-transparent backdrop-blur-sm border-b border-white/20"
+      : "shadow-sm border-b bg-white";
+
   if (loading) {
     return (
-      <header className="shadow-sm border-b bg-white">
+      <header className={headerClasses}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="animate-pulse bg-gray-200 w-32 h-8 rounded"></div>
@@ -42,7 +54,7 @@ export default function CustomerHeader() {
   }
 
   return (
-    <header className="shadow-sm border-b bg-white">
+    <header className={headerClasses}>
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-1 sm:space-x-4">
@@ -78,6 +90,11 @@ export default function CustomerHeader() {
           </div>
 
           <div className="flex items-center space-x-1 sm:space-x-4">
+            {/* Language Switcher - Desktop only */}
+            <div className="hidden sm:block">
+              <LanguageSwitcher />
+            </div>
+
             {user ? (
               <>
                 {/* Desktop: Show all buttons */}
@@ -130,17 +147,44 @@ export default function CustomerHeader() {
                         <LogOut className="mr-2 h-4 w-4" />
                         로그아웃
                       </DropdownMenuItem>
+                      {/* Language Switcher for Mobile */}
+                      <div className="px-2 py-1">
+                        <LanguageSwitcher />
+                      </div>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
               </>
             ) : (
-              <Button
-                onClick={() => router.push("/login")}
-                className="bg-black hover:bg-gray-800 sm:text-base text-sm text-white"
-              >
-                로그인
-              </Button>
+              <>
+                {/* Desktop: Login button */}
+                <Button
+                  onClick={() => router.push("/login")}
+                  className="bg-black hover:bg-gray-800 sm:text-base hidden text-sm text-white sm:block"
+                >
+                  로그인
+                </Button>
+
+                {/* Mobile: Dropdown menu with login and language */}
+                <div className="sm:hidden">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        <Menu className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48">
+                      <DropdownMenuItem onClick={() => router.push("/login")}>
+                        로그인
+                      </DropdownMenuItem>
+                      {/* Language Switcher for Mobile */}
+                      <div className="px-2 py-1">
+                        <LanguageSwitcher />
+                      </div>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </>
             )}
           </div>
         </div>

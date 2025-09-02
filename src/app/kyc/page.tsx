@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import KYCFormNew from "@/components/KYCFormNew";
 import FirebaseDebug from "@/components/FirebaseDebug";
 import Logo from "@/components/Logo";
+import Footer from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
@@ -724,5 +725,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
         </CardContent>
       </Card>
     </div>
+
+    <Footer />
   );
 }

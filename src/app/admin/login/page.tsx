@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowLeft, Eye, EyeOff, Shield } from "lucide-react";
 import { signInWithGoogle, signInWithEmailAndPassword } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
+import Footer from "@/components/Footer";
 
 export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
@@ -294,26 +295,7 @@ export default function AdminLoginPage() {
         </div>
       </div>
 
-      <footer className="border-gray-100 border-t py-8">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <div className="text-center md:text-left">
-              <p className="text-black text-sm font-light">nature.seoul</p>
-              <p className="text-gray-400 text-xs">
-                designed by{" "}
-                <a
-                  href="https://blacksheepwall.xyz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-gray-600 underline transition-colors"
-                >
-                  blacksheepwall
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Script from "next/script";
 import { GA_TRACKING_ID } from "@/lib/gtag";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -88,8 +89,10 @@ export default function RootLayout({
           </>
         )}
         <AuthProvider>
-          <GoogleAnalytics />
-          {children}
+          <LanguageProvider>
+            <GoogleAnalytics />
+            {children}
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

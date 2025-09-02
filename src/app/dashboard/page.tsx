@@ -31,6 +31,7 @@ import NotificationCenter from "@/components/NotificationCenter";
 import LocationDisplay from "@/components/LocationDisplay";
 import TestNotificationButton from "@/components/TestNotificationButton";
 import NoticeModal from "@/components/NoticeModal";
+import Footer from "@/components/Footer";
 import { auth } from "@/lib/firebase";
 import { signOut as firebaseSignOut } from "firebase/auth";
 import {
@@ -1243,6 +1244,8 @@ export default function DashboardPage() {
           {kycData && <KYCDataViewer kycData={kycData} />}
         </DialogContent>
       </Dialog>
+
+      <Footer />
     </div>
   );
 }
