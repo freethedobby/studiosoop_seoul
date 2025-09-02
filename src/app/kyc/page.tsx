@@ -246,17 +246,6 @@ export default function KYCPage() {
         {/* Main Content */}
         <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl">
-            {/* <div className="mb-8 text-center">
-              <h2 className="text-gray-900 mb-2 text-2xl font-light">
-                맞춤 상담 신청
-              </h2>
-              <p className="text-gray-600">
-                고객님의 눈썹 상태를 정확히 파악하여
-                <br />
-                최적의 시술 방법을 제안해드리겠습니다.
-              </p>
-            </div> */}
-
             <Card className="border-green-200 bg-green-50">
               <CardHeader>
                 <div className="flex items-center space-x-2">
@@ -305,6 +294,7 @@ export default function KYCPage() {
             </Card>
           </div>
         </main>
+        <Footer />
         <FirebaseDebug />
       </div>
     );
@@ -355,9 +345,97 @@ export default function KYCPage() {
               </p>
             </div>
 
-            <KYCDataViewer kycData={kycData} />
+            <Card className="space-y-6">
+              <CardHeader>
+                <CardTitle className="text-lg">기본 정보</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">이름</label>
+                    <p className="text-gray-900 font-bold">{kycData.name}</p>
+                  </div>
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">성별</label>
+                    <p className="text-gray-900 font-bold">
+                      {kycData.gender === "male" ? "남성" : 
+                       kycData.gender === "female" ? "여성" : "기타"}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">생년</label>
+                    <p className="text-gray-900 font-bold">{kycData.birthYear}</p>
+                  </div>
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">연락처</label>
+                    <p className="text-gray-900 font-bold">{kycData.contact}</p>
+                  </div>
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">주소</label>
+                    <p className="text-gray-900 font-bold">
+                      {kycData.province} {kycData.district} {kycData.dong}
+                      {kycData.detailedAddress && ` ${kycData.detailedAddress}`}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">피부 타입</label>
+                    <p className="text-gray-900 font-bold">
+                      {kycData.skinType === "oily" ? "지성" :
+                       kycData.skinType === "dry" ? "건성" :
+                       kycData.skinType === "normal" ? "중성" :
+                       kycData.skinType === "combination" ? "복합성" :
+                       kycData.skinType === "unknown" ? "모르겠음" :
+                       kycData.skinType === "other" ? "기타" : kycData.skinType}
+                      {kycData.skinTypeOther && ` (${kycData.skinTypeOther})`}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="space-y-6">
+              <CardHeader>
+                <CardTitle className="text-lg">시술 정보</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="text-gray-700 text-sm font-medium">이전 시술 경험</label>
+                  <p className="text-gray-900 font-bold">
+                    {kycData.hasPreviousTreatment === "yes" ? "있음" : "없음"}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="space-y-6">
+              <CardHeader>
+                <CardTitle className="text-lg">제출 정보</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">제출일</label>
+                    <p className="text-gray-900 font-bold">
+                      {kycData.submittedAt?.toDate?.()?.toLocaleDateString() ||
+                        "날짜 정보 없음"}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="text-gray-700 text-sm font-medium">상태</label>
+                    <p className="text-gray-900 font-bold">
+                      {kycData.status === "approved"
+                        ? "승인됨"
+                        : kycData.status === "rejected"
+                        ? "거절됨"
+                        : "검토중"}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </main>
+        <Footer />
         <FirebaseDebug />
       </div>
     );
@@ -495,265 +573,8 @@ export default function KYCPage() {
           )}
         </div>
       </main>
-      <FirebaseDebug />
-    </div>
-  );
-}
-
-// Mock KYC data for testing
-const mockKYCData: KYCData = {
-  name: "홍길동",
-  email: "hong@example.com",
-  phone: "010-1234-5678",
-  birthDate: "1990-01-01",
-  gender: "male",
-  address: "서울시 강남구",
-  skinType: "combination",
-  hasPreviousTreatment: "no",
-  previousTreatmentDetails: "",
-  allergies: "없음",
-  medications: "없음",
-  medicalConditions: "없음",
-  pregnancyStatus: "not_applicable",
-  expectations: "자연스러운 눈썹을 원합니다",
-  status: "approved",
-  submittedAt: new Date().toISOString(),
-  reviewedAt: new Date().toISOString(),
-};
-
-// KYC 데이터 뷰어 컴포넌트
-function KYCDataViewer({ kycData }: { kycData: KYCData }) {
-  const getGenderText = (gender: string) => {
-    switch (gender) {
-      case "male":
-        return "남성";
-      case "female":
-        return "여성";
-      case "other":
-        return "기타";
-      default:
-        return gender;
-    }
-  };
-
-  const getSkinTypeText = (skinType: string) => {
-    switch (skinType) {
-      case "oily":
-        return "지성";
-      case "dry":
-        return "건성";
-      case "normal":
-        return "중성";
-      case "combination":
-        return "복합성";
-      case "unknown":
-        return "모르겠음";
-      case "other":
-        return "기타";
-      default:
-        return skinType;
-    }
-  };
-
-  const getPreviousTreatmentText = (hasPrevious: string) => {
-    return hasPrevious === "yes" ? "있음" : "없음";
-  };
-
-  return (
-    <div className="space-y-6">
-      {/* 기본 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">기본 정보</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">이름</label>
-              <p className="text-gray-900 font-bold">{kycData.name}</p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">성별</label>
-              <p className="text-gray-900 font-bold">
-                {getGenderText(kycData.gender)}
-              </p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                출생년도
-              </label>
-              <p className="text-gray-900 font-bold">{kycData.birthYear}년</p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                연락처
-              </label>
-              <p className="text-gray-900 font-bold">{kycData.contact}</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 주소 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">주소 정보</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">시도</label>
-              <p className="text-gray-900 font-bold">{kycData.province}</p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                시군구
-              </label>
-              <p className="text-gray-900 font-bold">{kycData.district}</p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                읍면동
-              </label>
-              <p className="text-gray-900 font-bold">{kycData.dong}</p>
-            </div>
-            {kycData.detailedAddress && (
-              <div>
-                <label className="text-gray-700 text-sm font-medium">
-                  상세주소
-                </label>
-                <p className="text-gray-900 font-bold">
-                  {kycData.detailedAddress}
-                </p>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 피부 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">피부 정보</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                피부타입
-              </label>
-              <p className="text-gray-900 font-bold">
-                {getSkinTypeText(kycData.skinType)}
-                {kycData.skinType === "other" && kycData.skinTypeOther && (
-                  <span className="text-gray-600 ml-2">
-                    ({kycData.skinTypeOther})
-                  </span>
-                )}
-              </p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                기존 시술경험
-              </label>
-              <p className="text-gray-900 font-bold">
-                {getPreviousTreatmentText(kycData.hasPreviousTreatment)}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 눈썹 사진 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">눈썹 사진</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {kycData.eyebrowPhotoLeft && (
-              <div>
-                <label className="text-gray-700 mb-2 block text-sm font-medium">
-                  좌측
-                </label>
-                <div className="border-gray-200 rounded-lg border p-2">
-                  <img
-                    src={kycData.eyebrowPhotoLeft}
-                    alt="좌측 눈썹"
-                    className="h-32 w-full rounded object-cover"
-                  />
-                </div>
-              </div>
-            )}
-            {kycData.eyebrowPhotoFront && (
-              <div>
-                <label className="text-gray-700 mb-2 block text-sm font-medium">
-                  정면
-                </label>
-                <div className="border-gray-200 rounded-lg border p-2">
-                  <img
-                    src={kycData.eyebrowPhotoFront}
-                    alt="정면 눈썹"
-                    className="h-32 w-full rounded object-cover"
-                  />
-                </div>
-              </div>
-            )}
-            {kycData.eyebrowPhotoRight && (
-              <div>
-                <label className="text-gray-700 mb-2 block text-sm font-medium">
-                  우측
-                </label>
-                <div className="border-gray-200 rounded-lg border p-2">
-                  <img
-                    src={kycData.eyebrowPhotoRight}
-                    alt="우측 눈썹"
-                    className="h-32 w-full rounded object-cover"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 제출 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">제출 정보</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                제출일
-              </label>
-              <p className="text-gray-900 font-bold">
-                {kycData.submittedAt?.toDate?.()?.toLocaleDateString() ||
-                  "날짜 정보 없음"}
-              </p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">상태</label>
-              <p className="text-gray-900 font-bold">
-                {kycData.status === "approved"
-                  ? "승인됨"
-                  : kycData.status === "rejected"
-                  ? "거절됨"
-                  : "검토중"}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-export default function KYCPage() {
-  return (
-    <div>
-      <KYCDataViewer kycData={mockKYCData} />
       <Footer />
+      <FirebaseDebug />
     </div>
   );
 }
