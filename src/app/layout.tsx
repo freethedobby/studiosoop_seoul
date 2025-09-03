@@ -13,23 +13,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "nature.seoul 당신의 눈썹을 더 자연스럽게",
+  title: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
   description:
-    "개인 맞춤형 디자인으로 당신만의 완벽한 눈썹을 만들어드립니다. 용산 스튜디오에서 펼쳐지는 예술적 눈썹 조각.",
+    "프리미엄 뷰티 서비스로 당신만의 특별한 스타일을 만들어드립니다. STUDIOSOOP SEOUL에서 펼쳐지는 예술적 뷰티 서비스.",
   keywords:
-    "눈썹, 반영구, 서울, 용산, nature seoul, 맞춤형눈썹, 눈썹시술, 예약제눈썹, 고급눈썹시술",
+    "뷰티, 스튜디오, 서울, studiosoop, 프리미엄뷰티, 뷰티서비스, 예약제뷰티, 고급뷰티서비스",
   openGraph: {
-    title: "nature.seoul 당신의 눈썹을 더 자연스럽게",
+    title: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
     description:
-      "개인 맞춤형 디자인으로 당신만의 완벽한 눈썹을 만들어드립니다.",
-    url: "https://natureseoul.com",
-    siteName: "Nature Seoul",
+      "프리미엄 뷰티 서비스로 당신만의 특별한 스타일을 만들어드립니다.",
+    url: "https://studiosoop-seoul.vercel.app",
+    siteName: "STUDIOSOOP SEOUL",
     images: [
       {
-        url: "https://natureseoul.com/kakao-thumbnail.png",
+        url: "https://studiosoop-seoul.vercel.app/kakao-thumbnail.png",
         width: 1200,
         height: 630,
-        alt: "Nature Seoul - 당신의 눈썹을 더 아름답게",
+        alt: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
       },
     ],
     locale: "ko_KR",
@@ -37,17 +37,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nature Seoul - 당신의 눈썹을 더 아름답게",
+    title: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
     description:
-      "개인 맞춤형 디자인으로 당신만의 완벽한 눈썹을 만들어드립니다.",
-    images: ["https://natureseoul.com/kakao-thumbnail.png"],
+      "프리미엄 뷰티 서비스로 당신만의 특별한 스타일을 만들어드립니다.",
+    images: ["https://studiosoop-seoul.vercel.app/kakao-thumbnail.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://natureseoul.com",
+    canonical: "https://studiosoop-seoul.vercel.app",
   },
 };
 
