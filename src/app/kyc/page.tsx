@@ -233,7 +233,7 @@ export default function KYCPage() {
     return (
       <div className="min-h-screen">
         {/* Header */}
-        <header className="border-gray-200 sticky top-0 z-50 border-b bg-white">
+        <header className="border-gray-200 sticky top-0 z-50 border-b bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
@@ -323,7 +323,7 @@ export default function KYCPage() {
     return (
       <div className="min-h-screen">
         {/* Header */}
-        <header className="border-gray-200 sticky top-0 z-50 border-b bg-white">
+        <header className="border-gray-200 sticky top-0 z-50 border-b bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">

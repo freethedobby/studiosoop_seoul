@@ -46,7 +46,7 @@ export default function AdminLayout({
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Admin Header */}
-      <header className="shadow-sm border-b bg-white">
+      <header className="shadow-sm border-b bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Desktop Navigation */}

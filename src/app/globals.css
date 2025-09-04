@@ -45,23 +45,50 @@
 
 :root {
   --radius: 0.75rem;
-  --background: #ecdcd0;
+  
+  /* ===========================================
+     GLOBAL COLOR THEME SYSTEM
+     ===========================================
+     
+     To change the entire theme, update these base colors:
+     - --beige-500: Main background color
+     - --beige-100: Card/box backgrounds  
+     - --beige-200: Muted/secondary elements
+     - --beige-300: Borders and inputs
+     
+     All semantic colors automatically inherit from these base colors.
+     This ensures consistent theming across the entire application.
+     
+     Base Colors - Beige Theme */
+  --beige-50: #fdfcfb;
+  --beige-100: #f5f0eb;
+  --beige-200: #f0e6d8;
+  --beige-300: #e6d5c7;
+  --beige-400: #d4c4b0;
+  --beige-500: #ecdcd0;
+  --beige-600: #c4a882;
+  --beige-700: #a68b6b;
+  --beige-800: #8b7355;
+  --beige-900: #6b5a47;
+  
+  /* Semantic Colors */
+  --background: var(--beige-500);
   --foreground: oklch(0.15 0.02 261.692);
-  --card: #f5f0eb;
+  --card: var(--beige-100);
   --card-foreground: oklch(0.15 0.02 261.692);
-  --popover: #f5f0eb;
+  --popover: var(--beige-100);
   --popover-foreground: oklch(0.15 0.02 261.692);
   --primary: oklch(0.15 0.02 261.692);
   --primary-foreground: oklch(0.99 0.002 247.839);
-  --secondary: #f0e6d8;
+  --secondary: var(--beige-200);
   --secondary-foreground: oklch(0.15 0.02 261.692);
-  --muted: #f0e6d8;
+  --muted: var(--beige-200);
   --muted-foreground: oklch(0.55 0.027 264.364);
-  --accent: #f0e6d8;
+  --accent: var(--beige-200);
   --accent-foreground: oklch(0.15 0.02 261.692);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e6d5c7;
-  --input: #e6d5c7;
+  --border: var(--beige-300);
+  --input: var(--beige-300);
   --ring: oklch(0.15 0.02 261.692);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -79,23 +106,23 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.028 261.692);
+  --background: var(--beige-900);
   --foreground: oklch(0.985 0.002 247.839);
-  --card: #8b7355;
+  --card: var(--beige-800);
   --card-foreground: oklch(0.985 0.002 247.839);
-  --popover: #8b7355;
+  --popover: var(--beige-800);
   --popover-foreground: oklch(0.985 0.002 247.839);
   --primary: oklch(0.928 0.006 264.531);
   --primary-foreground: oklch(0.21 0.034 264.665);
-  --secondary: #a68b6b;
+  --secondary: var(--beige-700);
   --secondary-foreground: oklch(0.985 0.002 247.839);
-  --muted: #a68b6b;
+  --muted: var(--beige-700);
   --muted-foreground: oklch(0.707 0.022 261.325);
-  --accent: #a68b6b;
+  --accent: var(--beige-700);
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --border: var(--beige-600);
+  --input: var(--beige-600);
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -184,10 +211,10 @@
 
 /* Minimal DayPicker theme */
 .rdp {
-  background: #f5f0eb !important;
+  background: var(--beige-100) !important;
   border-radius: 1rem !important;
   box-shadow: none !important;
-  border: 1px solid #e6d5c7 !important;
+  border: 1px solid var(--beige-300) !important;
 }
 
 .rdp-caption_label {
@@ -229,7 +256,7 @@
 .rdp-nav button,
 .rdp-nav_button,
 .rdp-button[aria-label*="month"] {
-  background: #f5f0eb !important;
+  background: var(--beige-100) !important;
   color: #16a34a !important;
   border-radius: 9999px !important;
   width: 2.2rem !important;
@@ -242,14 +269,14 @@
 .rdp-nav button:hover,
 .rdp-nav_button:hover,
 .rdp-button[aria-label*="month"]:hover {
-  background: #f0e6d8 !important; /* light beige */
+  background: var(--beige-200) !important;
   color: #16a34a !important;
 }
 
 /* Style disabled days in DayPicker as gray and unclickable */
 .rdp-day_disabled, .rdp-day:disabled {
   color: #bbb !important;
-  background: #f0e6d8 !important;
+  background: var(--beige-200) !important;
   pointer-events: none !important;
   opacity: 0.7 !important;
   cursor: not-allowed !important;
@@ -291,7 +318,7 @@
 .rdp-day_button[aria-disabled="true"],
 .rdp-day_button--disabled {
   color: #bbb !important;
-  background: #f0e6d8 !important;
+  background: var(--beige-200) !important;
   pointer-events: none !important;
   opacity: 0.7 !important;
   cursor: not-allowed !important;
@@ -320,7 +347,7 @@ body .rdp-day_button[aria-selected="true"] {
   color: #16a34a !important;
   font-weight: 700 !important;
   border: 2px solid #16a34a !important;
-  background: #f5f0eb !important;
+  background: var(--beige-100) !important;
   border-radius: 0.75rem !important;
 }
 
@@ -403,13 +430,13 @@ body .rdp-day_button[aria-selected="true"] {
 /* Past dates styling - gray shading */
 .rdp-day.past-dates .rdp-day_button {
   color: #9ca3af !important;
-  background: #f0e6d8 !important;
+  background: var(--beige-200) !important;
   opacity: 0.6;
   cursor: pointer !important;
 }
 
 .rdp-day.past-dates .rdp-day_button:hover {
-  background: #e6d5c7 !important;
+  background: var(--beige-300) !important;
   opacity: 0.8;
 }
 
