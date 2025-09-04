@@ -46,7 +46,7 @@ export default function LoginPage() {
   // Show loading while checking authentication
   if (authLoading) {
     return (
-      <div className="bg-gradient-to-br from-gray-50 flex min-h-screen items-center justify-center to-white">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="animate-spin border-black h-8 w-8 rounded-full border-b-2"></div>
       </div>
     );
@@ -92,7 +92,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 flex min-h-screen flex-col to-white">
+    <div className="flex min-h-screen flex-col">
       <div className="flex-grow">
         <div className="container mx-auto max-w-6xl px-4 py-8">
           <Link

@@ -405,7 +405,7 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-br from-gray-50 flex min-h-screen items-center justify-center to-white">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="animate-spin border-black h-8 w-8 rounded-full border-b-2"></div>
       </div>
     );
@@ -421,7 +421,7 @@ export default function DashboardPage() {
     user.kycStatus === "rejected";
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 min-h-screen to-white">
+    <div className="min-h-screen">
       {/* Header */}
       <header className="border-gray-100 sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -492,7 +492,7 @@ export default function DashboardPage() {
                   <DollarSign className="h-4 w-4" />
                   <span>비용안내</span>
                 </Button>
-                
+
                 <Button
                   variant="ghost"
                   onClick={() => router.push("/dashboard")}
@@ -501,7 +501,7 @@ export default function DashboardPage() {
                   <User className="h-4 w-4" />
                   <span>내정보</span>
                 </Button>
-                
+
                 {user?.kycStatus === "approved" && (
                   <Button
                     variant="ghost"
@@ -512,7 +512,7 @@ export default function DashboardPage() {
                     <span>예약하기</span>
                   </Button>
                 )}
-                
+
                 <Button
                   variant="ghost"
                   onClick={handleLogout}

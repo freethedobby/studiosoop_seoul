@@ -209,7 +209,7 @@ export default function KYCPage() {
 
   if (loading || loadingKyc) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="animate-spin border-gray-900 h-8 w-8 rounded-full border-b-2"></div>
       </div>
     );
@@ -231,7 +231,7 @@ export default function KYCPage() {
   // KYC가 이미 제출된 경우
   if (kycData && !showKycData) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen">
         {/* Header */}
         <header className="border-gray-200 sticky top-0 z-50 border-b bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -321,7 +321,7 @@ export default function KYCPage() {
   // KYC 데이터 보기 모드
   if (kycData && showKycData) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen">
         {/* Header */}
         <header className="border-gray-200 sticky top-0 z-50 border-b bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

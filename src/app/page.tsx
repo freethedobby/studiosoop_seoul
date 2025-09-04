@@ -40,7 +40,7 @@ export default function Home() {
             </div>
 
             {/* Desktop: Text content with default background */}
-            <div className="bg-gray-50 hidden h-full md:flex md:items-center md:justify-center">
+            <div className="hidden h-full md:flex md:items-center md:justify-center">
               <div className="w-full max-w-2xl px-8 py-16">
                 <div className="text-left">
                   {/* Main Heading */}
@@ -126,8 +126,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Desktop: Video on right with original aspect ratio */}
-          <div className="bg-gray-100 relative hidden md:flex md:w-1/2 md:max-w-2xl md:flex-none md:items-center md:justify-center">
+                          {/* Desktop: Video on right with original aspect ratio */}
+                <div className="relative hidden md:flex md:w-1/2 md:max-w-2xl md:flex-none md:items-center md:justify-center">
             <video
               autoPlay
               muted
