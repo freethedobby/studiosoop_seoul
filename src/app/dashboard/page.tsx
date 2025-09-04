@@ -423,13 +423,13 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="border-gray-100 sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md">
+      <header className="shadow-sm border-b bg-white sticky top-0 z-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <button
                 onClick={() => router.push("/")}
-                className="hover:bg-gray-100 mr-4 rounded-full p-2 transition-colors"
+                className="hover:bg-muted mr-4 rounded-full p-2 transition-colors"
               >
                 <ArrowLeft className="h-6 w-6" />
               </button>
@@ -457,10 +457,10 @@ export default function DashboardPage() {
 
           {/* Universal Menu */}
           {isMenuOpen && (
-            <div className="border-t bg-white py-4">
+            <div className="border-t bg-card py-4">
               {/* User Profile Section */}
               <div className="mb-4 px-2">
-                <div className="bg-gray-50 flex items-center space-x-3 rounded-lg p-3">
+                <div className="bg-muted flex items-center space-x-3 rounded-lg p-3">
                   <div className="bg-gradient-to-br from-blue-400 to-purple-500 flex h-10 w-10 items-center justify-center rounded-full">
                     <span className="text-sm font-medium text-white">
                       {user?.email?.charAt(0).toUpperCase() || "U"}
@@ -539,7 +539,7 @@ export default function DashboardPage() {
 
           <div className="space-y-6">
             {/* User Info Card */}
-            <div className="border-gray-100 shadow-sm hover:shadow-md rounded-2xl border bg-white p-6 transition-all duration-300">
+            <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-lg font-semibold">기본 정보</h3>
                 <MembershipBadge
@@ -578,7 +578,7 @@ export default function DashboardPage() {
             {/* Action Cards */}
             <div className="grid gap-6 md:grid-cols-2">
               {/* KYC Status Card */}
-              <div className="border-gray-100 shadow-sm hover:shadow-md rounded-2xl border bg-white p-6 transition-all duration-300">
+              <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
                   <div className="bg-black mr-3 rounded-lg p-2">
                     <User className="h-5 w-5 text-white" />
@@ -717,7 +717,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Reservation Card */}
-              <div className="border-gray-100 shadow-sm hover:shadow-md rounded-2xl border bg-white p-6 transition-all duration-300">
+              <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
                   <div className="bg-black mr-3 rounded-lg p-2">
                     <Clock className="h-5 w-5 text-white" />
@@ -810,7 +810,7 @@ export default function DashboardPage() {
                   <div className="space-y-3">
                     <button
                       onClick={() => router.push("/user/reserve")}
-                      className="bg-gray-50 hover:bg-gray-100 border-gray-200 group w-full rounded-lg border p-3 text-left transition-colors duration-200"
+                      className="bg-muted hover:bg-accent border-border group w-full rounded-lg border p-3 text-left transition-colors duration-200"
                     >
                       <div className="mb-2 flex items-center justify-between">
                         <span className="text-gray-800 group-hover:text-gray-900 text-sm font-medium transition-colors">
@@ -1203,7 +1203,7 @@ export default function DashboardPage() {
 
             {/* Treatment Status */}
             {user.treatmentDone && (
-              <div className="border-gray-100 shadow-sm hover:shadow-md rounded-2xl border bg-white p-6 transition-all duration-300">
+              <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
                   <div className="bg-purple-100 mr-3 rounded-lg p-2">
                     <Lock className="text-purple-600 h-5 w-5" />
@@ -1391,7 +1391,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
               <label className="text-gray-800 mb-2 block text-sm font-semibold">
                 원하는 눈썹 디자인
               </label>
-              <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
+              <div className="bg-muted border-border text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
                 {kycData.designDescription}
               </div>
             </div>
@@ -1403,7 +1403,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
               <label className="text-gray-800 mb-2 block text-sm font-semibold">
                 기타 사항
               </label>
-              <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
+              <div className="bg-muted border-border text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
                 {kycData.additionalNotes}
               </div>
             </div>
@@ -1439,7 +1439,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                 <label className="text-gray-700 mb-2 block text-sm font-medium">
                   좌측
                 </label>
-                <div className="border-gray-200 rounded-lg border p-2">
+                <div className="border-border rounded-lg border p-2">
                   <img
                     src={kycData.eyebrowPhotoLeft}
                     alt="좌측 눈썹"
@@ -1453,7 +1453,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                 <label className="text-gray-700 mb-2 block text-sm font-medium">
                   정면
                 </label>
-                <div className="border-gray-200 rounded-lg border p-2">
+                <div className="border-border rounded-lg border p-2">
                   <img
                     src={kycData.eyebrowPhotoFront}
                     alt="정면 눈썹"
@@ -1467,7 +1467,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                 <label className="text-gray-700 mb-2 block text-sm font-medium">
                   우측
                 </label>
-                <div className="border-gray-200 rounded-lg border p-2">
+                <div className="border-border rounded-lg border p-2">
                   <img
                     src={kycData.eyebrowPhotoRight}
                     alt="우측 눈썹"
