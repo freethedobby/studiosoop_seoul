@@ -47,21 +47,21 @@
   --radius: 0.75rem;
   --background: #ecdcd0;
   --foreground: oklch(0.15 0.02 261.692);
-  --card: oklch(1 0 0);
+  --card: #f5f0eb;
   --card-foreground: oklch(0.15 0.02 261.692);
-  --popover: oklch(1 0 0);
+  --popover: #f5f0eb;
   --popover-foreground: oklch(0.15 0.02 261.692);
   --primary: oklch(0.15 0.02 261.692);
   --primary-foreground: oklch(0.99 0.002 247.839);
-  --secondary: oklch(0.98 0.003 264.542);
+  --secondary: #f0e6d8;
   --secondary-foreground: oklch(0.15 0.02 261.692);
-  --muted: oklch(0.97 0.003 264.542);
+  --muted: #f0e6d8;
   --muted-foreground: oklch(0.55 0.027 264.364);
-  --accent: oklch(0.97 0.003 264.542);
+  --accent: #f0e6d8;
   --accent-foreground: oklch(0.15 0.02 261.692);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.93 0.006 264.531);
-  --input: oklch(0.93 0.006 264.531);
+  --border: #e6d5c7;
+  --input: #e6d5c7;
   --ring: oklch(0.15 0.02 261.692);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -81,17 +81,17 @@
 .dark {
   --background: oklch(0.13 0.028 261.692);
   --foreground: oklch(0.985 0.002 247.839);
-  --card: oklch(0.21 0.034 264.665);
+  --card: #8b7355;
   --card-foreground: oklch(0.985 0.002 247.839);
-  --popover: oklch(0.21 0.034 264.665);
+  --popover: #8b7355;
   --popover-foreground: oklch(0.985 0.002 247.839);
   --primary: oklch(0.928 0.006 264.531);
   --primary-foreground: oklch(0.21 0.034 264.665);
-  --secondary: oklch(0.278 0.033 256.848);
+  --secondary: #a68b6b;
   --secondary-foreground: oklch(0.985 0.002 247.839);
-  --muted: oklch(0.278 0.033 256.848);
+  --muted: #a68b6b;
   --muted-foreground: oklch(0.707 0.022 261.325);
-  --accent: oklch(0.278 0.033 256.848);
+  --accent: #a68b6b;
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -154,7 +154,7 @@
 /* Custom sleek styles */
 @layer components {
   .sleek-card {
-    @apply bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300;
+    @apply bg-card border border-border rounded-2xl shadow-sm hover:shadow-md transition-all duration-300;
   }
   
   .sleek-button {
@@ -162,11 +162,11 @@
   }
   
   .sleek-button-outline {
-    @apply bg-white text-black border border-gray-200 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-gray-50 hover:border-gray-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+    @apply bg-card text-black border border-border px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-muted hover:border-border hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
   }
   
   .sleek-input {
-    @apply bg-white border border-gray-200 rounded-xl px-4 py-3 text-base transition-all duration-200 focus:border-black focus:ring-2 focus:ring-black/10 focus:outline-none placeholder:text-gray-400;
+    @apply bg-card border border-border rounded-xl px-4 py-3 text-base transition-all duration-200 focus:border-black focus:ring-2 focus:ring-black/10 focus:outline-none placeholder:text-gray-400;
   }
   
   .sleek-gradient {
@@ -184,10 +184,10 @@
 
 /* Minimal DayPicker theme */
 .rdp {
-  background: #fff !important;
+  background: #f5f0eb !important;
   border-radius: 1rem !important;
   box-shadow: none !important;
-  border: 1px solid #eee !important;
+  border: 1px solid #e6d5c7 !important;
 }
 
 .rdp-caption_label {
@@ -229,7 +229,7 @@
 .rdp-nav button,
 .rdp-nav_button,
 .rdp-button[aria-label*="month"] {
-  background: #fff !important;
+  background: #f5f0eb !important;
   color: #16a34a !important;
   border-radius: 9999px !important;
   width: 2.2rem !important;
@@ -242,14 +242,14 @@
 .rdp-nav button:hover,
 .rdp-nav_button:hover,
 .rdp-button[aria-label*="month"]:hover {
-  background: #f0fdf4 !important; /* very light green */
+  background: #f0e6d8 !important; /* light beige */
   color: #16a34a !important;
 }
 
 /* Style disabled days in DayPicker as gray and unclickable */
 .rdp-day_disabled, .rdp-day:disabled {
   color: #bbb !important;
-  background: #f3f4f6 !important;
+  background: #f0e6d8 !important;
   pointer-events: none !important;
   opacity: 0.7 !important;
   cursor: not-allowed !important;
@@ -291,7 +291,7 @@
 .rdp-day_button[aria-disabled="true"],
 .rdp-day_button--disabled {
   color: #bbb !important;
-  background: #f3f4f6 !important;
+  background: #f0e6d8 !important;
   pointer-events: none !important;
   opacity: 0.7 !important;
   cursor: not-allowed !important;
@@ -320,7 +320,7 @@ body .rdp-day_button[aria-selected="true"] {
   color: #16a34a !important;
   font-weight: 700 !important;
   border: 2px solid #16a34a !important;
-  background: #fff !important;
+  background: #f5f0eb !important;
   border-radius: 0.75rem !important;
 }
 
@@ -403,13 +403,13 @@ body .rdp-day_button[aria-selected="true"] {
 /* Past dates styling - gray shading */
 .rdp-day.past-dates .rdp-day_button {
   color: #9ca3af !important;
-  background: #f3f4f6 !important;
+  background: #f0e6d8 !important;
   opacity: 0.6;
   cursor: pointer !important;
 }
 
 .rdp-day.past-dates .rdp-day_button:hover {
-  background: #e5e7eb !important;
+  background: #e6d5c7 !important;
   opacity: 0.8;
 }
 

@@ -126,8 +126,8 @@ export default function Home() {
             </div>
           </div>
 
-                          {/* Desktop: Video on right with original aspect ratio */}
-                <div className="relative hidden md:flex md:w-1/2 md:max-w-2xl md:flex-none md:items-center md:justify-center">
+          {/* Desktop: Video on right with original aspect ratio */}
+          <div className="relative hidden md:flex md:w-1/2 md:max-w-2xl md:flex-none md:items-center md:justify-center">
             <video
               autoPlay
               muted
