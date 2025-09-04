@@ -108,16 +108,32 @@ export default function KYCPage() {
 
     const checkKycOpenStatus = () => {
       const now = new Date();
+      
+      // Create dates in Korean timezone
       const startDateTime = new Date(
-        `${kycOpenSettings.startDate}T${kycOpenSettings.startTime}`
+        `${kycOpenSettings.startDate}T${kycOpenSettings.startTime}:00+09:00`
       );
       const endDateTime = new Date(
-        `${kycOpenSettings.endDate}T${kycOpenSettings.endTime}`
+        `${kycOpenSettings.endDate}T${kycOpenSettings.endTime}:00+09:00`
       );
 
       const currentTime = now.getTime();
       const startTime = startDateTime.getTime();
       const endTime = endDateTime.getTime();
+
+      // Debug logging
+      console.log("KYC Time Debug:", {
+        currentTime: now.toISOString(),
+        currentKoreanTime: new Date(now.getTime() + (9 * 60 * 60 * 1000)).toISOString(),
+        startTime: startDateTime.toISOString(),
+        endTime: endDateTime.toISOString(),
+        isKycOpen: currentTime >= startTime && currentTime <= endTime,
+        settings: kycOpenSettings,
+        timeDiff: {
+          toStart: startTime - currentTime,
+          toEnd: endTime - currentTime
+        }
+      });
 
       if (currentTime < startTime) {
         // 아직 시작 전
