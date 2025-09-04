@@ -94,7 +94,7 @@ export default function CustomerHeader({
             <div className="flex items-center space-x-2">
               <NotificationCenter variant="customer" />
               <AdminModeToggle />
-              
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm">
@@ -110,9 +110,7 @@ export default function CustomerHeader({
                       >
                         {user.email}
                       </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => router.push("/cost")}
-                      >
+                      <DropdownMenuItem onClick={() => router.push("/cost")}>
                         <DollarSign className="mr-2 h-4 w-4" />
                         비용안내
                       </DropdownMenuItem>
