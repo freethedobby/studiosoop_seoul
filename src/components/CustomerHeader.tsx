@@ -57,27 +57,18 @@ export default function CustomerHeader({
     <header className={headerClasses}>
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-1 sm:space-x-4">
+          <div className="flex items-center">
             <Logo variant="header" />
 
             {user && (
               <>
-                <div className="w-px bg-gray-300 hidden h-6 sm:block" />
+                <div className="w-px bg-gray-300 hidden h-6 sm:block ml-4" />
 
-                <nav className="hidden items-center space-x-4 sm:flex">
-                  <Button
-                    variant="ghost"
-                    onClick={() => router.push("/cost")}
-                    className="flex items-center space-x-2"
-                  >
-                    <DollarSign className="h-4 w-4" />
-                    <span>비용안내</span>
-                  </Button>
-
+                <nav className="hidden items-center space-x-2 sm:flex ml-4">
                   <Button
                     variant="ghost"
                     onClick={() => router.push("/dashboard")}
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-1 text-sm"
                   >
                     <User className="h-4 w-4" />
                     <span>내정보</span>
@@ -87,7 +78,7 @@ export default function CustomerHeader({
                     <Button
                       variant="ghost"
                       onClick={() => router.push("/user/reserve")}
-                      className="flex items-center space-x-2"
+                      className="flex items-center space-x-1 text-sm"
                     >
                       <Calendar className="h-4 w-4" />
                       <span>예약하기</span>
@@ -98,23 +89,33 @@ export default function CustomerHeader({
             )}
           </div>
 
-          <div className="flex items-center space-x-1 sm:space-x-4">
-            {/* Language Switcher - Desktop only */}
-            <div className="hidden sm:block">
-              <LanguageSwitcher />
-            </div>
-
+          <div className="flex items-center space-x-2">
             {user ? (
               <>
-                {/* Desktop: Show all buttons */}
-                <div className="hidden items-center space-x-4 sm:flex">
+                {/* Desktop: Clean right side navigation */}
+                <div className="hidden items-center space-x-2 sm:flex">
+                  <Button
+                    variant="ghost"
+                    onClick={() => router.push("/cost")}
+                    className="flex items-center space-x-1 text-sm"
+                  >
+                    <DollarSign className="h-4 w-4" />
+                    <span>비용안내</span>
+                  </Button>
+                  
                   <NotificationCenter variant="customer" />
                   <AdminModeToggle />
-                  <div className="text-gray-600 text-sm">{user.email}</div>
+                  
+                  <div className="w-px bg-gray-300 h-6" />
+                  
+                  <div className="text-gray-600 text-sm max-w-32 truncate">
+                    {user.email}
+                  </div>
+                  
                   <Button
                     variant="ghost"
                     onClick={handleLogout}
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-1 text-sm"
                   >
                     <LogOut className="h-4 w-4" />
                     <span>로그아웃</span>
@@ -138,9 +139,7 @@ export default function CustomerHeader({
                       >
                         {user.email}
                       </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => router.push("/cost")}
-                      >
+                      <DropdownMenuItem onClick={() => router.push("/cost")}>
                         <DollarSign className="mr-2 h-4 w-4" />
                         비용안내
                       </DropdownMenuItem>
@@ -172,19 +171,22 @@ export default function CustomerHeader({
               </>
             ) : (
               <>
-                {/* Desktop: Cost and Login buttons */}
-                <div className="hidden items-center space-x-4 sm:flex">
+                {/* Desktop: Clean non-logged-in navigation */}
+                <div className="hidden items-center space-x-2 sm:flex">
                   <Button
                     variant="ghost"
                     onClick={() => router.push("/cost")}
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-1 text-sm"
                   >
                     <DollarSign className="h-4 w-4" />
                     <span>비용안내</span>
                   </Button>
+                  
+                  <div className="w-px bg-gray-300 h-6" />
+                  
                   <Button
                     onClick={() => router.push("/login")}
-                    className="bg-black hover:bg-gray-800 text-white"
+                    className="bg-black hover:bg-gray-800 text-white text-sm px-4 py-2"
                   >
                     로그인
                   </Button>
@@ -215,6 +217,11 @@ export default function CustomerHeader({
                 </div>
               </>
             )}
+            
+            {/* Language Switcher - Desktop only */}
+            <div className="hidden sm:block ml-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </div>

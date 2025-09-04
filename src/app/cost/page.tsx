@@ -13,7 +13,7 @@ export default function CostPage() {
   return (
     <div className="min-h-screen bg-white">
       <CustomerHeader />
-      
+
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           {/* Header */}
@@ -26,9 +26,9 @@ export default function CostPage() {
               <ArrowLeft className="h-4 w-4" />
               <span>뒤로가기</span>
             </Button>
-            
-            <h1 className="text-3xl font-bold text-gray-900">시술 비용 안내</h1>
-            <p className="mt-2 text-gray-600">
+
+            <h1 className="text-gray-900 text-3xl font-bold">시술 비용 안내</h1>
+            <p className="text-gray-600 mt-2">
               STUDIOSOOP SEOUL의 시술 비용을 확인해보세요
             </p>
           </div>
@@ -41,18 +41,18 @@ export default function CostPage() {
                 alt="시술 비용 안내"
                 width={800}
                 height={600}
-                className="w-full h-auto rounded-lg"
+                className="h-auto w-full rounded-lg"
                 priority
               />
             </div>
           </div>
 
           {/* Additional Information */}
-          <div className="mt-8 bg-gray-50 rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="bg-gray-50 mt-8 rounded-lg p-6">
+            <h2 className="text-gray-900 mb-4 text-xl font-semibold">
               비용 안내 사항
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="text-gray-700 space-y-3">
               <p>• 모든 가격은 부가세 포함 가격입니다</p>
               <p>• 시술 전 상담을 통해 정확한 비용을 안내해드립니다</p>
               <p>• 개인별 맞춤 디자인에 따라 추가 비용이 발생할 수 있습니다</p>
