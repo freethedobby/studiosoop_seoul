@@ -1,9 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface SoopTermsModalProps {
@@ -11,7 +16,10 @@ interface SoopTermsModalProps {
   onClose: () => void;
 }
 
-export default function SoopTermsModal({ isOpen, onClose }: SoopTermsModalProps) {
+export default function SoopTermsModal({
+  isOpen,
+  onClose,
+}: SoopTermsModalProps) {
   const [currentImage, setCurrentImage] = useState(1);
   const totalImages = 8;
 
@@ -25,16 +33,16 @@ export default function SoopTermsModal({ isOpen, onClose }: SoopTermsModalProps)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
+      <DialogContent className="max-h-[90vh] max-w-4xl overflow-hidden">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-bold">
             필독사항
           </DialogTitle>
         </DialogHeader>
-        
+
         <div className="relative">
           {/* 이미지 컨테이너 */}
-          <div className="relative w-full h-[70vh] bg-gray-100 rounded-lg overflow-hidden">
+          <div className="bg-gray-100 relative h-[70vh] w-full overflow-hidden rounded-lg">
             <Image
               src={`/soop${currentImage}.jpg`}
               alt={`필독사항 ${currentImage}`}
@@ -53,7 +61,7 @@ export default function SoopTermsModal({ isOpen, onClose }: SoopTermsModalProps)
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          
+
           <Button
             variant="outline"
             size="icon"
@@ -64,7 +72,7 @@ export default function SoopTermsModal({ isOpen, onClose }: SoopTermsModalProps)
           </Button>
 
           {/* 페이지 인디케이터 */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+          <div className="bg-black/50 absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-sm text-white">
             {currentImage} / {totalImages}
           </div>
         </div>
