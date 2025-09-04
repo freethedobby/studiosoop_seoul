@@ -62,9 +62,9 @@ export default function CustomerHeader({
 
             {user && (
               <>
-                <div className="w-px bg-gray-300 hidden h-6 sm:block ml-4" />
+                <div className="w-px bg-gray-300 ml-4 hidden h-6 sm:block" />
 
-                <nav className="hidden items-center space-x-2 sm:flex ml-4">
+                <nav className="ml-4 hidden items-center space-x-2 sm:flex">
                   <Button
                     variant="ghost"
                     onClick={() => router.push("/dashboard")}
@@ -90,56 +90,29 @@ export default function CustomerHeader({
           </div>
 
           <div className="flex items-center space-x-2">
-            {user ? (
-              <>
-                {/* Desktop: Clean right side navigation */}
-                <div className="hidden items-center space-x-2 sm:flex">
-                  <Button
-                    variant="ghost"
-                    onClick={() => router.push("/cost")}
-                    className="flex items-center space-x-1 text-sm"
-                  >
-                    <DollarSign className="h-4 w-4" />
-                    <span>비용안내</span>
+            {/* Universal Hamburger Menu for All Users */}
+            <div className="flex items-center space-x-2">
+              <NotificationCenter variant="customer" />
+              <AdminModeToggle />
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm">
+                    <Menu className="h-4 w-4" />
                   </Button>
-                  
-                  <NotificationCenter variant="customer" />
-                  <AdminModeToggle />
-                  
-                  <div className="w-px bg-gray-300 h-6" />
-                  
-                  <div className="text-gray-600 text-sm max-w-32 truncate">
-                    {user.email}
-                  </div>
-                  
-                  <Button
-                    variant="ghost"
-                    onClick={handleLogout}
-                    className="flex items-center space-x-1 text-sm"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    <span>로그아웃</span>
-                  </Button>
-                </div>
-
-                {/* Mobile: Admin Mode Toggle, Notification, and Dropdown menu */}
-                <div className="flex items-center space-x-2 sm:hidden">
-                  <AdminModeToggle />
-                  <NotificationCenter variant="customer" />
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm">
-                        <Menu className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {user ? (
+                    <>
                       <DropdownMenuItem
                         disabled
                         className="cursor-default opacity-100"
                       >
                         {user.email}
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push("/cost")}>
+                      <DropdownMenuItem
+                        onClick={() => router.push("/cost")}
+                      >
                         <DollarSign className="mr-2 h-4 w-4" />
                         비용안내
                       </DropdownMenuItem>
@@ -161,46 +134,9 @@ export default function CustomerHeader({
                         <LogOut className="mr-2 h-4 w-4" />
                         로그아웃
                       </DropdownMenuItem>
-                      {/* Language Switcher for Mobile */}
-                      <div className="px-2 py-1">
-                        <LanguageSwitcher />
-                      </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* Desktop: Clean non-logged-in navigation */}
-                <div className="hidden items-center space-x-2 sm:flex">
-                  <Button
-                    variant="ghost"
-                    onClick={() => router.push("/cost")}
-                    className="flex items-center space-x-1 text-sm"
-                  >
-                    <DollarSign className="h-4 w-4" />
-                    <span>비용안내</span>
-                  </Button>
-                  
-                  <div className="w-px bg-gray-300 h-6" />
-                  
-                  <Button
-                    onClick={() => router.push("/login")}
-                    className="bg-black hover:bg-gray-800 text-white text-sm px-4 py-2"
-                  >
-                    로그인
-                  </Button>
-                </div>
-
-                {/* Mobile: Dropdown menu with login and language */}
-                <div className="sm:hidden">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm">
-                        <Menu className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
+                    </>
+                  ) : (
+                    <>
                       <DropdownMenuItem onClick={() => router.push("/cost")}>
                         <DollarSign className="mr-2 h-4 w-4" />
                         비용안내
@@ -208,19 +144,14 @@ export default function CustomerHeader({
                       <DropdownMenuItem onClick={() => router.push("/login")}>
                         로그인
                       </DropdownMenuItem>
-                      {/* Language Switcher for Mobile */}
-                      <div className="px-2 py-1">
-                        <LanguageSwitcher />
-                      </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </>
-            )}
-            
-            {/* Language Switcher - Desktop only */}
-            <div className="hidden sm:block ml-2">
-              <LanguageSwitcher />
+                    </>
+                  )}
+                  {/* Language Switcher */}
+                  <div className="px-2 py-1">
+                    <LanguageSwitcher />
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>

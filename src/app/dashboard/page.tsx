@@ -23,6 +23,8 @@ import {
   Check,
   Eye,
   User,
+  DollarSign,
+  Calendar,
 } from "lucide-react";
 import Link from "next/link";
 import { MembershipBadge } from "@/components/MembershipBadge";
@@ -518,6 +520,35 @@ export default function DashboardPage() {
               </div>
 
               <nav className="flex flex-col space-y-2">
+                <Button
+                  variant="ghost"
+                  onClick={() => router.push("/cost")}
+                  className="flex items-center justify-start space-x-2"
+                >
+                  <DollarSign className="h-4 w-4" />
+                  <span>비용안내</span>
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  onClick={() => router.push("/dashboard")}
+                  className="flex items-center justify-start space-x-2"
+                >
+                  <User className="h-4 w-4" />
+                  <span>내정보</span>
+                </Button>
+                
+                {user?.kycStatus === "approved" && (
+                  <Button
+                    variant="ghost"
+                    onClick={() => router.push("/user/reserve")}
+                    className="flex items-center justify-start space-x-2"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    <span>예약하기</span>
+                  </Button>
+                )}
+                
                 <Button
                   variant="ghost"
                   onClick={handleLogout}
