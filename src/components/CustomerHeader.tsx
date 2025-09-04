@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User, Calendar, LogOut, Menu } from "lucide-react";
+import { User, Calendar, LogOut, Menu, DollarSign } from "lucide-react";
 import { signOutUser } from "@/lib/firebase";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -65,6 +65,15 @@ export default function CustomerHeader({
                 <div className="w-px bg-gray-300 hidden h-6 sm:block" />
 
                 <nav className="hidden items-center space-x-4 sm:flex">
+                  <Button
+                    variant="ghost"
+                    onClick={() => router.push("/cost")}
+                    className="flex items-center space-x-2"
+                  >
+                    <DollarSign className="h-4 w-4" />
+                    <span>비용안내</span>
+                  </Button>
+
                   <Button
                     variant="ghost"
                     onClick={() => router.push("/dashboard")}
@@ -130,6 +139,12 @@ export default function CustomerHeader({
                         {user.email}
                       </DropdownMenuItem>
                       <DropdownMenuItem
+                        onClick={() => router.push("/cost")}
+                      >
+                        <DollarSign className="mr-2 h-4 w-4" />
+                        비용안내
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
                         onClick={() => router.push("/dashboard")}
                       >
                         <User className="mr-2 h-4 w-4" />
@@ -157,13 +172,23 @@ export default function CustomerHeader({
               </>
             ) : (
               <>
-                {/* Desktop: Login button */}
-                <Button
-                  onClick={() => router.push("/login")}
-                  className="bg-black hover:bg-gray-800 sm:text-base hidden text-sm text-white sm:block"
-                >
-                  로그인
-                </Button>
+                {/* Desktop: Cost and Login buttons */}
+                <div className="hidden items-center space-x-4 sm:flex">
+                  <Button
+                    variant="ghost"
+                    onClick={() => router.push("/cost")}
+                    className="flex items-center space-x-2"
+                  >
+                    <DollarSign className="h-4 w-4" />
+                    <span>비용안내</span>
+                  </Button>
+                  <Button
+                    onClick={() => router.push("/login")}
+                    className="bg-black hover:bg-gray-800 text-white"
+                  >
+                    로그인
+                  </Button>
+                </div>
 
                 {/* Mobile: Dropdown menu with login and language */}
                 <div className="sm:hidden">
@@ -174,6 +199,10 @@ export default function CustomerHeader({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48">
+                      <DropdownMenuItem onClick={() => router.push("/cost")}>
+                        <DollarSign className="mr-2 h-4 w-4" />
+                        비용안내
+                      </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => router.push("/login")}>
                         로그인
                       </DropdownMenuItem>
