@@ -258,12 +258,12 @@ export default function DashboardPage() {
     const fetchKycData = async () => {
       if (user?.uid) {
         try {
-          console.log("대시보드 - KYC 데이터 조회 시작:", user.uid);
-          const userDoc = await getDoc(doc(db, "users", user.uid));
-          console.log("대시보드 - 사용자 문서 존재 여부:", userDoc.exists());
-          if (userDoc.exists()) {
-            const data = userDoc.data();
-            console.log("대시보드 - 사용자 데이터:", data);
+          console.log("대시보드 - KYC 데이터 조회 시작 (kyc 컬렉션):", user.email);
+          const kycDoc = await getDoc(doc(db, "kyc", user.email));
+          console.log("대시보드 - KYC 문서 존재 여부:", kycDoc.exists());
+          if (kycDoc.exists()) {
+            const data = kycDoc.data();
+            console.log("대시보드 - KYC 데이터:", data);
 
             // KYC 데이터 형식에 맞게 변환
             const kycData: KYCData = {
@@ -276,20 +276,15 @@ export default function DashboardPage() {
               reservationSource: data.reservationSource || "",
               termsAgreed: data.termsAgreed || false,
               eyebrowPhotos: data.eyebrowPhotos || [],
-              status: data.status || "",
+              status: data.status || "pending",
               submittedAt: data.submittedAt,
             };
 
             console.log("대시보드 - 변환된 KYC 데이터:", kycData);
-            console.log("대시보드 - 새로운 필드들:", {
-              designDescription: data.designDescription,
-              additionalNotes: data.additionalNotes,
-              marketingConsent: data.marketingConsent,
-            });
             setKycData(kycData);
             console.log("대시보드 - kycData 상태 설정 완료");
           } else {
-            console.log("대시보드 - 사용자 문서가 존재하지 않음");
+            console.log("대시보드 - KYC 문서가 존재하지 않음");
             setKycData(null);
           }
         } catch (error) {
@@ -589,62 +584,96 @@ export default function DashboardPage() {
                       </Link>
                     ) : (
                       <div className="space-y-3">
-                        {/* '신청 완료' 버튼은 kycData가 없을 때만 노출 */}
-                        {!kycData && (
-                          <Button
-                            variant="outline"
-                            className="w-full"
-                            disabled={true}
-                          >
-                            신청 완료
-                          </Button>
-                        )}
-                        {(() => {
-                          console.log("대시보드 - 상담신청 섹션 렌더링:", {
-                            kycData: !!kycData,
-                            showKycData: showKycData,
-                          });
-                          return null;
-                        })()}
-                        {kycData && (
-                          <Button
-                            variant="outline"
-                            className="w-full"
-                            onClick={() => {
-                              // 신청내용보기 클릭 시 데이터 강제 새로고침
-                              const fetchKycData = async () => {
-                                if (user?.email) {
-                                  try {
-                                    console.log(
-                                      "대시보드 - KYC 데이터 새로고침 시작:",
-                                      user.email
-                                    );
-                                    const kycDoc = await getDoc(
-                                      doc(db, "kyc", user.email)
-                                    );
-                                    if (kycDoc.exists()) {
-                                      const data = kycDoc.data() as KYCData;
+                        {kycData ? (
+                          <div className="space-y-3">
+                            {/* KYC 신청 완료 상태 표시 */}
+                            <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                              <div className="flex items-center space-x-2">
+                                <Check className="h-5 w-5 text-green-600" />
+                                <span className="text-green-800 font-medium">
+                                  신청 완료
+                                </span>
+                              </div>
+                              <Badge 
+                                variant="outline" 
+                                className={`${
+                                  kycData.status === "approved" 
+                                    ? "bg-green-100 text-green-800 border-green-300" 
+                                    : kycData.status === "rejected"
+                                    ? "bg-red-100 text-red-800 border-red-300"
+                                    : "bg-yellow-100 text-yellow-800 border-yellow-300"
+                                }`}
+                              >
+                                {kycData.status === "approved" 
+                                  ? "승인됨" 
+                                  : kycData.status === "rejected"
+                                  ? "거절됨"
+                                  : "검토중"}
+                              </Badge>
+                            </div>
+                            
+                            {/* 신청내용보기 버튼 */}
+                            <Button
+                              variant="outline"
+                              className="w-full"
+                              onClick={() => {
+                                // 신청내용보기 클릭 시 데이터 강제 새로고침
+                                const fetchKycData = async () => {
+                                  if (user?.email) {
+                                    try {
                                       console.log(
-                                        "대시보드 - 새로고침된 KYC 데이터:",
-                                        data
+                                        "대시보드 - KYC 데이터 새로고침 시작:",
+                                        user.email
                                       );
-                                      setKycData(data);
+                                      const kycDoc = await getDoc(
+                                        doc(db, "kyc", user.email)
+                                      );
+                                      if (kycDoc.exists()) {
+                                        const data = kycDoc.data();
+                                        console.log(
+                                          "대시보드 - 새로고침된 KYC 데이터:",
+                                          data
+                                        );
+                                        
+                                        // KYC 데이터 형식에 맞게 변환
+                                        const kycData: KYCData = {
+                                          name: data.name || "",
+                                          gender: data.gender || "",
+                                          ageGroup: data.ageGroup || "",
+                                          desiredServices: data.desiredServices || "",
+                                          hasPermanentExperience: data.hasPermanentExperience || "",
+                                          lastPermanentDate: data.lastPermanentDate || "",
+                                          reservationSource: data.reservationSource || "",
+                                          termsAgreed: data.termsAgreed || false,
+                                          eyebrowPhotos: data.eyebrowPhotos || [],
+                                          status: data.status || "pending",
+                                          submittedAt: data.submittedAt,
+                                        };
+                                        
+                                        setKycData(kycData);
+                                      }
+                                    } catch (error) {
+                                      console.error(
+                                        "대시보드 - KYC 데이터 새로고침 실패:",
+                                        error
+                                      );
                                     }
-                                  } catch (error) {
-                                    console.error(
-                                      "대시보드 - KYC 데이터 새로고침 실패:",
-                                      error
-                                    );
                                   }
-                                }
-                              };
-                              fetchKycData();
-                              setShowKycData(true);
-                            }}
-                          >
-                            <Eye className="mr-2 h-4 w-4" />
-                            신청내용보기
-                          </Button>
+                                };
+                                fetchKycData();
+                                setShowKycData(true);
+                              }}
+                            >
+                              <Eye className="mr-2 h-4 w-4" />
+                              신청내용보기
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="text-center py-4">
+                            <p className="text-gray-500 text-sm">
+                              아직 KYC 신청을 하지 않았습니다.
+                            </p>
+                          </div>
                         )}
                       </div>
                     )}

@@ -1556,13 +1556,19 @@ export default function AdminKYCPage() {
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">연령대</span>
                                   <span className="font-medium">
-                                    {user.ageGroup === "10s" ? "10대" :
-                                     user.ageGroup === "20s" ? "20대" :
-                                     user.ageGroup === "30s" ? "30대" :
-                                     user.ageGroup === "40s" ? "40대" :
-                                     user.ageGroup === "50s" ? "50대" :
-                                     user.ageGroup === "60s+" ? "60대 이상" :
-                                     user.ageGroup || "-"}
+                                    {user.ageGroup === "10s"
+                                      ? "10대"
+                                      : user.ageGroup === "20s"
+                                      ? "20대"
+                                      : user.ageGroup === "30s"
+                                      ? "30대"
+                                      : user.ageGroup === "40s"
+                                      ? "40대"
+                                      : user.ageGroup === "50s"
+                                      ? "50대"
+                                      : user.ageGroup === "60s+"
+                                      ? "60대 이상"
+                                      : user.ageGroup || "-"}
                                   </span>
                                 </div>
                                 {user.detailedAddress && (
@@ -1607,16 +1613,17 @@ export default function AdminKYCPage() {
                                       : "없음"}
                                   </span>
                                 </div>
-                                {user.hasPermanentExperience === "yes" && user.lastPermanentDate && (
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      마지막 반영구 시기
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.lastPermanentDate}
-                                    </span>
-                                  </div>
-                                )}
+                                {user.hasPermanentExperience === "yes" &&
+                                  user.lastPermanentDate && (
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">
+                                        마지막 반영구 시기
+                                      </span>
+                                      <span className="font-medium">
+                                        {user.lastPermanentDate}
+                                      </span>
+                                    </div>
+                                  )}
                                 {user.designDescription && (
                                   <div className="flex flex-col">
                                     <span className="text-gray-800 mb-2 text-sm font-semibold">
@@ -1685,31 +1692,39 @@ export default function AdminKYCPage() {
                               눈썹 사진
                             </h4>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                              {user.eyebrowPhotos && user.eyebrowPhotos.length > 0 ? (
-                                user.eyebrowPhotos.map((photo: string, index: number) => (
-                                  <div key={index} className="space-y-2">
-                                    <h5 className="text-gray-700 text-sm font-medium">
-                                      사진 {index + 1}
-                                    </h5>
-                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                      <Image
-                                        src={photo}
-                                        alt={`눈썹 사진 ${index + 1}`}
-                                        fill
-                                        className="object-contain"
-                                        unoptimized={photo.startsWith("data:")}
-                                        onError={(e) => {
-                                          console.error(
-                                            `Failed to load image ${index + 1}`
-                                          );
-                                          e.currentTarget.style.display = "none";
-                                        }}
-                                      />
+                              {user.eyebrowPhotos &&
+                              user.eyebrowPhotos.length > 0 ? (
+                                user.eyebrowPhotos.map(
+                                  (photo: string, index: number) => (
+                                    <div key={index} className="space-y-2">
+                                      <h5 className="text-gray-700 text-sm font-medium">
+                                        사진 {index + 1}
+                                      </h5>
+                                      <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                        <Image
+                                          src={photo}
+                                          alt={`눈썹 사진 ${index + 1}`}
+                                          fill
+                                          className="object-contain"
+                                          unoptimized={photo.startsWith(
+                                            "data:"
+                                          )}
+                                          onError={(e) => {
+                                            console.error(
+                                              `Failed to load image ${
+                                                index + 1
+                                              }`
+                                            );
+                                            e.currentTarget.style.display =
+                                              "none";
+                                          }}
+                                        />
+                                      </div>
                                     </div>
-                                  </div>
-                                ))
+                                  )
+                                )
                               ) : (
-                                <div className="col-span-3 text-center text-gray-500 py-8">
+                                <div className="text-gray-500 col-span-3 py-8 text-center">
                                   등록된 눈썹 사진이 없습니다.
                                 </div>
                               )}
@@ -1951,13 +1966,19 @@ export default function AdminKYCPage() {
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">연령대</span>
                                   <span className="font-medium">
-                                    {user.ageGroup === "10s" ? "10대" :
-                                     user.ageGroup === "20s" ? "20대" :
-                                     user.ageGroup === "30s" ? "30대" :
-                                     user.ageGroup === "40s" ? "40대" :
-                                     user.ageGroup === "50s" ? "50대" :
-                                     user.ageGroup === "60s+" ? "60대 이상" :
-                                     user.ageGroup || "-"}
+                                    {user.ageGroup === "10s"
+                                      ? "10대"
+                                      : user.ageGroup === "20s"
+                                      ? "20대"
+                                      : user.ageGroup === "30s"
+                                      ? "30대"
+                                      : user.ageGroup === "40s"
+                                      ? "40대"
+                                      : user.ageGroup === "50s"
+                                      ? "50대"
+                                      : user.ageGroup === "60s+"
+                                      ? "60대 이상"
+                                      : user.ageGroup || "-"}
                                   </span>
                                 </div>
                                 {user.detailedAddress && (
@@ -2002,16 +2023,17 @@ export default function AdminKYCPage() {
                                       : "없음"}
                                   </span>
                                 </div>
-                                {user.hasPermanentExperience === "yes" && user.lastPermanentDate && (
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      마지막 반영구 시기
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.lastPermanentDate}
-                                    </span>
-                                  </div>
-                                )}
+                                {user.hasPermanentExperience === "yes" &&
+                                  user.lastPermanentDate && (
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">
+                                        마지막 반영구 시기
+                                      </span>
+                                      <span className="font-medium">
+                                        {user.lastPermanentDate}
+                                      </span>
+                                    </div>
+                                  )}
                                 {user.designDescription && (
                                   <div className="flex flex-col">
                                     <span className="text-gray-800 mb-2 text-sm font-semibold">
@@ -2080,31 +2102,39 @@ export default function AdminKYCPage() {
                               눈썹 사진
                             </h4>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                              {user.eyebrowPhotos && user.eyebrowPhotos.length > 0 ? (
-                                user.eyebrowPhotos.map((photo: string, index: number) => (
-                                  <div key={index} className="space-y-2">
-                                    <h5 className="text-gray-700 text-sm font-medium">
-                                      사진 {index + 1}
-                                    </h5>
-                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                      <Image
-                                        src={photo}
-                                        alt={`눈썹 사진 ${index + 1}`}
-                                        fill
-                                        className="object-contain"
-                                        unoptimized={photo.startsWith("data:")}
-                                        onError={(e) => {
-                                          console.error(
-                                            `Failed to load image ${index + 1}`
-                                          );
-                                          e.currentTarget.style.display = "none";
-                                        }}
-                                      />
+                              {user.eyebrowPhotos &&
+                              user.eyebrowPhotos.length > 0 ? (
+                                user.eyebrowPhotos.map(
+                                  (photo: string, index: number) => (
+                                    <div key={index} className="space-y-2">
+                                      <h5 className="text-gray-700 text-sm font-medium">
+                                        사진 {index + 1}
+                                      </h5>
+                                      <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                        <Image
+                                          src={photo}
+                                          alt={`눈썹 사진 ${index + 1}`}
+                                          fill
+                                          className="object-contain"
+                                          unoptimized={photo.startsWith(
+                                            "data:"
+                                          )}
+                                          onError={(e) => {
+                                            console.error(
+                                              `Failed to load image ${
+                                                index + 1
+                                              }`
+                                            );
+                                            e.currentTarget.style.display =
+                                              "none";
+                                          }}
+                                        />
+                                      </div>
                                     </div>
-                                  </div>
-                                ))
+                                  )
+                                )
                               ) : (
-                                <div className="col-span-3 text-center text-gray-500 py-8">
+                                <div className="text-gray-500 col-span-3 py-8 text-center">
                                   등록된 눈썹 사진이 없습니다.
                                 </div>
                               )}
@@ -2371,13 +2401,19 @@ export default function AdminKYCPage() {
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">연령대</span>
                                   <span className="font-medium">
-                                    {user.ageGroup === "10s" ? "10대" :
-                                     user.ageGroup === "20s" ? "20대" :
-                                     user.ageGroup === "30s" ? "30대" :
-                                     user.ageGroup === "40s" ? "40대" :
-                                     user.ageGroup === "50s" ? "50대" :
-                                     user.ageGroup === "60s+" ? "60대 이상" :
-                                     user.ageGroup || "-"}
+                                    {user.ageGroup === "10s"
+                                      ? "10대"
+                                      : user.ageGroup === "20s"
+                                      ? "20대"
+                                      : user.ageGroup === "30s"
+                                      ? "30대"
+                                      : user.ageGroup === "40s"
+                                      ? "40대"
+                                      : user.ageGroup === "50s"
+                                      ? "50대"
+                                      : user.ageGroup === "60s+"
+                                      ? "60대 이상"
+                                      : user.ageGroup || "-"}
                                   </span>
                                 </div>
                                 {user.detailedAddress && (
@@ -2422,16 +2458,17 @@ export default function AdminKYCPage() {
                                       : "없음"}
                                   </span>
                                 </div>
-                                {user.hasPermanentExperience === "yes" && user.lastPermanentDate && (
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      마지막 반영구 시기
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.lastPermanentDate}
-                                    </span>
-                                  </div>
-                                )}
+                                {user.hasPermanentExperience === "yes" &&
+                                  user.lastPermanentDate && (
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">
+                                        마지막 반영구 시기
+                                      </span>
+                                      <span className="font-medium">
+                                        {user.lastPermanentDate}
+                                      </span>
+                                    </div>
+                                  )}
                                 {user.designDescription && (
                                   <div className="flex flex-col">
                                     <span className="text-gray-800 mb-2 text-sm font-semibold">
@@ -2500,31 +2537,39 @@ export default function AdminKYCPage() {
                               눈썹 사진
                             </h4>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                              {user.eyebrowPhotos && user.eyebrowPhotos.length > 0 ? (
-                                user.eyebrowPhotos.map((photo: string, index: number) => (
-                                  <div key={index} className="space-y-2">
-                                    <h5 className="text-gray-700 text-sm font-medium">
-                                      사진 {index + 1}
-                                    </h5>
-                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                      <Image
-                                        src={photo}
-                                        alt={`눈썹 사진 ${index + 1}`}
-                                        fill
-                                        className="object-contain"
-                                        unoptimized={photo.startsWith("data:")}
-                                        onError={(e) => {
-                                          console.error(
-                                            `Failed to load image ${index + 1}`
-                                          );
-                                          e.currentTarget.style.display = "none";
-                                        }}
-                                      />
+                              {user.eyebrowPhotos &&
+                              user.eyebrowPhotos.length > 0 ? (
+                                user.eyebrowPhotos.map(
+                                  (photo: string, index: number) => (
+                                    <div key={index} className="space-y-2">
+                                      <h5 className="text-gray-700 text-sm font-medium">
+                                        사진 {index + 1}
+                                      </h5>
+                                      <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                        <Image
+                                          src={photo}
+                                          alt={`눈썹 사진 ${index + 1}`}
+                                          fill
+                                          className="object-contain"
+                                          unoptimized={photo.startsWith(
+                                            "data:"
+                                          )}
+                                          onError={(e) => {
+                                            console.error(
+                                              `Failed to load image ${
+                                                index + 1
+                                              }`
+                                            );
+                                            e.currentTarget.style.display =
+                                              "none";
+                                          }}
+                                        />
+                                      </div>
                                     </div>
-                                  </div>
-                                ))
+                                  )
+                                )
                               ) : (
-                                <div className="col-span-3 text-center text-gray-500 py-8">
+                                <div className="text-gray-500 col-span-3 py-8 text-center">
                                   등록된 눈썹 사진이 없습니다.
                                 </div>
                               )}
