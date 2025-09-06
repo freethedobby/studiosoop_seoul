@@ -258,6 +258,11 @@ export default function DashboardPage() {
     const fetchKycData = async () => {
       if (user?.uid) {
         try {
+          if (!user.email) {
+            console.log("대시보드 - 사용자 이메일이 없음");
+            return;
+          }
+          
           console.log(
             "대시보드 - KYC 데이터 조회 시작 (kyc 컬렉션):",
             user.email
