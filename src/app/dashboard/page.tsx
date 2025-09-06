@@ -1242,27 +1242,27 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* 기본 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">기본 정보</CardTitle>
+      <Card className="border-gray-200 shadow-sm">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-gray-800">기본 정보</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">성함</label>
-              <p className="text-gray-900 font-medium">{kycData.name}</p>
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">성함</label>
+              <p className="text-gray-900 font-medium text-base">{kycData.name}</p>
             </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">성별</label>
-              <p className="text-gray-900">{getGenderText(kycData.gender)}</p>
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">성별</label>
+              <p className="text-gray-900 text-base">{getGenderText(kycData.gender)}</p>
             </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">
                 연령대
               </label>
-              <p className="text-gray-900">
+              <p className="text-gray-900 text-base">
                 {getAgeGroupText(kycData.ageGroup)}
               </p>
             </div>
@@ -1271,29 +1271,29 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       </Card>
 
       {/* 희망 시술 항목 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">희망 시술 항목</CardTitle>
+      <Card className="border-gray-200 shadow-sm">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-gray-800">희망 시술 항목</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm">
+          <div className="text-gray-900 rounded-lg border border-gray-200 bg-white p-4 text-base font-medium">
             {kycData.desiredServices}
           </div>
         </CardContent>
       </Card>
 
       {/* 반영구 경험 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">반영구 경험</CardTitle>
+      <Card className="border-gray-200 shadow-sm">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-gray-800">반영구 경험</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">
                 반영구 경험 유무
               </label>
-              <p className="text-gray-900">
+              <p className="text-gray-900 text-base">
                 {kycData.hasPermanentExperience === "yes" ? (
                   <span className="text-green-600 font-medium">있음</span>
                 ) : (
@@ -1303,11 +1303,11 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
             </div>
             {kycData.hasPermanentExperience === "yes" &&
               kycData.lastPermanentDate && (
-                <div>
-                  <label className="text-gray-700 text-sm font-medium">
+                <div className="space-y-1">
+                  <label className="text-gray-600 text-sm font-medium">
                     마지막 반영구 시기
                   </label>
-                  <p className="text-gray-900 font-medium">
+                  <p className="text-gray-900 font-medium text-base">
                     {kycData.lastPermanentDate}
                   </p>
                 </div>
@@ -1317,12 +1317,12 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       </Card>
 
       {/* 예약 경로 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">예약 경로</CardTitle>
+      <Card className="border-gray-200 shadow-sm">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-gray-800">예약 경로</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm font-medium">
+          <div className="text-gray-900 rounded-lg border border-gray-200 bg-white p-4 text-base font-medium">
             {kycData.reservationSource}
           </div>
         </CardContent>
@@ -1330,9 +1330,9 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
 
       {/* 눈썹 사진 */}
       {kycData.eyebrowPhotos && kycData.eyebrowPhotos.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">
+        <Card className="border-gray-200 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg text-gray-800">
               눈썹 사진 ({kycData.eyebrowPhotos.length}장)
             </CardTitle>
           </CardHeader>
@@ -1340,10 +1340,10 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {kycData.eyebrowPhotos.map((photo, index) => (
                 <div key={index} className="space-y-2">
-                  <label className="text-gray-700 text-sm font-medium">
+                  <label className="text-gray-600 text-sm font-medium">
                     사진 {index + 1}
                   </label>
-                  <div className="bg-gray-50 rounded-lg border border-border p-2">
+                  <div className="bg-gray-50 rounded-lg border border-gray-200 p-2">
                     <Image
                       src={photo}
                       alt={`눈썹 사진 ${index + 1}`}
@@ -1360,24 +1360,24 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       )}
 
       {/* 제출 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">제출 정보</CardTitle>
+      <Card className="border-gray-200 shadow-sm">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-gray-800">제출 정보</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">
                 제출일
               </label>
-              <p className="text-gray-900">
+              <p className="text-gray-900 text-base">
                 {kycData.submittedAt?.toDate?.()?.toLocaleDateString() ||
                   "날짜 정보 없음"}
               </p>
             </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">상태</label>
-              <p className="text-gray-900">
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">상태</label>
+              <p className="text-gray-900 text-base">
                 {kycData.status === "approved" ? (
                   <span className="text-green-600 font-medium">승인됨</span>
                 ) : kycData.status === "rejected" ? (
@@ -1387,11 +1387,11 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                 )}
               </p>
             </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
+            <div className="space-y-1">
+              <label className="text-gray-600 text-sm font-medium">
                 필독사항 동의
               </label>
-              <p className="text-gray-900">
+              <p className="text-gray-900 text-base">
                 {kycData.termsAgreed ? (
                   <span className="text-green-600 font-medium">✓ 동의함</span>
                 ) : (
