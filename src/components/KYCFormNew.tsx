@@ -96,11 +96,37 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
   // 이미지 업로드 함수
   const handleImageUpload = async (file: File): Promise<string> => {
     // 실제 구현에서는 Firebase Storage에 업로드
-    // 여기서는 임시로 base64로 변환
+    // 여기서는 임시로 base64로 변환 (압축 포함)
     return new Promise((resolve) => {
-              const reader = new FileReader();
-              reader.onload = () => resolve(reader.result as string);
-      reader.readAsDataURL(file);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Resize image to max 800px width while maintaining aspect ratio
+        const maxWidth = 800;
+        const maxHeight = 600;
+        let { width, height } = img;
+        
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+        if (height > maxHeight) {
+          width = (width * maxHeight) / height;
+          height = maxHeight;
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Draw and compress
+        ctx?.drawImage(img, 0, 0, width, height);
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7); // 70% quality
+        resolve(compressedDataUrl);
+      };
+      
+      img.src = URL.createObjectURL(file);
     });
   };
 
@@ -173,11 +199,11 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
 
       // 알림 생성
       console.log("알림 생성 중...");
-        await createNotification({
+      await createNotification({
         userId: user.uid,
-          type: "kyc_submitted",
-          title: "KYC 신청 완료",
-          message:
+        type: "kyc_submitted",
+        title: "KYC 신청 완료",
+        message:
           "고객등록 신청이 완료되었습니다. 검토 후 결과를 알려드리겠습니다.",
         data: { kycId: user.email },
       });
@@ -194,7 +220,10 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
       console.error("KYC 제출 실패:", error);
       console.error("Error details:", {
         message: error instanceof Error ? error.message : "Unknown error",
-        code: error && typeof error === 'object' && 'code' in error ? (error as { code: string }).code : undefined,
+        code:
+          error && typeof error === "object" && "code" in error
+            ? (error as { code: string }).code
+            : undefined,
         stack: error instanceof Error ? error.stack : undefined,
         user: user?.email,
         data: data,
@@ -210,19 +239,19 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
   };
 
   if (submitSuccess) {
-  return (
+    return (
       <Card className="border-green-200 bg-green-50">
         <CardContent className="pt-6">
           <div className="text-center">
             <CheckCircle className="text-green-600 mx-auto mb-4 h-12 w-12" />
             <h3 className="text-green-800 mb-2 text-lg font-semibold">
               신청이 완료되었습니다!
-                  </h3>
+            </h3>
             <p className="text-green-700 text-sm">
               고객등록 신청이 완료되었습니다. 관리자 검토 후 결과를
               알려드리겠습니다.
-                  </p>
-                </div>
+            </p>
+          </div>
         </CardContent>
       </Card>
     );
@@ -245,7 +274,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
             <div className="space-y-4">
               <Label htmlFor="desiredServices">
                 희망 시술 항목을 입력해주세요
-                  </Label>
+              </Label>
               <Input
                 id="desiredServices"
                 placeholder="예: 자연 눈썹 + 속눈썹펌"
@@ -269,48 +298,48 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
           <CardContent className="space-y-4">
             <div>
               <Label htmlFor="name">성함</Label>
-                  <Input
-                    id="name"
+              <Input
+                id="name"
                 placeholder="성함을 입력해주세요"
-                    {...register("name")}
+                {...register("name")}
                 className={cn(errors.name && "border-red-500")}
-                  />
-                  {errors.name && (
+              />
+              {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name.message}</p>
-                  )}
-                </div>
+              )}
+            </div>
 
             <div>
               <Label>성별</Label>
-                  <RadioGroup
-                    onValueChange={(value) =>
+              <RadioGroup
+                onValueChange={(value) =>
                   setValue("gender", value as "male" | "female" | "other")
-                    }
+                }
                 className="mt-2 flex space-x-6"
-                  >
+              >
                 <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="male" id="male" />
+                  <RadioGroupItem value="male" id="male" />
                   <Label htmlFor="male">남성</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="female" id="female" />
+                  <RadioGroupItem value="female" id="female" />
                   <Label htmlFor="female">여성</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="other" id="other" />
                   <Label htmlFor="other">기타</Label>
-                    </div>
-                  </RadioGroup>
-                  {errors.gender && (
-                <p className="text-red-500 text-sm">{errors.gender.message}</p>
-                  )}
                 </div>
+              </RadioGroup>
+              {errors.gender && (
+                <p className="text-red-500 text-sm">{errors.gender.message}</p>
+              )}
+            </div>
 
             <div>
               <Label>연령대</Label>
-                  <RadioGroup
-                    onValueChange={(value) =>
-                      setValue(
+              <RadioGroup
+                onValueChange={(value) =>
+                  setValue(
                     "ageGroup",
                     value as "10s" | "20s" | "30s" | "40s" | "50s" | "60s+"
                   )
@@ -320,34 +349,34 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="10s" id="10s" />
                   <Label htmlFor="10s">10대</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="20s" id="20s" />
                   <Label htmlFor="20s">20대</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="30s" id="30s" />
                   <Label htmlFor="30s">30대</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="40s" id="40s" />
                   <Label htmlFor="40s">40대</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="50s" id="50s" />
                   <Label htmlFor="50s">50대</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="60s+" id="60s+" />
                   <Label htmlFor="60s+">60대 이상</Label>
-                    </div>
-                  </RadioGroup>
+                </div>
+              </RadioGroup>
               {errors.ageGroup && (
                 <p className="text-red-500 text-sm">
                   {errors.ageGroup.message}
-                    </p>
-                  )}
-                </div>
+                </p>
+              )}
+            </div>
           </CardContent>
         </Card>
 
@@ -361,8 +390,8 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
           <CardContent className="space-y-4">
             <div>
               <Label>반영구 경험 유무</Label>
-                  <RadioGroup
-                    onValueChange={(value) =>
+              <RadioGroup
+                onValueChange={(value) =>
                   setValue("hasPermanentExperience", value as "yes" | "no")
                 }
                 className="mt-2 flex space-x-6"
@@ -370,18 +399,18 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="yes" id="hasExperience" />
                   <Label htmlFor="hasExperience">있음</Label>
-                    </div>
+                </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="no" id="noExperience" />
                   <Label htmlFor="noExperience">없음</Label>
-                    </div>
-                  </RadioGroup>
+                </div>
+              </RadioGroup>
               {errors.hasPermanentExperience && (
                 <p className="text-red-500 text-sm">
                   {errors.hasPermanentExperience.message}
-                    </p>
-                  )}
-                </div>
+                </p>
+              )}
+            </div>
 
             {hasPermanentExperience === "yes" && (
               <div>
@@ -391,8 +420,8 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                   type="date"
                   {...register("lastPermanentDate")}
                   className="mt-2"
-                  />
-                </div>
+                />
+              </div>
             )}
 
             {/* 눈썹 사진 첨부 (경험 있음 또는 50대 이상) */}
@@ -423,27 +452,27 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     {uploadedImages.map((image, index) => (
                       <div key={index} className="relative">
-                          <Image
+                        <Image
                           src={image}
                           alt={`눈썹 사진 ${index + 1}`}
                           width={200}
                           height={150}
-                            className="rounded-lg object-cover"
-                          />
+                          className="rounded-lg object-cover"
+                        />
                         <Button
-                            type="button"
+                          type="button"
                           variant="destructive"
                           size="sm"
                           className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
                           onClick={() => removeImage(index)}
-                          >
-                            <X className="h-3 w-3" />
+                        >
+                          <X className="h-3 w-3" />
                         </Button>
-                        </div>
+                      </div>
                     ))}
                   </div>
-                      )}
-                    </div>
+                )}
+              </div>
             )}
           </CardContent>
         </Card>
@@ -457,7 +486,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
             <div className="space-y-4">
               <Label htmlFor="reservationSource">
                 예약 경로를 입력해주세요
-                  </Label>
+              </Label>
               <Input
                 id="reservationSource"
                 placeholder="예: 인스타 광고, 소개 등"
@@ -468,8 +497,8 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                 <p className="text-red-500 text-sm">
                   {errors.reservationSource.message}
                 </p>
-                      )}
-                    </div>
+              )}
+            </div>
           </CardContent>
         </Card>
 
@@ -490,7 +519,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                 />
                 <Label htmlFor="termsAgreed" className="text-sm">
                   필독사항을 모두 확인하고 동의합니다
-                      </Label>
+                </Label>
                 <Button
                   type="button"
                   variant="outline"
@@ -501,41 +530,41 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                   <Eye className="mr-1 h-4 w-4" />
                   필독사항 읽기
                 </Button>
-                    </div>
+              </div>
               {errors.termsAgreed && (
                 <p className="text-red-500 text-sm">
                   {errors.termsAgreed.message}
-                    </p>
-                  )}
-                </div>
+                </p>
+              )}
+            </div>
           </CardContent>
         </Card>
 
         {/* 제출 버튼 */}
         <div className="flex justify-center pt-6">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
+          <Button
+            type="submit"
+            disabled={isSubmitting}
             className="w-full max-w-md"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="animate-spin mr-2 h-4 w-4" />
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="animate-spin mr-2 h-4 w-4" />
                 제출 중...
-                  </>
-                ) : (
+              </>
+            ) : (
               "신청하기"
-                )}
-              </Button>
-            </div>
+            )}
+          </Button>
+        </div>
 
         {submitError && (
           <div className="text-red-600 bg-red-50 flex items-center space-x-2 rounded-lg p-4">
             <AlertCircle className="h-5 w-5" />
             <span>{submitError}</span>
-              </div>
-            )}
-          </form>
+          </div>
+        )}
+      </form>
     </div>
   );
 }

@@ -581,7 +581,7 @@ export default function DashboardPage() {
               {/* KYC Status Card */}
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
-                  <div className="bg-beige-600 mr-3 rounded-lg p-2">
+                  <div className="bg-beige-800 mr-3 rounded-lg p-2">
                     <User className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold">고객등록 신청</h3>
@@ -720,7 +720,7 @@ export default function DashboardPage() {
               {/* Reservation Card */}
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
-                  <div className="bg-beige-600 mr-3 rounded-lg p-2">
+                  <div className="bg-beige-800 mr-3 rounded-lg p-2">
                     <Clock className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold">예약</h3>
@@ -1206,8 +1206,8 @@ export default function DashboardPage() {
             {user.treatmentDone && (
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
-                  <div className="bg-beige-200 mr-3 rounded-lg p-2">
-                    <Lock className="text-beige-700 h-5 w-5" />
+                  <div className="bg-beige-800 mr-3 rounded-lg p-2">
+                    <Lock className="text-white h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold">시술 완료</h3>
                 </div>
