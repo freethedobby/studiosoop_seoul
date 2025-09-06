@@ -50,11 +50,6 @@ import { db } from "@/lib/firebase";
 import CountdownTimer from "@/components/CountdownTimer";
 import { createNotification } from "@/lib/notifications";
 import { isTestMode } from "@/lib/utils";
-import {
-  provinces,
-  districts as districtData,
-  dongs as dongData,
-} from "@/lib/address-data";
 
 // KYC 데이터 타입 정의
 interface KYCData {
@@ -73,60 +68,6 @@ interface KYCData {
   };
 }
 
-// 주소 변환 함수들 (강화된 버전)
-const getAddressLabel = (
-  type: "province" | "district" | "dong",
-  value: string,
-  parentValue?: string
-): string => {
-  if (!value) return "";
-
-  try {
-    switch (type) {
-      case "province":
-        const province = provinces.find((p) => p.value === value);
-        return province?.label || value;
-
-      case "district":
-        // 새로운 주소 데이터에서 먼저 찾기
-        if (parentValue) {
-          const districtList = districtData[parentValue];
-          if (districtList) {
-            const district = districtList.find((d) => d.value === value);
-            if (district) return district.label;
-          }
-        }
-
-        // 일반적인 변환 시도
-        if (value.includes("seongdong")) return "성동구";
-        if (value.includes("gangnam")) return "강남구";
-        if (value.includes("seoul")) return "서울특별시";
-
-        return value;
-
-      case "dong":
-        if (parentValue) {
-          const dongList = dongData[parentValue];
-          if (dongList) {
-            const dong = dongList.find((d) => d.value === value);
-            if (dong) return dong.label;
-          }
-        }
-
-        // 일반적인 동 변환 시도
-        if (value.includes("seongsu")) return "성수동";
-        if (value.includes("hangang")) return "한강로동";
-
-        return value;
-
-      default:
-        return value;
-    }
-  } catch (error) {
-    console.error("Address conversion error:", error);
-    return value;
-  }
-};
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
@@ -1264,7 +1205,6 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
     }
   };
 
-
   return (
     <div className="space-y-6">
       {/* 기본 정보 */}
@@ -1286,7 +1226,9 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
               <label className="text-gray-700 text-sm font-medium">
                 연령대
               </label>
-              <p className="text-gray-900">{getAgeGroupText(kycData.ageGroup)}</p>
+              <p className="text-gray-900">
+                {getAgeGroupText(kycData.ageGroup)}
+              </p>
             </div>
           </div>
         </CardContent>
@@ -1318,14 +1260,15 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
               {kycData.hasPermanentExperience === "yes" ? "있음" : "없음"}
             </p>
           </div>
-          {kycData.hasPermanentExperience === "yes" && kycData.lastPermanentDate && (
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                마지막 반영구 시기
-              </label>
-              <p className="text-gray-900">{kycData.lastPermanentDate}</p>
-            </div>
-          )}
+          {kycData.hasPermanentExperience === "yes" &&
+            kycData.lastPermanentDate && (
+              <div>
+                <label className="text-gray-700 text-sm font-medium">
+                  마지막 반영구 시기
+                </label>
+                <p className="text-gray-900">{kycData.lastPermanentDate}</p>
+              </div>
+            )}
         </CardContent>
       </Card>
 
@@ -1340,7 +1283,6 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
           </div>
         </CardContent>
       </Card>
-
 
       {/* 눈썹 사진 */}
       {kycData.eyebrowPhotos && kycData.eyebrowPhotos.length > 0 && (
