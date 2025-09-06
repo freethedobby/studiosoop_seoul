@@ -45,6 +45,18 @@ module.exports = {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
+        beige: {
+          50: "var(--beige-50)",
+          100: "var(--beige-100)",
+          200: "var(--beige-200)",
+          300: "var(--beige-300)",
+          400: "var(--beige-400)",
+          500: "var(--beige-500)",
+          600: "var(--beige-600)",
+          700: "var(--beige-700)",
+          800: "var(--beige-800)",
+          900: "var(--beige-900)",
+        },
         chart: {
           "1": "var(--chart-1)",
           "2": "var(--chart-2)",

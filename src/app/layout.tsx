@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
     description:
       "프리미엄 뷰티 서비스로 당신만의 특별한 스타일을 만들어드립니다.",
-    url: "https://studiosoop-seoul.vercel.app",
+    url: "https://studiosoopseoul.com",
     siteName: "STUDIOSOOP SEOUL",
     images: [
       {
-        url: "https://studiosoop-seoul.vercel.app/kakao-thumbnail.png",
+        url: "https://studiosoopseoul.com/kakao-thumbnail.png",
         width: 1200,
         height: 630,
         alt: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     title: "STUDIOSOOP SEOUL - 프리미엄 뷰티 서비스",
     description:
       "프리미엄 뷰티 서비스로 당신만의 특별한 스타일을 만들어드립니다.",
-    images: ["https://studiosoop-seoul.vercel.app/kakao-thumbnail.png"],
+    images: ["https://studiosoopseoul.com/kakao-thumbnail.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://studiosoop-seoul.vercel.app",
+    canonical: "https://studiosoopseoul.com",
   },
 };
 

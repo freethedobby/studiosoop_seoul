@@ -580,7 +580,7 @@ export default function DashboardPage() {
               {/* KYC Status Card */}
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
-                  <div className="bg-black mr-3 rounded-lg p-2">
+                  <div className="bg-beige-600 mr-3 rounded-lg p-2">
                     <User className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold">고객등록 신청</h3>
@@ -592,8 +592,8 @@ export default function DashboardPage() {
                     <p className="text-gray-600 text-sm">
                       고객등록 신청이 곧 시작됩니다.
                     </p>
-                    <div className="bg-blue-50 border-blue-200 rounded-lg border p-3">
-                      <p className="text-blue-900 text-sm font-medium">
+                    <div className="bg-beige-200 border-beige-300 rounded-lg border p-3">
+                      <p className="text-beige-800 text-sm font-medium">
                         오픈까지: {formatTime(timeUntilOpen)}
                       </p>
                     </div>
@@ -617,8 +617,8 @@ export default function DashboardPage() {
                   <div className="space-y-3">
                     {/* 테스트 모드 표시 */}
                     {isTestMode() && (
-                      <div className="bg-yellow-50 border-yellow-200 rounded-lg border p-3">
-                        <p className="text-yellow-800 text-xs font-medium">
+                      <div className="bg-beige-200 border-beige-300 rounded-lg border p-3">
+                        <p className="text-beige-800 text-xs font-medium">
                           🔧 개발 모드 - 시간 제한 비활성화
                         </p>
                       </div>
@@ -626,8 +626,8 @@ export default function DashboardPage() {
 
                     {/* KYC 오픈 중 */}
                     {timeUntilClose && !isTestMode() && (
-                      <div className="bg-green-50 border-green-200 rounded-lg border p-3">
-                        <p className="text-green-800 text-xs">
+                      <div className="bg-beige-200 border-beige-300 rounded-lg border p-3">
+                        <p className="text-beige-800 text-xs">
                           마감까지: {formatTime(timeUntilClose)}
                         </p>
                       </div>
@@ -719,7 +719,7 @@ export default function DashboardPage() {
               {/* Reservation Card */}
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
-                  <div className="bg-black mr-3 rounded-lg p-2">
+                  <div className="bg-beige-600 mr-3 rounded-lg p-2">
                     <Clock className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold">예약</h3>
@@ -773,7 +773,7 @@ export default function DashboardPage() {
                 {user.kycStatus === "approved" && user.noticeConfirmed && (
                   <button
                     onClick={() => setShowNoticeModal(true)}
-                    className="bg-green-50 hover:bg-green-100 border-green-200 group mb-4 w-full rounded-lg border p-3 text-left transition-colors duration-200"
+                    className="bg-beige-200 hover:bg-beige-300 border-beige-300 group mb-4 w-full rounded-lg border p-3 text-left transition-colors duration-200"
                   >
                     <div className="flex items-start space-x-2">
                       <Check className="text-green-600 mt-0.5 h-5 w-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-110" />
@@ -959,9 +959,9 @@ export default function DashboardPage() {
                                 <div className="text-amber-700 border-amber-200 mt-4 space-y-4 border-t pt-4 text-xs">
                                   <div>
                                     <div className="mb-2 flex items-center">
-                                      <div className="bg-red-100 p-1.5 mr-2 rounded-full">
+                                      <div className="bg-beige-200 p-1.5 mr-2 rounded-full">
                                         <svg
-                                          className="text-red-600 h-4 w-4"
+                                          className="text-beige-700 h-4 w-4"
                                           fill="none"
                                           stroke="currentColor"
                                           viewBox="0 0 24 24"
@@ -1033,9 +1033,9 @@ export default function DashboardPage() {
 
                                   <div className="border-amber-200 border-t pt-3">
                                     <div className="mb-2 flex items-center">
-                                      <div className="bg-blue-100 p-1.5 mr-2 rounded-full">
+                                      <div className="bg-beige-200 p-1.5 mr-2 rounded-full">
                                         <svg
-                                          className="text-blue-600 h-4 w-4"
+                                          className="text-beige-700 h-4 w-4"
                                           fill="none"
                                           stroke="currentColor"
                                           viewBox="0 0 24 24"
@@ -1072,9 +1072,9 @@ export default function DashboardPage() {
 
                                   <div className="border-amber-200 border-t pt-3">
                                     <div className="mb-2 flex items-center">
-                                      <div className="bg-purple-100 p-1.5 mr-2 rounded-full">
+                                      <div className="bg-beige-200 p-1.5 mr-2 rounded-full">
                                         <svg
-                                          className="text-purple-600 h-4 w-4"
+                                          className="text-beige-700 h-4 w-4"
                                           fill="none"
                                           stroke="currentColor"
                                           viewBox="0 0 24 24"
@@ -1105,9 +1105,9 @@ export default function DashboardPage() {
 
                                   <div className="border-amber-200 border-t pt-3">
                                     <div className="mb-2 flex items-center">
-                                      <div className="bg-green-100 p-1.5 mr-2 rounded-full">
+                                      <div className="bg-beige-200 p-1.5 mr-2 rounded-full">
                                         <svg
-                                          className="text-green-600 h-4 w-4"
+                                          className="text-beige-700 h-4 w-4"
                                           fill="none"
                                           stroke="currentColor"
                                           viewBox="0 0 24 24"
@@ -1205,8 +1205,8 @@ export default function DashboardPage() {
             {user.treatmentDone && (
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
-                  <div className="bg-purple-100 mr-3 rounded-lg p-2">
-                    <Lock className="text-purple-600 h-5 w-5" />
+                  <div className="bg-beige-200 mr-3 rounded-lg p-2">
+                    <Lock className="text-beige-700 h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-semibold">시술 완료</h3>
                 </div>
