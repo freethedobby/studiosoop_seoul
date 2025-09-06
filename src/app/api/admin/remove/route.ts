@@ -8,13 +8,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Check if Firebase Admin environment variables are set
-    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
-      console.error('Firebase Admin environment variables not set');
-      return NextResponse.json({ 
-        error: 'Admin functionality not configured. Please set Firebase Admin environment variables.' 
-      }, { status: 500 });
-    }
+    // Firebase Admin SDK is now hardcoded, no need to check environment variables
 
     // Dynamic import to prevent build-time errors
     const { removeAdmin } = await import('@/lib/admin');
