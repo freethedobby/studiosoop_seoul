@@ -53,21 +53,31 @@ import { isTestMode } from "@/lib/utils";
 
 // KYC 데이터 타입 정의
 interface KYCData {
+  // 1. 희망 시술 항목
+  desiredServices: string;
+  
+  // 2. 성함 / 성별 / 연령대
   name: string;
   gender: string;
   ageGroup: string;
-  desiredServices: string;
+  
+  // 3. 반영구 경험 유무, 마지막 반영구 시기
   hasPermanentExperience: string;
   lastPermanentDate?: string;
-  reservationSource: string;
-  termsAgreed: boolean;
   eyebrowPhotos?: string[];
+  
+  // 4. 예약 경로
+  reservationSource: string;
+  
+  // 5. 필독사항 동의
+  termsAgreed: boolean;
+  
+  // 시스템 필드
   status: string;
   submittedAt?: {
     toDate?: () => Date;
   };
 }
-
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
@@ -1213,10 +1223,10 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
           <CardTitle className="text-lg">기본 정보</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div>
               <label className="text-gray-700 text-sm font-medium">성함</label>
-              <p className="text-gray-900">{kycData.name}</p>
+              <p className="text-gray-900 font-medium">{kycData.name}</p>
             </div>
             <div>
               <label className="text-gray-700 text-sm font-medium">성별</label>
@@ -1252,23 +1262,28 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
           <CardTitle className="text-lg">반영구 경험</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <label className="text-gray-700 text-sm font-medium">
-              반영구 경험 유무
-            </label>
-            <p className="text-gray-900">
-              {kycData.hasPermanentExperience === "yes" ? "있음" : "없음"}
-            </p>
-          </div>
-          {kycData.hasPermanentExperience === "yes" &&
-            kycData.lastPermanentDate && (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-gray-700 text-sm font-medium">
+                반영구 경험 유무
+              </label>
+              <p className="text-gray-900">
+                {kycData.hasPermanentExperience === "yes" ? (
+                  <span className="text-green-600 font-medium">있음</span>
+                ) : (
+                  <span className="text-gray-500">없음</span>
+                )}
+              </p>
+            </div>
+            {kycData.hasPermanentExperience === "yes" && kycData.lastPermanentDate && (
               <div>
                 <label className="text-gray-700 text-sm font-medium">
                   마지막 반영구 시기
                 </label>
-                <p className="text-gray-900">{kycData.lastPermanentDate}</p>
+                <p className="text-gray-900 font-medium">{kycData.lastPermanentDate}</p>
               </div>
             )}
+          </div>
         </CardContent>
       </Card>
 
@@ -1278,7 +1293,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
           <CardTitle className="text-lg">예약 경로</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm">
+          <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm font-medium">
             {kycData.reservationSource}
           </div>
         </CardContent>
@@ -1288,16 +1303,16 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {kycData.eyebrowPhotos && kycData.eyebrowPhotos.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">눈썹 사진</CardTitle>
+            <CardTitle className="text-lg">눈썹 사진 ({kycData.eyebrowPhotos.length}장)</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {kycData.eyebrowPhotos.map((photo, index) => (
-                <div key={index}>
-                  <label className="text-gray-700 mb-2 block text-sm font-medium">
+                <div key={index} className="space-y-2">
+                  <label className="text-gray-700 text-sm font-medium">
                     사진 {index + 1}
                   </label>
-                  <div className="rounded-lg border border-border p-2">
+                  <div className="rounded-lg border border-border p-2 bg-gray-50">
                     <Image
                       src={photo}
                       alt={`눈썹 사진 ${index + 1}`}
@@ -1332,11 +1347,13 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
             <div>
               <label className="text-gray-700 text-sm font-medium">상태</label>
               <p className="text-gray-900">
-                {kycData.status === "approved"
-                  ? "승인됨"
-                  : kycData.status === "rejected"
-                  ? "거절됨"
-                  : "검토중"}
+                {kycData.status === "approved" ? (
+                  <span className="text-green-600 font-medium">승인됨</span>
+                ) : kycData.status === "rejected" ? (
+                  <span className="text-red-500 font-medium">거절됨</span>
+                ) : (
+                  <span className="text-yellow-600 font-medium">검토중</span>
+                )}
               </p>
             </div>
             <div>
@@ -1345,9 +1362,9 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
               </label>
               <p className="text-gray-900">
                 {kycData.termsAgreed ? (
-                  <span className="text-green-600 font-medium">동의함</span>
+                  <span className="text-green-600 font-medium">✓ 동의함</span>
                 ) : (
-                  <span className="text-red-500">미동의</span>
+                  <span className="text-red-500 font-medium">✗ 미동의</span>
                 )}
               </p>
             </div>
