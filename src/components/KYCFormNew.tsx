@@ -98,16 +98,16 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
     // 실제 구현에서는 Firebase Storage에 업로드
     // 여기서는 임시로 base64로 변환 (압축 포함)
     return new Promise((resolve) => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new window.Image();
+
       img.onload = () => {
         // Resize image to max 800px width while maintaining aspect ratio
         const maxWidth = 800;
         const maxHeight = 600;
         let { width, height } = img;
-        
+
         if (width > maxWidth) {
           height = (height * maxWidth) / width;
           width = maxWidth;
@@ -116,16 +116,16 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
           width = (width * maxHeight) / height;
           height = maxHeight;
         }
-        
+
         canvas.width = width;
         canvas.height = height;
-        
+
         // Draw and compress
         ctx?.drawImage(img, 0, 0, width, height);
-        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7); // 70% quality
+        const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7); // 70% quality
         resolve(compressedDataUrl);
       };
-      
+
       img.src = URL.createObjectURL(file);
     });
   };

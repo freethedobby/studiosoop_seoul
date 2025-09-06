@@ -1207,7 +1207,7 @@ export default function DashboardPage() {
               <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
                 <div className="mb-4 flex items-center">
                   <div className="bg-beige-800 mr-3 rounded-lg p-2">
-                    <Lock className="text-white h-5 w-5" />
+                    <Lock className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold">시술 완료</h3>
                 </div>
