@@ -135,10 +135,6 @@ export default function CustomerHeader({
                     </>
                   ) : (
                     <>
-                      <DropdownMenuItem onClick={() => router.push("/cost")}>
-                        <DollarSign className="mr-2 h-4 w-4" />
-                        비용안내
-                      </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => router.push("/login")}>
                         로그인
                       </DropdownMenuItem>
