@@ -55,39 +55,7 @@ import {
 import { createNotification, notificationTemplates } from "@/lib/notifications";
 import Image from "next/image";
 import CountdownTimer from "@/components/CountdownTimer";
-import {
-  provinces,
-  districts as districtData,
-  dongs as dongData,
-} from "@/lib/address-data";
 
-// 레거시 서울시 시군구 데이터 (호환성을 위해 유지)
-const legacyDistricts = [
-  { value: "gangnam", label: "강남구" },
-  { value: "gangdong", label: "강동구" },
-  { value: "gangbuk", label: "강북구" },
-  { value: "gangseo", label: "강서구" },
-  { value: "gwanak", label: "관악구" },
-  { value: "gwangjin", label: "광진구" },
-  { value: "guro", label: "구로구" },
-  { value: "geumcheon", label: "금천구" },
-  { value: "nowon", label: "노원구" },
-  { value: "dobong", label: "도봉구" },
-  { value: "dongdaemun", label: "동대문구" },
-  { value: "dongjak", label: "동작구" },
-  { value: "mapo", label: "마포구" },
-  { value: "seodaemun", label: "서대문구" },
-  { value: "seocho", label: "서초구" },
-  { value: "seongbuk", label: "성북구" },
-  { value: "songpa", label: "송파구" },
-  { value: "yangcheon", label: "양천구" },
-  { value: "yeongdeungpo", label: "영등포구" },
-  { value: "yongsan", label: "용산구" },
-  { value: "eunpyeong", label: "은평구" },
-  { value: "jongno", label: "종로구" },
-  { value: "junggu", label: "중구" },
-  { value: "jungnang", label: "중랑구" },
-];
 
 interface UserData {
   id: string;
@@ -150,64 +118,6 @@ interface SearchFilters {
   status: string;
 }
 
-// 주소 변환 함수 (강화된 버전)
-const getAddressLabel = (
-  type: "province" | "district" | "dong",
-  value: string,
-  parentValue?: string
-): string => {
-  if (!value) return "";
-
-  try {
-    switch (type) {
-      case "province":
-        const province = provinces.find((p) => p.value === value);
-        return province?.label || value;
-
-      case "district":
-        // 새로운 주소 데이터에서 먼저 찾기
-        if (parentValue) {
-          const districtList = districtData[parentValue];
-          if (districtList) {
-            const district = districtList.find((d) => d.value === value);
-            if (district) return district.label;
-          }
-        }
-
-        // 레거시 데이터 호환성 - 기존 서울 데이터에서 찾기
-        const legacyDistrict = legacyDistricts.find((d) => d.value === value);
-        if (legacyDistrict) return legacyDistrict.label;
-
-        // 일반적인 변환 시도
-        if (value.includes("seongdong")) return "성동구";
-        if (value.includes("gangnam")) return "강남구";
-        if (value.includes("seoul")) return "서울특별시";
-
-        return value;
-
-      case "dong":
-        if (parentValue) {
-          const dongList = dongData[parentValue];
-          if (dongList) {
-            const dong = dongList.find((d) => d.value === value);
-            if (dong) return dong.label;
-          }
-        }
-
-        // 일반적인 동 변환 시도
-        if (value.includes("seongsu")) return "성수동";
-        if (value.includes("hangang")) return "한강로동";
-
-        return value;
-
-      default:
-        return value;
-    }
-  } catch (error) {
-    console.error("Address conversion error:", error);
-    return value;
-  }
-};
 
 export default function AdminKYCPage() {
   const { user, loading } = useAuth();
