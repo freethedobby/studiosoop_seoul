@@ -209,7 +209,6 @@ const getAddressLabel = (
   }
 };
 
-
 export default function AdminKYCPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
@@ -651,16 +650,7 @@ export default function AdminKYCPage() {
                 email: data.email || "",
                 name: data.name || "",
                 gender: data.gender,
-                birthYear: data.birthYear,
-                contact: data.contact || "",
-                district: data.district,
-                detailedAddress: data.detailedAddress,
-                skinType: data.skinType,
-                photoURLs: data.photoURLs,
-                photoURL: data.photoURL,
-                photoType: data.photoType,
                 kycStatus: data.kycStatus || "pending",
-                hasPreviousTreatment: data.hasPreviousTreatment,
                 rejectReason: data.rejectReason,
                 createdAt: data.createdAt?.toDate?.() || new Date(),
                 approvedAt: data.approvedAt?.toDate?.() || undefined,
@@ -1497,7 +1487,7 @@ export default function AdminKYCPage() {
                         <div className="flex items-start justify-between">
                           <div>
                             <CardTitle>{user.name}</CardTitle>
-                            <CardDescription>{user.contact}</CardDescription>
+                            <CardDescription>{user.email}</CardDescription>
                             <div className="text-gray-500 text-sm">
                               {user.email}
                             </div>
@@ -1587,16 +1577,6 @@ export default function AdminKYCPage() {
                                       : user.ageGroup || "-"}
                                   </span>
                                 </div>
-                                {user.detailedAddress && (
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      상세주소
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.detailedAddress}
-                                    </span>
-                                  </div>
-                                )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">이메일</span>
                                   <span className="font-medium">
@@ -1640,26 +1620,6 @@ export default function AdminKYCPage() {
                                       </span>
                                     </div>
                                   )}
-                                {user.designDescription && (
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-800 mb-2 text-sm font-semibold">
-                                      원하는 눈썹 디자인
-                                    </span>
-                                    <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
-                                      {user.designDescription}
-                                    </div>
-                                  </div>
-                                )}
-                                {user.additionalNotes && (
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-800 mb-2 text-sm font-semibold">
-                                      기타 사항
-                                    </span>
-                                    <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
-                                      {user.additionalNotes}
-                                    </div>
-                                  </div>
-                                )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
                                     예약 경로
@@ -1907,7 +1867,7 @@ export default function AdminKYCPage() {
                         <div className="flex items-start justify-between">
                           <div>
                             <CardTitle>{user.name}</CardTitle>
-                            <CardDescription>{user.contact}</CardDescription>
+                            <CardDescription>{user.email}</CardDescription>
                             <div className="text-gray-500 text-sm">
                               {user.email}
                             </div>
@@ -2000,16 +1960,6 @@ export default function AdminKYCPage() {
                                       : user.ageGroup || "-"}
                                   </span>
                                 </div>
-                                {user.detailedAddress && (
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      상세주소
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.detailedAddress}
-                                    </span>
-                                  </div>
-                                )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">이메일</span>
                                   <span className="font-medium">
@@ -2053,26 +2003,6 @@ export default function AdminKYCPage() {
                                       </span>
                                     </div>
                                   )}
-                                {user.designDescription && (
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-800 mb-2 text-sm font-semibold">
-                                      원하는 눈썹 디자인
-                                    </span>
-                                    <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
-                                      {user.designDescription}
-                                    </div>
-                                  </div>
-                                )}
-                                {user.additionalNotes && (
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-800 mb-2 text-sm font-semibold">
-                                      기타 사항
-                                    </span>
-                                    <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
-                                      {user.additionalNotes}
-                                    </div>
-                                  </div>
-                                )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
                                     예약 경로
@@ -2324,7 +2254,7 @@ export default function AdminKYCPage() {
                         <div className="flex items-start justify-between">
                           <div>
                             <CardTitle>{user.name}</CardTitle>
-                            <CardDescription>{user.contact}</CardDescription>
+                            <CardDescription>{user.email}</CardDescription>
                             <div className="text-gray-500 text-sm">
                               {user.email}
                             </div>
@@ -2438,16 +2368,6 @@ export default function AdminKYCPage() {
                                       : user.ageGroup || "-"}
                                   </span>
                                 </div>
-                                {user.detailedAddress && (
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      상세주소
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.detailedAddress}
-                                    </span>
-                                  </div>
-                                )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">이메일</span>
                                   <span className="font-medium">
@@ -2491,26 +2411,6 @@ export default function AdminKYCPage() {
                                       </span>
                                     </div>
                                   )}
-                                {user.designDescription && (
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-800 mb-2 text-sm font-semibold">
-                                      원하는 눈썹 디자인
-                                    </span>
-                                    <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
-                                      {user.designDescription}
-                                    </div>
-                                  </div>
-                                )}
-                                {user.additionalNotes && (
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-800 mb-2 text-sm font-semibold">
-                                      기타 사항
-                                    </span>
-                                    <div className="bg-gray-100 border-gray-400 text-gray-900 rounded-r-md border-l-4 p-3 text-sm">
-                                      {user.additionalNotes}
-                                    </div>
-                                  </div>
-                                )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
                                     예약 경로
@@ -3724,59 +3624,18 @@ export default function AdminKYCPage() {
                                   </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">
-                                      출생년도
+                                      이메일
                                     </span>
                                     <span className="font-medium">
-                                      {user.birthYear || "-"}
-                                    </span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      연락처
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.contact}
+                                      {user.email}
                                     </span>
                                   </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">주소</span>
                                     <span className="font-medium">
-                                      {[
-                                        user.province
-                                          ? getAddressLabel(
-                                              "province",
-                                              user.province
-                                            )
-                                          : "",
-                                        user.district
-                                          ? getAddressLabel(
-                                              "district",
-                                              user.district,
-                                              user.province
-                                            )
-                                          : "",
-                                        user.dong
-                                          ? getAddressLabel(
-                                              "dong",
-                                              user.dong,
-                                              user.district
-                                            )
-                                          : "",
-                                      ]
-                                        .filter(Boolean)
-                                        .join(" ") || "-"}
+                                      서울특별시
                                     </span>
                                   </div>
-                                  {user.detailedAddress && (
-                                    <div className="flex justify-between">
-                                      <span className="text-gray-600">
-                                        상세주소
-                                      </span>
-                                      <span className="font-medium">
-                                        {user.detailedAddress}
-                                      </span>
-                                    </div>
-                                  )}
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">
                                       이메일
@@ -3793,36 +3652,6 @@ export default function AdminKYCPage() {
                                   시술 정보
                                 </h4>
                                 <div className="space-y-1 text-sm">
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      피부타입
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.skinType === "oily"
-                                        ? "지성"
-                                        : user.skinType === "dry"
-                                        ? "건성"
-                                        : user.skinType === "normal"
-                                        ? "중성"
-                                        : user.skinType === "combination"
-                                        ? "복합성"
-                                        : user.skinType === "unknown"
-                                        ? "모르겠음"
-                                        : user.skinType === "other"
-                                        ? "기타"
-                                        : "-"}
-                                    </span>
-                                  </div>
-                                  <div className="flex justify-between">
-                                    <span className="text-gray-600">
-                                      기존 시술 경험
-                                    </span>
-                                    <span className="font-medium">
-                                      {user.hasPreviousTreatment
-                                        ? "있음"
-                                        : "없음"}
-                                    </span>
-                                  </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">
                                       신청일
