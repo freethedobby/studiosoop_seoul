@@ -302,7 +302,7 @@ export default function DashboardPage() {
     if (user?.uid) {
       fetchKycData();
     }
-  }, [user?.uid]);
+  }, [user?.uid, user?.email]);
 
   const handleLogout = async () => {
     try {

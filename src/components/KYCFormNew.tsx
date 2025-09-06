@@ -23,7 +23,6 @@ import {
   serverTimestamp,
   setDoc,
   doc as firestoreDoc,
-  updateDoc,
 } from "firebase/firestore";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";

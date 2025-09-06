@@ -209,19 +209,6 @@ const getAddressLabel = (
   }
 };
 
-// 피부타입 변환 함수
-const getSkinTypeLabel = (skinType: string): string => {
-  const skinTypeMap: { [key: string]: string } = {
-    oily: "지성",
-    dry: "건성",
-    normal: "보통",
-    combination: "복합성",
-    sensitive: "민감성",
-    unknown: "모름",
-    other: "기타",
-  };
-  return skinTypeMap[skinType] || skinType;
-};
 
 export default function AdminKYCPage() {
   const { user, loading } = useAuth();
