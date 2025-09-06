@@ -56,7 +56,6 @@ import { createNotification, notificationTemplates } from "@/lib/notifications";
 import Image from "next/image";
 import CountdownTimer from "@/components/CountdownTimer";
 
-
 interface UserData {
   id: string;
   userId: string; // Firebase Auth UID or "guest"
@@ -117,7 +116,6 @@ interface SearchFilters {
   endDate: string;
   status: string;
 }
-
 
 export default function AdminKYCPage() {
   const { user, loading } = useAuth();
@@ -3596,37 +3594,6 @@ export default function AdminKYCPage() {
                                   <h5 className="text-gray-700 text-sm font-medium">
                                     좌측
                                   </h5>
-                                  {(user.photoURLs?.left || user.photoURL) && (
-                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                      <Image
-                                        src={
-                                          user.photoURLs?.left ||
-                                          user.photoURL ||
-                                          ""
-                                        }
-                                        alt="좌측 눈썹"
-                                        fill
-                                        className="object-contain"
-                                        unoptimized={(
-                                          user.photoURLs?.left ||
-                                          user.photoURL ||
-                                          ""
-                                        ).startsWith("data:")}
-                                        onError={(e) => {
-                                          console.error(
-                                            "Failed to load left image"
-                                          );
-                                          e.currentTarget.style.display =
-                                            "none";
-                                        }}
-                                      />
-                                      {user.photoType === "base64" && (
-                                        <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                          Base64
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
                                 </div>
 
                                 {/* Front Photo */}
@@ -3634,37 +3601,6 @@ export default function AdminKYCPage() {
                                   <h5 className="text-gray-700 text-sm font-medium">
                                     정면
                                   </h5>
-                                  {(user.photoURLs?.front || user.photoURL) && (
-                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                      <Image
-                                        src={
-                                          user.photoURLs?.front ||
-                                          user.photoURL ||
-                                          ""
-                                        }
-                                        alt="정면 눈썹"
-                                        fill
-                                        className="object-contain"
-                                        unoptimized={(
-                                          user.photoURLs?.front ||
-                                          user.photoURL ||
-                                          ""
-                                        ).startsWith("data:")}
-                                        onError={(e) => {
-                                          console.error(
-                                            "Failed to load front image"
-                                          );
-                                          e.currentTarget.style.display =
-                                            "none";
-                                        }}
-                                      />
-                                      {user.photoType === "base64" && (
-                                        <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                          Base64
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
                                 </div>
 
                                 {/* Right Photo */}
@@ -3672,37 +3608,6 @@ export default function AdminKYCPage() {
                                   <h5 className="text-gray-700 text-sm font-medium">
                                     우측
                                   </h5>
-                                  {(user.photoURLs?.right || user.photoURL) && (
-                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                      <Image
-                                        src={
-                                          user.photoURLs?.right ||
-                                          user.photoURL ||
-                                          ""
-                                        }
-                                        alt="우측 눈썹"
-                                        fill
-                                        className="object-contain"
-                                        unoptimized={(
-                                          user.photoURLs?.right ||
-                                          user.photoURL ||
-                                          ""
-                                        ).startsWith("data:")}
-                                        onError={(e) => {
-                                          console.error(
-                                            "Failed to load right image"
-                                          );
-                                          e.currentTarget.style.display =
-                                            "none";
-                                        }}
-                                      />
-                                      {user.photoType === "base64" && (
-                                        <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                          Base64
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
                                 </div>
                               </div>
                             </div>
