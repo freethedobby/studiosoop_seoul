@@ -637,10 +637,8 @@ export default function DashboardPage() {
                                         data.lastPermanentDate || "",
                                       reservationSource:
                                         data.reservationSource || "",
-                                      termsAgreed:
-                                        data.termsAgreed || false,
-                                      eyebrowPhotos:
-                                        data.eyebrowPhotos || [],
+                                      termsAgreed: data.termsAgreed || false,
+                                      eyebrowPhotos: data.eyebrowPhotos || [],
                                       status: data.status || "pending",
                                       submittedAt: data.submittedAt,
                                     };

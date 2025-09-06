@@ -60,6 +60,15 @@ const kycSchema = z.object({
   termsAgreed: z.boolean().refine((val) => val === true, {
     message: "필독사항에 동의해주세요",
   }),
+}).refine((data) => {
+  // 반영구 경험이 "있음"일 때 사진이 필수
+  if (data.hasPermanentExperience === "yes") {
+    return data.eyebrowPhotos && data.eyebrowPhotos.length > 0;
+  }
+  return true;
+}, {
+  message: "반영구 경험이 있으시면 눈썹 사진을 첨부해주세요",
+  path: ["eyebrowPhotos"],
 });
 
 type KYCFormData = z.infer<typeof kycSchema>;
@@ -93,55 +102,88 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
   const hasPermanentExperience = watch("hasPermanentExperience");
   const ageGroup = watch("ageGroup");
 
-  // 이미지 업로드 함수
-  const handleImageUpload = async (file: File): Promise<string> => {
-    // 실제 구현에서는 Firebase Storage에 업로드
-    // 여기서는 임시로 base64로 변환 (압축 포함)
-    return new Promise((resolve) => {
+  // 이미지 압축 함수
+  const compressImage = (file: File, maxWidth: number = 800, quality: number = 0.8): Promise<string> => {
+    return new Promise((resolve, reject) => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
       const img = new window.Image();
 
       img.onload = () => {
-        // Resize image to max 800px width while maintaining aspect ratio
-        const maxWidth = 800;
-        const maxHeight = 600;
+        // 이미지 크기 조정
         let { width, height } = img;
+        const maxHeight = 600;
 
-        if (width > maxWidth) {
-          height = (height * maxWidth) / width;
-          width = maxWidth;
-        }
-        if (height > maxHeight) {
-          width = (width * maxHeight) / height;
-          height = maxHeight;
+        if (width > height) {
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = (width * maxHeight) / height;
+            height = maxHeight;
+          }
         }
 
         canvas.width = width;
         canvas.height = height;
 
-        // Draw and compress
+        // 이미지 그리기
         ctx?.drawImage(img, 0, 0, width, height);
-        const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7); // 70% quality
+
+        // 압축된 이미지를 base64로 변환
+        const compressedDataUrl = canvas.toDataURL("image/jpeg", quality);
         resolve(compressedDataUrl);
       };
 
+      img.onerror = () => reject(new Error("이미지 로드 실패"));
       img.src = URL.createObjectURL(file);
     });
+  };
+
+  // 이미지 업로드 함수
+  const handleImageUpload = async (file: File): Promise<string> => {
+    // 파일 크기 체크 (5MB 제한)
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error("파일 크기는 5MB를 초과할 수 없습니다.");
+    }
+
+    // 파일 타입 체크
+    if (!file.type.startsWith("image/")) {
+      throw new Error("이미지 파일만 업로드 가능합니다.");
+    }
+
+    try {
+      const compressedImage = await compressImage(file);
+      return compressedImage;
+    } catch (error) {
+      console.error("이미지 압축 실패:", error);
+      throw error;
+    }
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
+    // 최대 2장 제한 체크
+    if (uploadedImages.length + files.length > 2) {
+      setSubmitError("눈썹 사진은 최대 2장까지 업로드 가능합니다.");
+      return;
+    }
+
     setIsUploading(true);
     try {
       const uploadPromises = Array.from(files).map(handleImageUpload);
       const uploadedUrls = await Promise.all(uploadPromises);
-      setUploadedImages((prev) => [...prev, ...uploadedUrls]);
-      setValue("eyebrowPhotos", [...uploadedImages, ...uploadedUrls]);
+      const newImages = [...uploadedImages, ...uploadedUrls];
+      setUploadedImages(newImages);
+      setValue("eyebrowPhotos", newImages);
+      setSubmitError(""); // 성공 시 에러 메시지 초기화
     } catch (error) {
       console.error("이미지 업로드 실패:", error);
+      setSubmitError(error instanceof Error ? error.message : "이미지 업로드에 실패했습니다.");
     } finally {
       setIsUploading(false);
     }
@@ -429,7 +471,13 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
               ageGroup === "50s" ||
               ageGroup === "60s+") && (
               <div>
-                <Label>눈썹 고화질 사진 첨부 (필수)</Label>
+                <Label>
+                  눈썹 고화질 사진 첨부 
+                  {hasPermanentExperience === "yes" && " (필수)"}
+                  <span className="text-sm text-gray-500 ml-2">
+                    (최대 2장, 5MB 이하)
+                  </span>
+                </Label>
                 <div className="mt-2">
                   <input
                     type="file"
@@ -438,13 +486,18 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                     onChange={handleFileChange}
                     className="hidden"
                     id="eyebrow-photos"
+                    disabled={isUploading || uploadedImages.length >= 2}
                   />
                   <Label
                     htmlFor="eyebrow-photos"
-                    className="border-gray-300 shadow-sm text-gray-700 hover:bg-gray-50 inline-flex cursor-pointer items-center rounded-md border bg-white px-4 py-2 text-sm font-medium"
+                    className={`border-gray-300 shadow-sm text-gray-700 hover:bg-gray-50 inline-flex cursor-pointer items-center rounded-md border bg-white px-4 py-2 text-sm font-medium ${
+                      uploadedImages.length >= 2 ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                   >
                     <ImagePlus className="mr-2 h-4 w-4" />
-                    {isUploading ? "업로드 중..." : "사진 선택"}
+                    {isUploading ? "업로드 중..." : 
+                     uploadedImages.length >= 2 ? "최대 2장까지 업로드 가능" : 
+                     "사진 선택"}
                   </Label>
                 </div>
 
