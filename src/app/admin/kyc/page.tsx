@@ -789,7 +789,7 @@ export default function AdminKYCPage() {
 
     // Load initial data for the current tab
     fetchKYCUsers(kycTab, 1, kycFilters);
-  }, [user, isAuthorized]);
+  }, [user, isAuthorized, kycTab, kycFilters]);
 
   // Load data when KYC tab changes
   useEffect(() => {

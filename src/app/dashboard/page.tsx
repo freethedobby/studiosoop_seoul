@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -1440,9 +1441,11 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                   좌측
                 </label>
                 <div className="rounded-lg border border-border p-2">
-                  <img
+                  <Image
                     src={kycData.eyebrowPhotoLeft}
                     alt="좌측 눈썹"
+                    width={200}
+                    height={128}
                     className="h-32 w-full rounded object-cover"
                   />
                 </div>
@@ -1454,9 +1457,11 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                   정면
                 </label>
                 <div className="rounded-lg border border-border p-2">
-                  <img
+                  <Image
                     src={kycData.eyebrowPhotoFront}
                     alt="정면 눈썹"
+                    width={200}
+                    height={128}
                     className="h-32 w-full rounded object-cover"
                   />
                 </div>
@@ -1468,9 +1473,11 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                   우측
                 </label>
                 <div className="rounded-lg border border-border p-2">
-                  <img
+                  <Image
                     src={kycData.eyebrowPhotoRight}
                     alt="우측 눈썹"
+                    width={200}
+                    height={128}
                     className="h-32 w-full rounded object-cover"
                   />
                 </div>
