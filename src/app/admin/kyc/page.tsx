@@ -95,26 +95,14 @@ interface UserData {
   email: string;
   name: string;
   gender?: string;
-  birthYear?: string;
-  contact: string;
-  province?: string;
-  district?: string;
-  dong?: string;
-  detailedAddress?: string;
-  skinType?: string;
-  skinTypeOther?: string;
-  designDescription?: string;
-  additionalNotes?: string;
-  marketingConsent?: boolean;
-  photoURLs?: {
-    left: string;
-    front: string;
-    right: string;
-  };
-  photoURL?: string; // Legacy support
-  photoType?: "base64" | "firebase-storage";
+  ageGroup?: string;
+  desiredServices?: string;
+  hasPermanentExperience?: string;
+  lastPermanentDate?: string;
+  reservationSource?: string;
+  termsAgreed?: boolean;
+  eyebrowPhotos?: string[];
   kycStatus: string;
-  hasPreviousTreatment?: boolean;
   rejectReason?: string;
   createdAt: Date;
   approvedAt?: Date;
@@ -1548,7 +1536,7 @@ export default function AdminKYCPage() {
                               </h4>
                               <div className="space-y-1 text-sm">
                                 <div className="flex justify-between">
-                                  <span className="text-gray-600">이름</span>
+                                  <span className="text-gray-600">성함</span>
                                   <span className="font-medium">
                                     {user.name}
                                   </span>
@@ -1566,46 +1554,15 @@ export default function AdminKYCPage() {
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
-                                  <span className="text-gray-600">
-                                    출생년도
-                                  </span>
+                                  <span className="text-gray-600">연령대</span>
                                   <span className="font-medium">
-                                    {user.birthYear || "-"}
-                                  </span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-gray-600">연락처</span>
-                                  <span className="font-medium">
-                                    {user.contact}
-                                  </span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-gray-600">주소</span>
-                                  <span className="font-medium">
-                                    {[
-                                      user.province
-                                        ? getAddressLabel(
-                                            "province",
-                                            user.province
-                                          )
-                                        : "",
-                                      user.district
-                                        ? getAddressLabel(
-                                            "district",
-                                            user.district,
-                                            user.province
-                                          )
-                                        : "",
-                                      user.dong
-                                        ? getAddressLabel(
-                                            "dong",
-                                            user.dong,
-                                            user.district
-                                          )
-                                        : "",
-                                    ]
-                                      .filter(Boolean)
-                                      .join(" ") || "-"}
+                                    {user.ageGroup === "10s" ? "10대" :
+                                     user.ageGroup === "20s" ? "20대" :
+                                     user.ageGroup === "30s" ? "30대" :
+                                     user.ageGroup === "40s" ? "40대" :
+                                     user.ageGroup === "50s" ? "50대" :
+                                     user.ageGroup === "60s+" ? "60대 이상" :
+                                     user.ageGroup || "-"}
                                   </span>
                                 </div>
                                 {user.detailedAddress && (
@@ -1634,30 +1591,32 @@ export default function AdminKYCPage() {
                               <div className="space-y-1 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    피부타입
+                                    희망 시술 항목
                                   </span>
                                   <span className="font-medium">
-                                    {user.skinType
-                                      ? getSkinTypeLabel(user.skinType)
-                                      : "-"}
-                                    {user.skinType === "other" &&
-                                      user.skinTypeOther && (
-                                        <span className="text-gray-500 block text-xs">
-                                          ({user.skinTypeOther})
-                                        </span>
-                                      )}
+                                    {user.desiredServices || "-"}
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    반영구 이력
+                                    반영구 경험 유무
                                   </span>
                                   <span className="font-medium">
-                                    {user.hasPreviousTreatment
+                                    {user.hasPermanentExperience === "yes"
                                       ? "있음"
                                       : "없음"}
                                   </span>
                                 </div>
+                                {user.hasPermanentExperience === "yes" && user.lastPermanentDate && (
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">
+                                      마지막 반영구 시기
+                                    </span>
+                                    <span className="font-medium">
+                                      {user.lastPermanentDate}
+                                    </span>
+                                  </div>
+                                )}
                                 {user.designDescription && (
                                   <div className="flex flex-col">
                                     <span className="text-gray-800 mb-2 text-sm font-semibold">
@@ -1680,16 +1639,24 @@ export default function AdminKYCPage() {
                                 )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    마케팅 동의
+                                    예약 경로
                                   </span>
                                   <span className="font-medium">
-                                    {user.marketingConsent ? (
+                                    {user.reservationSource || "-"}
+                                  </span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-600">
+                                    필독사항 동의
+                                  </span>
+                                  <span className="font-medium">
+                                    {user.termsAgreed ? (
                                       <span className="text-green-600">
-                                        동의 (5만원 할인)
+                                        ✓ 동의함
                                       </span>
                                     ) : (
-                                      <span className="text-gray-500">
-                                        미동의
+                                      <span className="text-red-500">
+                                        ✗ 미동의
                                       </span>
                                     )}
                                   </span>
@@ -1718,116 +1685,34 @@ export default function AdminKYCPage() {
                               눈썹 사진
                             </h4>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                              {/* Left Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  좌측
-                                </h5>
-                                {(user.photoURLs?.left || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.left ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="좌측 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.left ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load left image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
+                              {user.eyebrowPhotos && user.eyebrowPhotos.length > 0 ? (
+                                user.eyebrowPhotos.map((photo: string, index: number) => (
+                                  <div key={index} className="space-y-2">
+                                    <h5 className="text-gray-700 text-sm font-medium">
+                                      사진 {index + 1}
+                                    </h5>
+                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                      <Image
+                                        src={photo}
+                                        alt={`눈썹 사진 ${index + 1}`}
+                                        fill
+                                        className="object-contain"
+                                        unoptimized={photo.startsWith("data:")}
+                                        onError={(e) => {
+                                          console.error(
+                                            `Failed to load image ${index + 1}`
+                                          );
+                                          e.currentTarget.style.display = "none";
+                                        }}
+                                      />
+                                    </div>
                                   </div>
-                                )}
-                              </div>
-
-                              {/* Front Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  정면
-                                </h5>
-                                {(user.photoURLs?.front || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.front ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="정면 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.front ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load front image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Right Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  우측
-                                </h5>
-                                {(user.photoURLs?.right || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.right ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="우측 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.right ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load right image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
+                                ))
+                              ) : (
+                                <div className="col-span-3 text-center text-gray-500 py-8">
+                                  등록된 눈썹 사진이 없습니다.
+                                </div>
+                              )}
                             </div>
                           </div>
                         </CardContent>
@@ -2046,7 +1931,7 @@ export default function AdminKYCPage() {
                               </h4>
                               <div className="space-y-1 text-sm">
                                 <div className="flex justify-between">
-                                  <span className="text-gray-600">이름</span>
+                                  <span className="text-gray-600">성함</span>
                                   <span className="font-medium">
                                     {user.name}
                                   </span>
@@ -2064,46 +1949,15 @@ export default function AdminKYCPage() {
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
-                                  <span className="text-gray-600">
-                                    출생년도
-                                  </span>
+                                  <span className="text-gray-600">연령대</span>
                                   <span className="font-medium">
-                                    {user.birthYear || "-"}
-                                  </span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-gray-600">연락처</span>
-                                  <span className="font-medium">
-                                    {user.contact}
-                                  </span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-gray-600">주소</span>
-                                  <span className="font-medium">
-                                    {[
-                                      user.province
-                                        ? getAddressLabel(
-                                            "province",
-                                            user.province
-                                          )
-                                        : "",
-                                      user.district
-                                        ? getAddressLabel(
-                                            "district",
-                                            user.district,
-                                            user.province
-                                          )
-                                        : "",
-                                      user.dong
-                                        ? getAddressLabel(
-                                            "dong",
-                                            user.dong,
-                                            user.district
-                                          )
-                                        : "",
-                                    ]
-                                      .filter(Boolean)
-                                      .join(" ") || "-"}
+                                    {user.ageGroup === "10s" ? "10대" :
+                                     user.ageGroup === "20s" ? "20대" :
+                                     user.ageGroup === "30s" ? "30대" :
+                                     user.ageGroup === "40s" ? "40대" :
+                                     user.ageGroup === "50s" ? "50대" :
+                                     user.ageGroup === "60s+" ? "60대 이상" :
+                                     user.ageGroup || "-"}
                                   </span>
                                 </div>
                                 {user.detailedAddress && (
@@ -2132,30 +1986,32 @@ export default function AdminKYCPage() {
                               <div className="space-y-1 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    피부타입
+                                    희망 시술 항목
                                   </span>
                                   <span className="font-medium">
-                                    {user.skinType
-                                      ? getSkinTypeLabel(user.skinType)
-                                      : "-"}
-                                    {user.skinType === "other" &&
-                                      user.skinTypeOther && (
-                                        <span className="text-gray-500 block text-xs">
-                                          ({user.skinTypeOther})
-                                        </span>
-                                      )}
+                                    {user.desiredServices || "-"}
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    반영구 이력
+                                    반영구 경험 유무
                                   </span>
                                   <span className="font-medium">
-                                    {user.hasPreviousTreatment
+                                    {user.hasPermanentExperience === "yes"
                                       ? "있음"
                                       : "없음"}
                                   </span>
                                 </div>
+                                {user.hasPermanentExperience === "yes" && user.lastPermanentDate && (
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">
+                                      마지막 반영구 시기
+                                    </span>
+                                    <span className="font-medium">
+                                      {user.lastPermanentDate}
+                                    </span>
+                                  </div>
+                                )}
                                 {user.designDescription && (
                                   <div className="flex flex-col">
                                     <span className="text-gray-800 mb-2 text-sm font-semibold">
@@ -2178,16 +2034,24 @@ export default function AdminKYCPage() {
                                 )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    마케팅 동의
+                                    예약 경로
                                   </span>
                                   <span className="font-medium">
-                                    {user.marketingConsent ? (
+                                    {user.reservationSource || "-"}
+                                  </span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-600">
+                                    필독사항 동의
+                                  </span>
+                                  <span className="font-medium">
+                                    {user.termsAgreed ? (
                                       <span className="text-green-600">
-                                        동의 (5만원 할인)
+                                        ✓ 동의함
                                       </span>
                                     ) : (
-                                      <span className="text-gray-500">
-                                        미동의
+                                      <span className="text-red-500">
+                                        ✗ 미동의
                                       </span>
                                     )}
                                   </span>
@@ -2216,116 +2080,34 @@ export default function AdminKYCPage() {
                               눈썹 사진
                             </h4>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                              {/* Left Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  좌측
-                                </h5>
-                                {(user.photoURLs?.left || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.left ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="좌측 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.left ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load left image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
+                              {user.eyebrowPhotos && user.eyebrowPhotos.length > 0 ? (
+                                user.eyebrowPhotos.map((photo: string, index: number) => (
+                                  <div key={index} className="space-y-2">
+                                    <h5 className="text-gray-700 text-sm font-medium">
+                                      사진 {index + 1}
+                                    </h5>
+                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                      <Image
+                                        src={photo}
+                                        alt={`눈썹 사진 ${index + 1}`}
+                                        fill
+                                        className="object-contain"
+                                        unoptimized={photo.startsWith("data:")}
+                                        onError={(e) => {
+                                          console.error(
+                                            `Failed to load image ${index + 1}`
+                                          );
+                                          e.currentTarget.style.display = "none";
+                                        }}
+                                      />
+                                    </div>
                                   </div>
-                                )}
-                              </div>
-
-                              {/* Front Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  정면
-                                </h5>
-                                {(user.photoURLs?.front || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.front ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="정면 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.front ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load front image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Right Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  우측
-                                </h5>
-                                {(user.photoURLs?.right || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.right ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="우측 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.right ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load right image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
+                                ))
+                              ) : (
+                                <div className="col-span-3 text-center text-gray-500 py-8">
+                                  등록된 눈썹 사진이 없습니다.
+                                </div>
+                              )}
                             </div>
                           </div>
                         </CardContent>
@@ -2569,7 +2351,7 @@ export default function AdminKYCPage() {
                               </h4>
                               <div className="space-y-1 text-sm">
                                 <div className="flex justify-between">
-                                  <span className="text-gray-600">이름</span>
+                                  <span className="text-gray-600">성함</span>
                                   <span className="font-medium">
                                     {user.name}
                                   </span>
@@ -2587,46 +2369,15 @@ export default function AdminKYCPage() {
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
-                                  <span className="text-gray-600">
-                                    출생년도
-                                  </span>
+                                  <span className="text-gray-600">연령대</span>
                                   <span className="font-medium">
-                                    {user.birthYear || "-"}
-                                  </span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-gray-600">연락처</span>
-                                  <span className="font-medium">
-                                    {user.contact}
-                                  </span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-gray-600">주소</span>
-                                  <span className="font-medium">
-                                    {[
-                                      user.province
-                                        ? getAddressLabel(
-                                            "province",
-                                            user.province
-                                          )
-                                        : "",
-                                      user.district
-                                        ? getAddressLabel(
-                                            "district",
-                                            user.district,
-                                            user.province
-                                          )
-                                        : "",
-                                      user.dong
-                                        ? getAddressLabel(
-                                            "dong",
-                                            user.dong,
-                                            user.district
-                                          )
-                                        : "",
-                                    ]
-                                      .filter(Boolean)
-                                      .join(" ") || "-"}
+                                    {user.ageGroup === "10s" ? "10대" :
+                                     user.ageGroup === "20s" ? "20대" :
+                                     user.ageGroup === "30s" ? "30대" :
+                                     user.ageGroup === "40s" ? "40대" :
+                                     user.ageGroup === "50s" ? "50대" :
+                                     user.ageGroup === "60s+" ? "60대 이상" :
+                                     user.ageGroup || "-"}
                                   </span>
                                 </div>
                                 {user.detailedAddress && (
@@ -2655,30 +2406,32 @@ export default function AdminKYCPage() {
                               <div className="space-y-1 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    피부타입
+                                    희망 시술 항목
                                   </span>
                                   <span className="font-medium">
-                                    {user.skinType
-                                      ? getSkinTypeLabel(user.skinType)
-                                      : "-"}
-                                    {user.skinType === "other" &&
-                                      user.skinTypeOther && (
-                                        <span className="text-gray-500 block text-xs">
-                                          ({user.skinTypeOther})
-                                        </span>
-                                      )}
+                                    {user.desiredServices || "-"}
                                   </span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    반영구 이력
+                                    반영구 경험 유무
                                   </span>
                                   <span className="font-medium">
-                                    {user.hasPreviousTreatment
+                                    {user.hasPermanentExperience === "yes"
                                       ? "있음"
                                       : "없음"}
                                   </span>
                                 </div>
+                                {user.hasPermanentExperience === "yes" && user.lastPermanentDate && (
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">
+                                      마지막 반영구 시기
+                                    </span>
+                                    <span className="font-medium">
+                                      {user.lastPermanentDate}
+                                    </span>
+                                  </div>
+                                )}
                                 {user.designDescription && (
                                   <div className="flex flex-col">
                                     <span className="text-gray-800 mb-2 text-sm font-semibold">
@@ -2701,16 +2454,24 @@ export default function AdminKYCPage() {
                                 )}
                                 <div className="flex justify-between">
                                   <span className="text-gray-600">
-                                    마케팅 동의
+                                    예약 경로
                                   </span>
                                   <span className="font-medium">
-                                    {user.marketingConsent ? (
+                                    {user.reservationSource || "-"}
+                                  </span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-600">
+                                    필독사항 동의
+                                  </span>
+                                  <span className="font-medium">
+                                    {user.termsAgreed ? (
                                       <span className="text-green-600">
-                                        동의 (5만원 할인)
+                                        ✓ 동의함
                                       </span>
                                     ) : (
-                                      <span className="text-gray-500">
-                                        미동의
+                                      <span className="text-red-500">
+                                        ✗ 미동의
                                       </span>
                                     )}
                                   </span>
@@ -2739,116 +2500,34 @@ export default function AdminKYCPage() {
                               눈썹 사진
                             </h4>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                              {/* Left Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  좌측
-                                </h5>
-                                {(user.photoURLs?.left || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.left ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="좌측 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.left ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load left image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
+                              {user.eyebrowPhotos && user.eyebrowPhotos.length > 0 ? (
+                                user.eyebrowPhotos.map((photo: string, index: number) => (
+                                  <div key={index} className="space-y-2">
+                                    <h5 className="text-gray-700 text-sm font-medium">
+                                      사진 {index + 1}
+                                    </h5>
+                                    <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                      <Image
+                                        src={photo}
+                                        alt={`눈썹 사진 ${index + 1}`}
+                                        fill
+                                        className="object-contain"
+                                        unoptimized={photo.startsWith("data:")}
+                                        onError={(e) => {
+                                          console.error(
+                                            `Failed to load image ${index + 1}`
+                                          );
+                                          e.currentTarget.style.display = "none";
+                                        }}
+                                      />
+                                    </div>
                                   </div>
-                                )}
-                              </div>
-
-                              {/* Front Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  정면
-                                </h5>
-                                {(user.photoURLs?.front || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.front ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="정면 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.front ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load front image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Right Photo */}
-                              <div className="space-y-2">
-                                <h5 className="text-gray-700 text-sm font-medium">
-                                  우측
-                                </h5>
-                                {(user.photoURLs?.right || user.photoURL) && (
-                                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
-                                    <Image
-                                      src={
-                                        user.photoURLs?.right ||
-                                        user.photoURL ||
-                                        ""
-                                      }
-                                      alt="우측 눈썹"
-                                      fill
-                                      className="object-contain"
-                                      unoptimized={(
-                                        user.photoURLs?.right ||
-                                        user.photoURL ||
-                                        ""
-                                      ).startsWith("data:")}
-                                      onError={(e) => {
-                                        console.error(
-                                          "Failed to load right image"
-                                        );
-                                        e.currentTarget.style.display = "none";
-                                      }}
-                                    />
-                                    {user.photoType === "base64" && (
-                                      <div className="bg-blue-100 text-blue-800 absolute top-2 right-2 rounded px-2 py-1 text-xs">
-                                        Base64
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
+                                ))
+                              ) : (
+                                <div className="col-span-3 text-center text-gray-500 py-8">
+                                  등록된 눈썹 사진이 없습니다.
+                                </div>
+                              )}
                             </div>
                           </div>
                         </CardContent>
