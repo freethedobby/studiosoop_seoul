@@ -137,6 +137,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
     setSubmitError(null);
 
     try {
+      console.log("KYC 제출 시작:", { user: user.email, data });
+      console.log("Firebase 연결 상태:", { db, user: user.uid });
+
       // Google Analytics 이벤트
       event({
         action: "kyc_submit",
@@ -153,16 +156,23 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         status: "pending",
       };
 
+      console.log("KYC 데이터 준비 완료:", kycData);
+
       // KYC 컬렉션에 데이터 저장
+      console.log("KYC 컬렉션에 저장 중...");
       await setDoc(firestoreDoc(db, "kyc", user.email), kycData);
+      console.log("KYC 컬렉션 저장 완료");
 
       // 사용자의 kycStatus도 업데이트
+      console.log("사용자 상태 업데이트 중...");
       await updateDoc(firestoreDoc(db, "users", user.uid), {
         kycStatus: "pending",
         kycSubmittedAt: serverTimestamp(),
       });
+      console.log("사용자 상태 업데이트 완료");
 
       // 알림 생성
+      console.log("알림 생성 중...");
         await createNotification({
         userId: user.uid,
           type: "kyc_submitted",
@@ -171,8 +181,10 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
           "고객등록 신청이 완료되었습니다. 검토 후 결과를 알려드리겠습니다.",
         data: { kycId: user.email },
       });
+      console.log("알림 생성 완료");
 
       setSubmitSuccess(true);
+      console.log("KYC 제출 성공!");
 
       // 성공 콜백 실행
       if (onSuccess) {
@@ -180,7 +192,14 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
       }
     } catch (error) {
       console.error("KYC 제출 실패:", error);
-      setSubmitError("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error("Error details:", {
+        message: error instanceof Error ? error.message : "Unknown error",
+        code: (error as any)?.code,
+        stack: error instanceof Error ? error.stack : undefined,
+        user: user?.email,
+        data: data
+      });
+      setSubmitError(`제출 중 오류가 발생했습니다: ${error instanceof Error ? error.message : "알 수 없는 오류"}`);
     } finally {
       setIsSubmitting(false);
     }
