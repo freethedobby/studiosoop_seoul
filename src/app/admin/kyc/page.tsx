@@ -416,11 +416,10 @@ export default function AdminKYCPage() {
     try {
       setLoading(true);
 
-      // Simplified query to avoid composite index requirement
-      // Remove orderBy to avoid any index issues - sort client-side instead
+      // Fetch from kyc collection with proper ordering
       let baseQuery = query(
-        collection(db, "users"),
-        where("kycStatus", "==", status),
+        collection(db, "kyc"),
+        where("status", "==", status),
         limit(ITEMS_PER_PAGE * 3) // Fetch more to account for client-side filtering
       );
 
@@ -432,14 +431,14 @@ export default function AdminKYCPage() {
       const snapshot = await getDocs(baseQuery);
       const users: UserData[] = [];
 
-      // Apply all filters client-side to avoid composite index issues
+      // Process KYC data and sort chronologically
       snapshot.forEach((doc) => {
         try {
           const data = doc.data();
           const user = {
             id: doc.id,
             ...data,
-            createdAt: data.createdAt?.toDate() || new Date(),
+            createdAt: data.submittedAt?.toDate() || new Date(),
             approvedAt: data.approvedAt?.toDate() || null,
             rejectedAt: data.rejectedAt?.toDate() || null,
           } as UserData;
@@ -487,8 +486,8 @@ export default function AdminKYCPage() {
       if (snapshot.docs.length > 0) {
         try {
           const nextQuery = query(
-            collection(db, "users"),
-            where("kycStatus", "==", status),
+            collection(db, "kyc"),
+            where("status", "==", status),
             startAfter(snapshot.docs[snapshot.docs.length - 1]),
             limit(1)
           );
@@ -815,11 +814,19 @@ export default function AdminKYCPage() {
         return;
       }
 
-      // Update user status
-      await updateDoc(doc(db, "users", userId), {
-        kycStatus: "approved",
+      // Update KYC collection
+      await updateDoc(doc(db, "kyc", user.email), {
+        status: "approved",
         approvedAt: Timestamp.now(),
       });
+
+      // Update user status in users collection
+      if (user.userId) {
+        await updateDoc(doc(db, "users", user.userId), {
+          kycStatus: "approved",
+          approvedAt: Timestamp.now(),
+        });
+      }
 
       // Send email notification
       try {
@@ -866,12 +873,21 @@ export default function AdminKYCPage() {
       console.log("Found user:", user);
       console.log("User userId:", user.userId);
 
-      // Update user status
-      await updateDoc(doc(db, "users", selectedUserId), {
-        kycStatus: "rejected",
-        rejectReason: rejectReason.trim(),
+      // Update KYC collection
+      await updateDoc(doc(db, "kyc", user.email), {
+        status: "rejected",
         rejectedAt: Timestamp.now(),
+        rejectReason: rejectReason.trim(),
       });
+
+      // Update user status in users collection
+      if (user.userId) {
+        await updateDoc(doc(db, "users", user.userId), {
+          kycStatus: "rejected",
+          rejectedAt: Timestamp.now(),
+          rejectReason: rejectReason.trim(),
+        });
+      }
 
       // Create notification for the user
       try {
