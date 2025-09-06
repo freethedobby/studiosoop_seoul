@@ -808,12 +808,15 @@ export default function AdminKYCPage() {
         approvedAt: Timestamp.now(),
       });
 
-      // Update user status in users collection
+      // Update user status in users collection (create if not exists)
       if (user.userId) {
-        await updateDoc(doc(db, "users", user.userId), {
+        await setDoc(doc(db, "users", user.userId), {
           kycStatus: "approved",
           approvedAt: Timestamp.now(),
-        });
+          email: user.email,
+          name: user.name,
+          createdAt: Timestamp.now(),
+        }, { merge: true });
       }
 
       // Send email notification
@@ -868,13 +871,16 @@ export default function AdminKYCPage() {
         rejectReason: rejectReason.trim(),
       });
 
-      // Update user status in users collection
+      // Update user status in users collection (create if not exists)
       if (user.userId) {
-        await updateDoc(doc(db, "users", user.userId), {
+        await setDoc(doc(db, "users", user.userId), {
           kycStatus: "rejected",
           rejectedAt: Timestamp.now(),
           rejectReason: rejectReason.trim(),
-        });
+          email: user.email,
+          name: user.name,
+          createdAt: Timestamp.now(),
+        }, { merge: true });
       }
 
       // Create notification for the user

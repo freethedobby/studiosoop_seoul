@@ -1246,17 +1246,21 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {/* 기본 정보 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg text-gray-800">기본 정보</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">기본 정보</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div className="space-y-1">
               <label className="text-gray-600 text-sm font-medium">성함</label>
-              <p className="text-gray-900 font-medium text-base">{kycData.name}</p>
+              <p className="text-gray-900 text-base font-medium">
+                {kycData.name}
+              </p>
             </div>
             <div className="space-y-1">
               <label className="text-gray-600 text-sm font-medium">성별</label>
-              <p className="text-gray-900 text-base">{getGenderText(kycData.gender)}</p>
+              <p className="text-gray-900 text-base">
+                {getGenderText(kycData.gender)}
+              </p>
             </div>
             <div className="space-y-1">
               <label className="text-gray-600 text-sm font-medium">
@@ -1273,10 +1277,12 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {/* 희망 시술 항목 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg text-gray-800">희망 시술 항목</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">
+            희망 시술 항목
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-gray-900 rounded-lg border border-gray-200 bg-white p-4 text-base font-medium">
+          <div className="text-gray-900 border-gray-200 text-base rounded-lg border bg-white p-4 font-medium">
             {kycData.desiredServices}
           </div>
         </CardContent>
@@ -1285,7 +1291,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {/* 반영구 경험 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg text-gray-800">반영구 경험</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">반영구 경험</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -1307,7 +1313,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                   <label className="text-gray-600 text-sm font-medium">
                     마지막 반영구 시기
                   </label>
-                  <p className="text-gray-900 font-medium text-base">
+                  <p className="text-gray-900 text-base font-medium">
                     {kycData.lastPermanentDate}
                   </p>
                 </div>
@@ -1319,10 +1325,10 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {/* 예약 경로 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg text-gray-800">예약 경로</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">예약 경로</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-gray-900 rounded-lg border border-gray-200 bg-white p-4 text-base font-medium">
+          <div className="text-gray-900 border-gray-200 text-base rounded-lg border bg-white p-4 font-medium">
             {kycData.reservationSource}
           </div>
         </CardContent>
@@ -1332,7 +1338,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {kycData.eyebrowPhotos && kycData.eyebrowPhotos.length > 0 && (
         <Card className="border-gray-200 shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg text-gray-800">
+            <CardTitle className="text-gray-800 text-lg">
               눈썹 사진 ({kycData.eyebrowPhotos.length}장)
             </CardTitle>
           </CardHeader>
@@ -1343,7 +1349,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                   <label className="text-gray-600 text-sm font-medium">
                     사진 {index + 1}
                   </label>
-                  <div className="bg-gray-50 rounded-lg border border-gray-200 p-2">
+                  <div className="bg-gray-50 border-gray-200 rounded-lg border p-2">
                     <Image
                       src={photo}
                       alt={`눈썹 사진 ${index + 1}`}
@@ -1362,7 +1368,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
       {/* 제출 정보 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg text-gray-800">제출 정보</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">제출 정보</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
