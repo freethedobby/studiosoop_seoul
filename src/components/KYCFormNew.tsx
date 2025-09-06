@@ -57,10 +57,7 @@ const kycSchema = z.object({
   // 4. 예약 경로
   reservationSource: z.string().min(1, "예약 경로를 입력해주세요"),
 
-  // 5. 희망 예약 타임
-  desiredTimes: z.string().min(1, "희망 예약 타임을 입력해주세요"),
-
-  // 6. 필독사항 동의
+  // 5. 필독사항 동의
   termsAgreed: z.boolean().refine((val) => val === true, {
     message: "필독사항에 동의해주세요",
   }),
@@ -454,36 +451,10 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
           </CardContent>
         </Card>
 
-        {/* 5. 희망 예약 타임 */}
+        {/* 5. 필독사항 동의 */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">5. 희망 예약 타임</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <Label htmlFor="desiredTimes">
-                희망 예약 타임을 입력해주세요 (여러 후보 기재해주세요)
-              </Label>
-              <Textarea
-                id="desiredTimes"
-                placeholder="예: 월요일 오후 2시, 화요일 오전 10시, 수요일 오후 3시"
-                rows={3}
-                {...register("desiredTimes")}
-                className={cn(errors.desiredTimes && "border-red-500")}
-              />
-              {errors.desiredTimes && (
-                <p className="text-red-500 text-sm">
-                  {errors.desiredTimes.message}
-                </p>
-              )}
-                </div>
-          </CardContent>
-        </Card>
-
-        {/* 6. 필독사항 동의 */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">6. 필독사항 동의</CardTitle>
+            <CardTitle className="text-lg">5. 필독사항 동의</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
