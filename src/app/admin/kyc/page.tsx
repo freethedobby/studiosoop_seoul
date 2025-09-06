@@ -375,6 +375,21 @@ export default function AdminKYCPage() {
   const [selectedReservation, setSelectedReservation] =
     useState<ReservationData | null>(null);
 
+  // Image modal states
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
+  // Image modal handlers
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsImageModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+    setIsImageModalOpen(false);
+  };
+
   // Optimized data fetching functions
   const fetchKYCUsers = async (
     status: "pending" | "approved" | "rejected",
@@ -810,13 +825,17 @@ export default function AdminKYCPage() {
 
       // Update user status in users collection (create if not exists)
       if (user.userId) {
-        await setDoc(doc(db, "users", user.userId), {
-          kycStatus: "approved",
-          approvedAt: Timestamp.now(),
-          email: user.email,
-          name: user.name,
-          createdAt: Timestamp.now(),
-        }, { merge: true });
+        await setDoc(
+          doc(db, "users", user.userId),
+          {
+            kycStatus: "approved",
+            approvedAt: Timestamp.now(),
+            email: user.email,
+            name: user.name,
+            createdAt: Timestamp.now(),
+          },
+          { merge: true }
+        );
       }
 
       // Send email notification
@@ -873,14 +892,18 @@ export default function AdminKYCPage() {
 
       // Update user status in users collection (create if not exists)
       if (user.userId) {
-        await setDoc(doc(db, "users", user.userId), {
-          kycStatus: "rejected",
-          rejectedAt: Timestamp.now(),
-          rejectReason: rejectReason.trim(),
-          email: user.email,
-          name: user.name,
-          createdAt: Timestamp.now(),
-        }, { merge: true });
+        await setDoc(
+          doc(db, "users", user.userId),
+          {
+            kycStatus: "rejected",
+            rejectedAt: Timestamp.now(),
+            rejectReason: rejectReason.trim(),
+            email: user.email,
+            name: user.name,
+            createdAt: Timestamp.now(),
+          },
+          { merge: true }
+        );
       }
 
       // Create notification for the user
@@ -1706,7 +1729,10 @@ export default function AdminKYCPage() {
                                       <h5 className="text-gray-700 text-sm font-medium">
                                         사진 {index + 1}
                                       </h5>
-                                      <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                      <div 
+                                        className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white cursor-pointer hover:opacity-90 transition-opacity"
+                                        onClick={() => handleImageClick(photo)}
+                                      >
                                         <Image
                                           src={photo}
                                           alt={`눈썹 사진 ${index + 1}`}
@@ -2116,7 +2142,10 @@ export default function AdminKYCPage() {
                                       <h5 className="text-gray-700 text-sm font-medium">
                                         사진 {index + 1}
                                       </h5>
-                                      <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                      <div 
+                                        className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white cursor-pointer hover:opacity-90 transition-opacity"
+                                        onClick={() => handleImageClick(photo)}
+                                      >
                                         <Image
                                           src={photo}
                                           alt={`눈썹 사진 ${index + 1}`}
@@ -2551,7 +2580,10 @@ export default function AdminKYCPage() {
                                       <h5 className="text-gray-700 text-sm font-medium">
                                         사진 {index + 1}
                                       </h5>
-                                      <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white">
+                                      <div 
+                                        className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white cursor-pointer hover:opacity-90 transition-opacity"
+                                        onClick={() => handleImageClick(photo)}
+                                      >
                                         <Image
                                           src={photo}
                                           alt={`눈썹 사진 ${index + 1}`}
@@ -4594,6 +4626,37 @@ export default function AdminKYCPage() {
                 취소
               </Button>
               <Button onClick={handleSaveKycOpenSettings}>저장</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Image Modal */}
+        <Dialog open={isImageModalOpen} onOpenChange={setIsImageModalOpen}>
+          <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+            <DialogHeader className="p-6 pb-0">
+              <DialogTitle>사진 확대보기</DialogTitle>
+            </DialogHeader>
+            <div className="p-6 pt-0">
+              {selectedImage && (
+                <div className="relative w-full h-[70vh] bg-gray-100 rounded-lg overflow-hidden">
+                  <Image
+                    src={selectedImage}
+                    alt="확대된 사진"
+                    fill
+                    className="object-contain"
+                    unoptimized={selectedImage.startsWith("data:")}
+                    onError={(e) => {
+                      console.error("Failed to load enlarged image");
+                      e.currentTarget.style.display = "none";
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+            <DialogFooter className="p-6 pt-0">
+              <Button variant="outline" onClick={closeImageModal}>
+                닫기
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
