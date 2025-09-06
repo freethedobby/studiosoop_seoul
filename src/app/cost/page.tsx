@@ -47,19 +47,6 @@ export default function CostPage() {
             </div>
           </div>
 
-          {/* Additional Information */}
-          <div className="bg-gray-50 mt-8 rounded-lg p-6">
-            <h2 className="text-gray-900 mb-4 text-xl font-semibold">
-              비용 안내 사항
-            </h2>
-            <div className="text-gray-700 space-y-3">
-              <p>• 모든 가격은 부가세 포함 가격입니다</p>
-              <p>• 시술 전 상담을 통해 정확한 비용을 안내해드립니다</p>
-              <p>• 개인별 맞춤 디자인에 따라 추가 비용이 발생할 수 있습니다</p>
-              <p>• 재시술 시 할인 혜택이 적용됩니다</p>
-              <p>• 예약 및 문의: 010-1234-5678</p>
-            </div>
-          </div>
         </div>
       </main>
 
