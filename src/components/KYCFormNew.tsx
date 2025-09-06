@@ -194,12 +194,16 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
       console.error("KYC 제출 실패:", error);
       console.error("Error details:", {
         message: error instanceof Error ? error.message : "Unknown error",
-        code: (error as any)?.code,
+        code: error && typeof error === 'object' && 'code' in error ? (error as { code: string }).code : undefined,
         stack: error instanceof Error ? error.stack : undefined,
         user: user?.email,
-        data: data
+        data: data,
       });
-      setSubmitError(`제출 중 오류가 발생했습니다: ${error instanceof Error ? error.message : "알 수 없는 오류"}`);
+      setSubmitError(
+        `제출 중 오류가 발생했습니다: ${
+          error instanceof Error ? error.message : "알 수 없는 오류"
+        }`
+      );
     } finally {
       setIsSubmitting(false);
     }
