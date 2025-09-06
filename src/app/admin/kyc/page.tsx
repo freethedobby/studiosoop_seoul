@@ -1729,8 +1729,8 @@ export default function AdminKYCPage() {
                                       <h5 className="text-gray-700 text-sm font-medium">
                                         사진 {index + 1}
                                       </h5>
-                                      <div 
-                                        className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white cursor-pointer hover:opacity-90 transition-opacity"
+                                      <div
+                                        className="relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg border bg-white transition-opacity hover:opacity-90"
                                         onClick={() => handleImageClick(photo)}
                                       >
                                         <Image
@@ -2142,8 +2142,8 @@ export default function AdminKYCPage() {
                                       <h5 className="text-gray-700 text-sm font-medium">
                                         사진 {index + 1}
                                       </h5>
-                                      <div 
-                                        className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white cursor-pointer hover:opacity-90 transition-opacity"
+                                      <div
+                                        className="relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg border bg-white transition-opacity hover:opacity-90"
                                         onClick={() => handleImageClick(photo)}
                                       >
                                         <Image
@@ -2580,8 +2580,8 @@ export default function AdminKYCPage() {
                                       <h5 className="text-gray-700 text-sm font-medium">
                                         사진 {index + 1}
                                       </h5>
-                                      <div 
-                                        className="relative aspect-square w-full overflow-hidden rounded-lg border bg-white cursor-pointer hover:opacity-90 transition-opacity"
+                                      <div
+                                        className="relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg border bg-white transition-opacity hover:opacity-90"
                                         onClick={() => handleImageClick(photo)}
                                       >
                                         <Image
@@ -4632,13 +4632,13 @@ export default function AdminKYCPage() {
 
         {/* Image Modal */}
         <Dialog open={isImageModalOpen} onOpenChange={setIsImageModalOpen}>
-          <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+          <DialogContent className="max-h-[90vh] max-w-4xl p-0">
             <DialogHeader className="p-6 pb-0">
               <DialogTitle>사진 확대보기</DialogTitle>
             </DialogHeader>
             <div className="p-6 pt-0">
               {selectedImage && (
-                <div className="relative w-full h-[70vh] bg-gray-100 rounded-lg overflow-hidden">
+                <div className="bg-gray-100 relative h-[70vh] w-full overflow-hidden rounded-lg">
                   <Image
                     src={selectedImage}
                     alt="확대된 사진"

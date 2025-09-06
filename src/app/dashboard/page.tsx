@@ -33,7 +33,7 @@ import Logo from "@/components/Logo";
 import NotificationCenter from "@/components/NotificationCenter";
 import LocationDisplay from "@/components/LocationDisplay";
 import TestNotificationButton from "@/components/TestNotificationButton";
-import NoticeModal from "@/components/NoticeModal";
+import KYCTermsModal from "@/components/KYCTermsModal";
 import Footer from "@/components/Footer";
 import { auth } from "@/lib/firebase";
 import { signOut as firebaseSignOut } from "firebase/auth";
@@ -690,7 +690,7 @@ export default function DashboardPage() {
                   {isLocked
                     ? "고객등록 신청 후 예약이 가능합니다."
                     : user.kycStatus === "approved" && !user.noticeConfirmed
-                    ? "공지사항 확인 후 예약이 가능합니다."
+                    ? "필독사항 확인 후 예약이 가능합니다."
                     : reservation &&
                       reservation.status !== "cancelled" &&
                       reservation.status !== "rejected"
@@ -707,10 +707,10 @@ export default function DashboardPage() {
                       <AlertTriangle className="text-orange-600 mt-0.5 h-5 w-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-110" />
                       <div className="flex-1">
                         <p className="text-orange-800 group-hover:text-orange-900 text-sm font-medium transition-colors">
-                          공지사항 확인 필수
+                          필독사항 확인 필수
                         </p>
                         <p className="text-orange-700 group-hover:text-orange-800 mt-1 text-xs transition-colors">
-                          예약하기 전에 반드시 공지사항을 확인해주세요.
+                          예약하기 전에 반드시 필독사항을 확인해주세요.
                         </p>
                       </div>
                       <div className="text-orange-400 group-hover:text-orange-600 transition-colors">
@@ -741,7 +741,7 @@ export default function DashboardPage() {
                       <Check className="text-green-600 mt-0.5 h-5 w-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-110" />
                       <div className="flex-1">
                         <p className="text-green-800 group-hover:text-green-900 text-sm font-medium transition-colors">
-                          공지사항 확인 완료
+                          필독사항 확인 완료
                         </p>
                         <p className="text-green-700 group-hover:text-green-800 mt-1 text-xs transition-colors">
                           예약이 가능합니다.
@@ -1154,7 +1154,7 @@ export default function DashboardPage() {
                     {isLocked
                       ? "고객등록 신청 필요"
                       : user.kycStatus === "approved" && !user.noticeConfirmed
-                      ? "공지사항 확인하기"
+                      ? "필독사항 확인하기"
                       : user.kycStatus === "approved"
                       ? "예약하기"
                       : "승인 대기 중"}
@@ -1184,8 +1184,8 @@ export default function DashboardPage() {
         </div>
       </main>
 
-      {/* Notice Modal */}
-      <NoticeModal
+      {/* KYC Terms Modal */}
+      <KYCTermsModal
         isOpen={showNoticeModal}
         onClose={() => setShowNoticeModal(false)}
         onConfirm={handleNoticeConfirm}
