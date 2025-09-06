@@ -60,21 +60,13 @@ import {
 interface KYCData {
   name: string;
   gender: string;
-  birthYear: string;
-  contact: string;
-  province: string;
-  district: string;
-  dong: string;
-  detailedAddress?: string;
-  skinType: string;
-  skinTypeOther?: string;
-  hasPreviousTreatment: string;
-  designDescription?: string; // 원하는 눈썹 디자인
-  additionalNotes?: string; // 기타 사항
-  marketingConsent?: boolean; // 마케팅 동의
-  eyebrowPhotoLeft?: string;
-  eyebrowPhotoFront?: string;
-  eyebrowPhotoRight?: string;
+  ageGroup: string;
+  desiredServices: string;
+  hasPermanentExperience: string;
+  lastPermanentDate?: string;
+  reservationSource: string;
+  termsAgreed: boolean;
+  eyebrowPhotos?: string[];
   status: string;
   submittedAt?: {
     toDate?: () => Date;
@@ -326,22 +318,14 @@ export default function DashboardPage() {
             const kycData: KYCData = {
               name: data.name || "",
               gender: data.gender || "",
-              birthYear: data.birthYear || "",
-              contact: data.contact || "",
-              province: data.province || "",
-              district: data.district || "",
-              dong: data.dong || "",
-              detailedAddress: data.detailedAddress || "",
-              skinType: data.skinType || "",
-              skinTypeOther: data.skinTypeOther || "",
-              hasPreviousTreatment: data.hasPreviousTreatment ? "yes" : "no",
-              designDescription: data.designDescription || "",
-              additionalNotes: data.additionalNotes || "",
-              marketingConsent: data.marketingConsent || false,
-              eyebrowPhotoLeft: data.photoURLs?.left || "",
-              eyebrowPhotoFront: data.photoURLs?.front || "",
-              eyebrowPhotoRight: data.photoURLs?.right || "",
-              status: data.kycStatus || "",
+              ageGroup: data.ageGroup || "",
+              desiredServices: data.desiredServices || "",
+              hasPermanentExperience: data.hasPermanentExperience || "",
+              lastPermanentDate: data.lastPermanentDate || "",
+              reservationSource: data.reservationSource || "",
+              termsAgreed: data.termsAgreed || false,
+              eyebrowPhotos: data.eyebrowPhotos || [],
+              status: data.status || "",
               submittedAt: data.submittedAt,
             };
 
@@ -1261,28 +1245,25 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
     }
   };
 
-  const getSkinTypeText = (skinType: string) => {
-    switch (skinType) {
-      case "oily":
-        return "지성";
-      case "dry":
-        return "건성";
-      case "normal":
-        return "중성";
-      case "combination":
-        return "복합성";
-      case "unknown":
-        return "모르겠음";
-      case "other":
-        return "기타";
+  const getAgeGroupText = (ageGroup: string) => {
+    switch (ageGroup) {
+      case "10s":
+        return "10대";
+      case "20s":
+        return "20대";
+      case "30s":
+        return "30대";
+      case "40s":
+        return "40대";
+      case "50s":
+        return "50대";
+      case "60s+":
+        return "60대 이상";
       default:
-        return skinType;
+        return ageGroup;
     }
   };
 
-  const getPreviousTreatmentText = (hasPrevious: string) => {
-    return hasPrevious === "yes" ? "있음" : "없음";
-  };
 
   return (
     <div className="space-y-6">
@@ -1294,7 +1275,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
-              <label className="text-gray-700 text-sm font-medium">이름</label>
+              <label className="text-gray-700 text-sm font-medium">성함</label>
               <p className="text-gray-900">{kycData.name}</p>
             </div>
             <div>
@@ -1303,189 +1284,92 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
             </div>
             <div>
               <label className="text-gray-700 text-sm font-medium">
-                출생년도
+                연령대
               </label>
-              <p className="text-gray-900">{kycData.birthYear}년</p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                연락처
-              </label>
-              <p className="text-gray-900">{kycData.contact}</p>
+              <p className="text-gray-900">{getAgeGroupText(kycData.ageGroup)}</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* 주소 정보 */}
+      {/* 희망 시술 항목 */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">주소 정보</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <label className="text-gray-700 text-sm font-medium">주소</label>
-            <p className="text-gray-900">
-              {[
-                kycData.province
-                  ? getAddressLabel("province", kycData.province)
-                  : "",
-                kycData.district
-                  ? getAddressLabel(
-                      "district",
-                      kycData.district,
-                      kycData.province
-                    )
-                  : "",
-                kycData.dong
-                  ? getAddressLabel("dong", kycData.dong, kycData.district)
-                  : "",
-              ]
-                .filter(Boolean)
-                .join(" ") || "-"}
-            </p>
-          </div>
-          {kycData.detailedAddress && (
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                상세주소
-              </label>
-              <p className="text-gray-900">{kycData.detailedAddress}</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* 시술 정보 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">시술 정보</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                피부타입
-              </label>
-              <p className="text-gray-900">
-                {getSkinTypeText(kycData.skinType)}
-                {kycData.skinType === "other" && kycData.skinTypeOther && (
-                  <span className="text-gray-600 ml-2">
-                    ({kycData.skinTypeOther})
-                  </span>
-                )}
-              </p>
-            </div>
-            <div>
-              <label className="text-gray-700 text-sm font-medium">
-                반영구 이력
-              </label>
-              <p className="text-gray-900">
-                {getPreviousTreatmentText(kycData.hasPreviousTreatment)}
-              </p>
-            </div>
-          </div>
-
-          {/* 원하는 눈썹 디자인 */}
-          {kycData.designDescription && kycData.designDescription.trim() && (
-            <div>
-              <label className="text-gray-800 mb-2 block text-sm font-semibold">
-                원하는 눈썹 디자인
-              </label>
-              <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm">
-                {kycData.designDescription}
-              </div>
-            </div>
-          )}
-
-          {/* 기타 사항 */}
-          {kycData.additionalNotes && kycData.additionalNotes.trim() && (
-            <div>
-              <label className="text-gray-800 mb-2 block text-sm font-semibold">
-                기타 사항
-              </label>
-              <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm">
-                {kycData.additionalNotes}
-              </div>
-            </div>
-          )}
-
-          {/* 마케팅 동의 */}
-          <div>
-            <label className="text-gray-700 text-sm font-medium">
-              마케팅 동의
-            </label>
-            <p className="text-gray-900">
-              {kycData.marketingConsent ? (
-                <span className="text-green-600 font-medium">
-                  동의 (5만원 할인)
-                </span>
-              ) : (
-                <span className="text-gray-500">미동의</span>
-              )}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 눈썹 사진 */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">눈썹 사진</CardTitle>
+          <CardTitle className="text-lg">희망 시술 항목</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {kycData.eyebrowPhotoLeft && (
-              <div>
-                <label className="text-gray-700 mb-2 block text-sm font-medium">
-                  좌측
-                </label>
-                <div className="rounded-lg border border-border p-2">
-                  <Image
-                    src={kycData.eyebrowPhotoLeft}
-                    alt="좌측 눈썹"
-                    width={200}
-                    height={128}
-                    className="h-32 w-full rounded object-cover"
-                  />
-                </div>
-              </div>
-            )}
-            {kycData.eyebrowPhotoFront && (
-              <div>
-                <label className="text-gray-700 mb-2 block text-sm font-medium">
-                  정면
-                </label>
-                <div className="rounded-lg border border-border p-2">
-                  <Image
-                    src={kycData.eyebrowPhotoFront}
-                    alt="정면 눈썹"
-                    width={200}
-                    height={128}
-                    className="h-32 w-full rounded object-cover"
-                  />
-                </div>
-              </div>
-            )}
-            {kycData.eyebrowPhotoRight && (
-              <div>
-                <label className="text-gray-700 mb-2 block text-sm font-medium">
-                  우측
-                </label>
-                <div className="rounded-lg border border-border p-2">
-                  <Image
-                    src={kycData.eyebrowPhotoRight}
-                    alt="우측 눈썹"
-                    width={200}
-                    height={128}
-                    className="h-32 w-full rounded object-cover"
-                  />
-                </div>
-              </div>
-            )}
+          <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm">
+            {kycData.desiredServices}
           </div>
         </CardContent>
       </Card>
+
+      {/* 반영구 경험 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">반영구 경험</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <label className="text-gray-700 text-sm font-medium">
+              반영구 경험 유무
+            </label>
+            <p className="text-gray-900">
+              {kycData.hasPermanentExperience === "yes" ? "있음" : "없음"}
+            </p>
+          </div>
+          {kycData.hasPermanentExperience === "yes" && kycData.lastPermanentDate && (
+            <div>
+              <label className="text-gray-700 text-sm font-medium">
+                마지막 반영구 시기
+              </label>
+              <p className="text-gray-900">{kycData.lastPermanentDate}</p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* 예약 경로 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">예약 경로</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-gray-900 rounded-r-md border-l-4 border-border bg-muted p-3 text-sm">
+            {kycData.reservationSource}
+          </div>
+        </CardContent>
+      </Card>
+
+
+      {/* 눈썹 사진 */}
+      {kycData.eyebrowPhotos && kycData.eyebrowPhotos.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">눈썹 사진</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {kycData.eyebrowPhotos.map((photo, index) => (
+                <div key={index}>
+                  <label className="text-gray-700 mb-2 block text-sm font-medium">
+                    사진 {index + 1}
+                  </label>
+                  <div className="rounded-lg border border-border p-2">
+                    <Image
+                      src={photo}
+                      alt={`눈썹 사진 ${index + 1}`}
+                      width={200}
+                      height={128}
+                      className="h-32 w-full rounded object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* 제출 정보 */}
       <Card>
@@ -1493,7 +1377,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
           <CardTitle className="text-lg">제출 정보</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div>
               <label className="text-gray-700 text-sm font-medium">
                 제출일
@@ -1511,6 +1395,18 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
                   : kycData.status === "rejected"
                   ? "거절됨"
                   : "검토중"}
+              </p>
+            </div>
+            <div>
+              <label className="text-gray-700 text-sm font-medium">
+                필독사항 동의
+              </label>
+              <p className="text-gray-900">
+                {kycData.termsAgreed ? (
+                  <span className="text-green-600 font-medium">동의함</span>
+                ) : (
+                  <span className="text-red-500">미동의</span>
+                )}
               </p>
             </div>
           </div>
