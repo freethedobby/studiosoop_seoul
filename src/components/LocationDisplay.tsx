@@ -200,7 +200,7 @@ export default function LocationDisplay({ reservation }: LocationDisplayProps) {
               </div>
               <div className="relative mx-auto w-full">
                 <Image
-                  src="/nature_seoul_map.jpeg"
+                  src="/place_map.png"
                   alt="Nature Seoul 위치 약도"
                   width={300}
                   height={300}
@@ -242,7 +242,7 @@ export default function LocationDisplay({ reservation }: LocationDisplayProps) {
 
             <div className="relative flex h-full max-h-[90vh] w-full max-w-4xl items-center justify-center p-4">
               <Image
-                src="/nature_seoul_map.jpeg"
+                src="/place_map.png"
                 alt="Nature Seoul 위치 약도 (확대)"
                 width={800}
                 height={800}

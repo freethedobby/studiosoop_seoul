@@ -41,8 +41,13 @@ export async function isAdmin(email: string): Promise<boolean> {
   
   // Check Firestore admins collection
   try {
-    const adminDoc = await db.collection('admins').doc(email).get();
-    return adminDoc.exists && adminDoc.data()?.isActive !== false;
+    const adminQuery = await db.collection('admins')
+      .where('email', '==', email)
+      .where('isActive', '==', true)
+      .limit(1)
+      .get();
+    
+    return !adminQuery.empty;
   } catch (error) {
     console.error('Error checking admin status:', error);
     return false;
@@ -56,7 +61,7 @@ export async function addAdmin(email: string) {
   }
   
   try {
-    await db.collection('admins').doc(email).set({
+    await db.collection('admins').add({
       email: email,
       isActive: true,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -81,9 +86,18 @@ export async function removeAdmin(email: string) {
   }
   
   try {
-    await db.collection('admins').doc(email).update({
-      isActive: false,
-    });
+    const adminQuery = await db.collection('admins')
+      .where('email', '==', email)
+      .limit(1)
+      .get();
+    
+    if (!adminQuery.empty) {
+      const adminDoc = adminQuery.docs[0];
+      await adminDoc.ref.update({
+        isActive: false,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
     
     // Remove from allowed emails
     const index = ADMIN_EMAILS.indexOf(email);
