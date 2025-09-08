@@ -259,20 +259,20 @@ export default function AdminManagement() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 min-h-screen to-white p-4">
+    <div className="bg-gradient-to-br from-gray-50 min-h-screen to-white p-2 sm:p-4">
       <div className="container mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
               <Button
                 variant="ghost"
                 onClick={() => router.push("/admin")}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 self-start"
               >
                 <ArrowLeft className="h-4 w-4" />
                 뒤로
               </Button>
-              <h1 className="text-gray-900 font-sans text-3xl font-extrabold tracking-tight">
+              <h1 className="text-gray-900 font-sans text-2xl font-extrabold tracking-tight sm:text-3xl">
                 관리자 관리
               </h1>
             </div>
@@ -282,7 +282,7 @@ export default function AdminManagement() {
             onClick={() => {
               router.push("/dashboard");
             }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 self-start sm:self-auto"
           >
             사용자 페이지로
           </Button>
@@ -476,89 +476,100 @@ export default function AdminManagement() {
                   {admins.map((admin) => (
                     <div
                       key={admin.id}
-                      className="hover:bg-gray-50 flex items-center justify-between rounded-lg border p-4 transition-colors"
+                      className="hover:bg-gray-50 rounded-lg border p-4 transition-colors"
                     >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <div className="bg-gray-200 flex h-8 w-8 items-center justify-center rounded-full">
-                            <span className="text-gray-600 text-sm font-medium">
-                              {admin.email.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <div>
-                            <p className="text-gray-900 font-medium">
-                              {admin.email}
-                            </p>
-                            <p className="text-gray-500 text-sm">
-                              등록일:{" "}
-                              {(() => {
-                                try {
-                                  const date = getDateFromCreatedAt(
-                                    admin.createdAt
-                                  );
+                      {/* Mobile-first layout */}
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-3">
+                            <div className="bg-gray-200 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                              <span className="text-gray-600 text-sm font-medium">
+                                {admin.email.charAt(0).toUpperCase()}
+                              </span>
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-gray-900 truncate font-medium">
+                                {admin.email}
+                              </p>
+                              <p className="text-gray-500 text-sm">
+                                등록일:{" "}
+                                {(() => {
+                                  try {
+                                    const date = getDateFromCreatedAt(
+                                      admin.createdAt
+                                    );
 
-                                  // Check if date is valid
-                                  if (
-                                    isNaN(date.getTime()) ||
-                                    date.getTime() === 0
-                                  ) {
+                                    // Check if date is valid
+                                    if (
+                                      isNaN(date.getTime()) ||
+                                      date.getTime() === 0
+                                    ) {
+                                      return "날짜 정보 없음";
+                                    }
+
+                                    return date.toLocaleDateString("ko-KR", {
+                                      year: "numeric",
+                                      month: "long",
+                                      day: "numeric",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    });
+                                  } catch {
                                     return "날짜 정보 없음";
                                   }
-
-                                  return date.toLocaleDateString("ko-KR", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                  });
-                                } catch {
-                                  return "날짜 정보 없음";
-                                }
-                              })()}
-                            </p>
+                                })()}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Badge
-                          variant={admin.isActive ? "default" : "secondary"}
-                          className={
-                            admin.isActive
-                              ? "bg-green-100 text-green-800"
-                              : "bg-gray-100 text-gray-600"
-                          }
-                        >
-                          {admin.isActive ? "활성" : "비활성"}
-                        </Badge>
-                        {admin.isActive &&
-                          admin.email !== user?.email &&
-                          !admin.email.includes("blacksheepwall") && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                              onClick={() => handleRemoveAdmin(admin.email)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          )}
-                        {admin.email.includes("blacksheepwall") && (
+
+                        {/* Status and actions - responsive layout */}
+                        <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
                           <Badge
-                            variant="outline"
-                            className="text-purple-600 border-purple-200"
+                            variant={admin.isActive ? "default" : "secondary"}
+                            className={
+                              admin.isActive
+                                ? "bg-green-100 text-green-800"
+                                : "bg-gray-100 text-gray-600"
+                            }
                           >
-                            시스템 관리자
+                            {admin.isActive ? "활성" : "비활성"}
                           </Badge>
-                        )}
-                        {admin.email === user?.email && (
-                          <Badge
-                            variant="outline"
-                            className="text-blue-600 border-blue-200"
-                          >
-                            현재 사용자
-                          </Badge>
-                        )}
+
+                          {/* Additional badges */}
+                          <div className="flex flex-wrap gap-2">
+                            {admin.email.includes("blacksheepwall") && (
+                              <Badge
+                                variant="outline"
+                                className="text-purple-600 border-purple-200 text-xs"
+                              >
+                                시스템 관리자
+                              </Badge>
+                            )}
+                            {admin.email === user?.email && (
+                              <Badge
+                                variant="outline"
+                                className="text-blue-600 border-blue-200 text-xs"
+                              >
+                                현재 사용자
+                              </Badge>
+                            )}
+                          </div>
+
+                          {/* Delete button */}
+                          {admin.isActive &&
+                            admin.email !== user?.email &&
+                            !admin.email.includes("blacksheepwall") && (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50 flex-shrink-0"
+                                onClick={() => handleRemoveAdmin(admin.email)}
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            )}
+                        </div>
                       </div>
                     </div>
                   ))}
