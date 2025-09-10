@@ -288,11 +288,7 @@ export default function KYCPage() {
                       variant="outline"
                       className="text-green-700 border-green-300"
                     >
-                      {kycData.status === "approved"
-                        ? "승인됨"
-                        : kycData.status === "rejected"
-                        ? "거절됨"
-                        : "검토중"}
+                      {t(`dashboard.kycStatus.${kycData.status}`)}
                     </Badge>
                     <span className="text-green-600 text-xs">
                       제출일:{" "}
@@ -383,11 +379,7 @@ export default function KYCPage() {
                       성별
                     </label>
                     <p className="text-gray-900 font-bold">
-                      {kycData.gender === "male"
-                        ? "남성"
-                        : kycData.gender === "female"
-                        ? "여성"
-                        : "기타"}
+                      {t(`dashboard.gender.${kycData.gender}`)}
                     </p>
                   </div>
                   <div>
@@ -418,19 +410,7 @@ export default function KYCPage() {
                       피부 타입
                     </label>
                     <p className="text-gray-900 font-bold">
-                      {kycData.skinType === "oily"
-                        ? "지성"
-                        : kycData.skinType === "dry"
-                        ? "건성"
-                        : kycData.skinType === "normal"
-                        ? "중성"
-                        : kycData.skinType === "combination"
-                        ? "복합성"
-                        : kycData.skinType === "unknown"
-                        ? "모르겠음"
-                        : kycData.skinType === "other"
-                        ? "기타"
-                        : kycData.skinType}
+                      {t(`kyc.skinType.${kycData.skinType}`)}
                       {kycData.skinTypeOther && ` (${kycData.skinTypeOther})`}
                     </p>
                   </div>
@@ -448,7 +428,7 @@ export default function KYCPage() {
                     이전 시술 경험
                   </label>
                   <p className="text-gray-900 font-bold">
-                    {kycData.hasPreviousTreatment === "yes" ? "있음" : "없음"}
+                    {t(`kyc.treatment.${kycData.hasPreviousTreatment}`)}
                   </p>
                 </div>
               </CardContent>
@@ -474,11 +454,7 @@ export default function KYCPage() {
                       상태
                     </label>
                     <p className="text-gray-900 font-bold">
-                      {kycData.status === "approved"
-                        ? "승인됨"
-                        : kycData.status === "rejected"
-                        ? "거절됨"
-                        : "검토중"}
+                      {t(`dashboard.kycStatus.${kycData.status}`)}
                     </p>
                   </div>
                 </div>

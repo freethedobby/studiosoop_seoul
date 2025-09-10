@@ -131,13 +131,19 @@ const translations = {
     "dashboard.treatmentCompleted": "Treatment Completed",
     "dashboard.treatmentCompletedDesc":
       "Treatment has been completed. Thank you!",
-    "dashboard.kycCompletedMessage": "Customer registration application has been completed.",
-    "dashboard.kycRequiredMessage": "Complete customer registration application to make reservations.",
-    "dashboard.reservationRequiredMessage": "Customer registration application required for reservations.",
-    "dashboard.reservationNoticeMessage": "Reservations available after reading required notices.",
+    "dashboard.kycCompletedMessage":
+      "Customer registration application has been completed.",
+    "dashboard.kycRequiredMessage":
+      "Complete customer registration application to make reservations.",
+    "dashboard.reservationRequiredMessage":
+      "Customer registration application required for reservations.",
+    "dashboard.reservationNoticeMessage":
+      "Reservations available after reading required notices.",
     "dashboard.reservationInProgressMessage": "Reservation in progress.",
-    "dashboard.reservationAvailableMessage": "Reservations available after customer registration approval.",
-    "dashboard.reservationNeededMessage": "Customer registration application required",
+    "dashboard.reservationAvailableMessage":
+      "Reservations available after customer registration approval.",
+    "dashboard.reservationNeededMessage":
+      "Customer registration application required",
     "dashboard.reservationNoticeCheckMessage": "Check required notices",
     "dashboard.noDateInfo": "No date information",
     "dashboard.memberStatus": {
@@ -148,7 +154,7 @@ const translations = {
     },
     "dashboard.kycStatus": {
       approved: "Approved",
-      pending: "Under Review", 
+      pending: "Under Review",
       rejected: "Rejected",
     },
     "dashboard.reservationStatus": {
@@ -160,7 +166,7 @@ const translations = {
     },
     "dashboard.gender": {
       male: "Male",
-      female: "Female", 
+      female: "Female",
       other: "Other",
     },
     "dashboard.ageGroup": {
@@ -170,6 +176,18 @@ const translations = {
       "40s": "40s",
       "50s": "50s",
       "60s+": "60+",
+    },
+    "kyc.skinType": {
+      oily: "Oily",
+      dry: "Dry",
+      normal: "Normal",
+      combination: "Combination",
+      unknown: "Unknown",
+      other: "Other",
+    },
+    "kyc.treatment": {
+      yes: "Yes",
+      no: "No",
     },
 
     // Common
@@ -291,11 +309,14 @@ const translations = {
     "dashboard.treatmentCompleted": "시술 완료",
     "dashboard.treatmentCompletedDesc": "시술이 완료되었습니다. 감사합니다!",
     "dashboard.kycCompletedMessage": "고객등록 신청이 완료되었습니다.",
-    "dashboard.kycRequiredMessage": "고객등록 신청을 완료하면 예약이 가능합니다.",
-    "dashboard.reservationRequiredMessage": "고객등록 신청 후 예약이 가능합니다.",
+    "dashboard.kycRequiredMessage":
+      "고객등록 신청을 완료하면 예약이 가능합니다.",
+    "dashboard.reservationRequiredMessage":
+      "고객등록 신청 후 예약이 가능합니다.",
     "dashboard.reservationNoticeMessage": "필독사항 확인 후 예약이 가능합니다.",
     "dashboard.reservationInProgressMessage": "예약이 진행 중입니다.",
-    "dashboard.reservationAvailableMessage": "고객 등록 승인 후 예약이 가능합니다.",
+    "dashboard.reservationAvailableMessage":
+      "고객 등록 승인 후 예약이 가능합니다.",
     "dashboard.reservationNeededMessage": "고객등록 신청 필요",
     "dashboard.reservationNoticeCheckMessage": "필독사항 확인하기",
     "dashboard.noDateInfo": "날짜 정보 없음",
@@ -329,6 +350,18 @@ const translations = {
       "40s": "40대",
       "50s": "50대",
       "60s+": "60대 이상",
+    },
+    "kyc.skinType": {
+      oily: "지성",
+      dry: "건성",
+      normal: "중성",
+      combination: "복합성",
+      unknown: "모르겠음",
+      other: "기타",
+    },
+    "kyc.treatment": {
+      yes: "있음",
+      no: "없음",
     },
 
     // Common
@@ -378,7 +411,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+    <LanguageContext.Provider
+      value={{ language, setLanguage: handleSetLanguage, t }}
+    >
       {children}
     </LanguageContext.Provider>
   );

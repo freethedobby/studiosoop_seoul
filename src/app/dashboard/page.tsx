@@ -785,7 +785,9 @@ export default function DashboardPage() {
                                 : "outline"
                             }
                           >
-                            {t(`dashboard.reservationStatus.${reservation.status}`)}
+                            {t(
+                              `dashboard.reservationStatus.${reservation.status}`
+                            )}
                           </Badge>
                           <div className="text-gray-400 group-hover:text-gray-600 transition-colors">
                             <svg
@@ -1197,7 +1199,13 @@ export default function DashboardPage() {
 }
 
 // KYC 데이터 뷰어 컴포넌트
-function KYCDataViewer({ kycData, t }: { kycData: KYCData; t: (key: string) => string }) {
+function KYCDataViewer({
+  kycData,
+  t,
+}: {
+  kycData: KYCData;
+  t: (key: string) => string;
+}) {
   const getGenderText = (gender: string) => {
     return t(`dashboard.gender.${gender}`) || gender;
   };
