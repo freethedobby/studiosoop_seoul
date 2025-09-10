@@ -23,7 +23,7 @@ const translations = {
       "Premium beauty service\nfor your own special style\nwe create for you",
     "studio.button": "Book Now",
     "footer.designed": "designed by",
-    
+
     // Navigation
     "nav.myInfo": "My Info",
     "nav.reserve": "Reserve",
@@ -33,7 +33,7 @@ const translations = {
     "nav.userPage": "User Page",
     "nav.back": "Back",
     "nav.menu": "Menu",
-    
+
     // Admin
     "admin.management": "Admin Management",
     "admin.kyc": "Customer Management",
@@ -51,7 +51,8 @@ const translations = {
     "admin.currentUser": "Current User",
     "admin.registrationDate": "Registration Date:",
     "admin.noDate": "No date info",
-    "admin.removeConfirm": "Are you sure you want to remove {email} from administrators?",
+    "admin.removeConfirm":
+      "Are you sure you want to remove {email} from administrators?",
     "admin.addSuccess": "Admin successfully added",
     "admin.removeSuccess": "Admin successfully removed",
     "admin.addError": "Failed to add admin",
@@ -66,8 +67,9 @@ const translations = {
     "admin.connectionFailed": "Firebase Connection Failed",
     "admin.connectionError": "Connection Error:",
     "admin.setupRequired": "Setup Required:",
-    "admin.setupSteps": "1. Download service account key from Firebase Console\n2. Set environment variables:\nFIREBASE_PROJECT_ID=your-project-id\nFIREBASE_CLIENT_EMAIL=your-service-account-email\nFIREBASE_PRIVATE_KEY=\"-----BEGIN PRIVATE KEY-----\\nYour Private Key\\n-----END PRIVATE KEY-----\"\n3. Add environment variables to Vercel and redeploy",
-    
+    "admin.setupSteps":
+      '1. Download service account key from Firebase Console\n2. Set environment variables:\nFIREBASE_PROJECT_ID=your-project-id\nFIREBASE_CLIENT_EMAIL=your-service-account-email\nFIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\\nYour Private Key\\n-----END PRIVATE KEY-----"\n3. Add environment variables to Vercel and redeploy',
+
     // KYC
     "kyc.title": "KYC Management",
     "kyc.pending": "Pending",
@@ -77,6 +79,55 @@ const translations = {
     "kyc.reject": "Reject",
     "kyc.noData": "No KYC data available",
     "kyc.loading": "Loading...",
+
+    // Dashboard
+    "dashboard.title": "My Info",
+    "dashboard.subtitle": "Check your registration status and reservation status.",
+    "dashboard.basicInfo": "Basic Information",
+    "dashboard.email": "Email",
+    "dashboard.status": "Status",
+    "dashboard.rejectReason": "Rejection Reason",
+    "dashboard.kycApplication": "Customer Registration Application",
+    "dashboard.kycSoon": "Customer registration application will start soon.",
+    "dashboard.kycOpenIn": "Opens in:",
+    "dashboard.kycWaiting": "Waiting for customer registration application",
+    "dashboard.kycClosed": "Customer registration application period has ended.",
+    "dashboard.kycClosedButton": "Customer registration application closed",
+    "dashboard.kycCompleted": "Customer registration application has been completed.",
+    "dashboard.kycRequired": "Complete customer registration application to make reservations.",
+    "dashboard.kycViewApplication": "View Application",
+    "dashboard.kycApply": "Apply for Customer Registration",
+    "dashboard.kycChecking": "Checking",
+    "dashboard.reservation": "Reservation",
+    "dashboard.reservationRequired": "Customer registration application required for reservations.",
+    "dashboard.reservationNotice": "Reservations available after reading required notices.",
+    "dashboard.reservationInProgress": "Reservation in progress.",
+    "dashboard.reservationAvailable": "Reservations available after customer registration approval.",
+    "dashboard.noticeRequired": "Required Notice Confirmation",
+    "dashboard.noticeRequiredDesc": "Please read the required notices before making a reservation.",
+    "dashboard.noticeCompleted": "Notice Confirmation Completed",
+    "dashboard.noticeCompletedDesc": "Reservations are now available.",
+    "dashboard.reservationInfo": "Reservation Information",
+    "dashboard.reservationConfirmed": "Confirmed",
+    "dashboard.reservationPaymentConfirmed": "Payment Confirmed",
+    "dashboard.reservationPaymentRequired": "Payment Required",
+    "dashboard.reservationRejected": "Rejected",
+    "dashboard.reservationWaiting": "Waiting",
+    "dashboard.paymentRequired": "💰 200,000 KRW deposit required",
+    "dashboard.paymentConfirmed": "Confirmation requested.",
+    "dashboard.reservationRejected": "❌ Reservation was rejected",
+    "dashboard.reservationNeeded": "Customer registration application required",
+    "dashboard.reservationNoticeCheck": "Check required notices",
+    "dashboard.reservationBook": "Make Reservation",
+    "dashboard.reservationWaiting": "Waiting for approval",
+    "dashboard.treatmentCompleted": "Treatment Completed",
+    "dashboard.treatmentCompletedDesc": "Treatment has been completed. Thank you!",
+    "dashboard.memberStatus": {
+      "approved": "Verified Member",
+      "pending": "Under Review",
+      "rejected": "Rejected",
+      "none": "Not Applied"
+    },
     
     // Common
     "common.loading": "Loading...",
@@ -97,7 +148,7 @@ const translations = {
       "프리미엄 뷰티 서비스로\n당신만의 특별한 스타일을\n만들어드립니다",
     "studio.button": "예약하기",
     "footer.designed": "designed by",
-    
+
     // Navigation
     "nav.myInfo": "내정보",
     "nav.reserve": "예약하기",
@@ -107,7 +158,7 @@ const translations = {
     "nav.userPage": "사용자 페이지",
     "nav.back": "뒤로",
     "nav.menu": "메뉴",
-    
+
     // Admin
     "admin.management": "관리자 관리",
     "admin.kyc": "고객관리",
@@ -140,8 +191,9 @@ const translations = {
     "admin.connectionFailed": "Firebase 연결 실패",
     "admin.connectionError": "연결 오류:",
     "admin.setupRequired": "설정이 필요합니다:",
-    "admin.setupSteps": "1. Firebase Console에서 서비스 계정 키를 다운로드하세요\n2. 환경 변수를 설정하세요:\nFIREBASE_PROJECT_ID=your-project-id\nFIREBASE_CLIENT_EMAIL=your-service-account-email\nFIREBASE_PRIVATE_KEY=\"-----BEGIN PRIVATE KEY-----\\nYour Private Key\\n-----END PRIVATE KEY-----\"\n3. Vercel에 환경 변수를 추가하고 재배포하세요",
-    
+    "admin.setupSteps":
+      '1. Firebase Console에서 서비스 계정 키를 다운로드하세요\n2. 환경 변수를 설정하세요:\nFIREBASE_PROJECT_ID=your-project-id\nFIREBASE_CLIENT_EMAIL=your-service-account-email\nFIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\\nYour Private Key\\n-----END PRIVATE KEY-----"\n3. Vercel에 환경 변수를 추가하고 재배포하세요',
+
     // KYC
     "kyc.title": "KYC 관리",
     "kyc.pending": "대기중",
@@ -151,6 +203,55 @@ const translations = {
     "kyc.reject": "거부",
     "kyc.noData": "KYC 데이터가 없습니다",
     "kyc.loading": "로딩중...",
+
+    // Dashboard
+    "dashboard.title": "내 정보",
+    "dashboard.subtitle": "고객 등록 상태와 예약 현황을 확인하세요.",
+    "dashboard.basicInfo": "기본 정보",
+    "dashboard.email": "이메일",
+    "dashboard.status": "상태",
+    "dashboard.rejectReason": "반려 사유",
+    "dashboard.kycApplication": "고객등록 신청",
+    "dashboard.kycSoon": "고객등록 신청이 곧 시작됩니다.",
+    "dashboard.kycOpenIn": "오픈까지:",
+    "dashboard.kycWaiting": "고객등록 신청 대기중",
+    "dashboard.kycClosed": "고객등록 신청 기간이 마감되었습니다.",
+    "dashboard.kycClosedButton": "고객등록 신청 마감",
+    "dashboard.kycCompleted": "고객등록 신청이 완료되었습니다.",
+    "dashboard.kycRequired": "고객등록 신청을 완료하면 예약이 가능합니다.",
+    "dashboard.kycViewApplication": "신청내용보기",
+    "dashboard.kycApply": "고객등록 신청하기",
+    "dashboard.kycChecking": "확인중",
+    "dashboard.reservation": "예약",
+    "dashboard.reservationRequired": "고객등록 신청 후 예약이 가능합니다.",
+    "dashboard.reservationNotice": "필독사항 확인 후 예약이 가능합니다.",
+    "dashboard.reservationInProgress": "예약이 진행 중입니다.",
+    "dashboard.reservationAvailable": "고객 등록 승인 후 예약이 가능합니다.",
+    "dashboard.noticeRequired": "필독사항 확인 필수",
+    "dashboard.noticeRequiredDesc": "예약하기 전에 반드시 필독사항을 확인해주세요.",
+    "dashboard.noticeCompleted": "필독사항 확인 완료",
+    "dashboard.noticeCompletedDesc": "예약이 가능합니다.",
+    "dashboard.reservationInfo": "예약 정보",
+    "dashboard.reservationConfirmed": "확정",
+    "dashboard.reservationPaymentConfirmed": "입금확인중",
+    "dashboard.reservationPaymentRequired": "입금대기",
+    "dashboard.reservationRejected": "거절",
+    "dashboard.reservationWaiting": "대기",
+    "dashboard.paymentRequired": "💰 예약금 20만원 입금 필요",
+    "dashboard.paymentConfirmed": "확인 요청 되었습니다.",
+    "dashboard.reservationRejected": "❌ 예약이 거절되었습니다",
+    "dashboard.reservationNeeded": "고객등록 신청 필요",
+    "dashboard.reservationNoticeCheck": "필독사항 확인하기",
+    "dashboard.reservationBook": "예약하기",
+    "dashboard.reservationWaiting": "승인 대기 중",
+    "dashboard.treatmentCompleted": "시술 완료",
+    "dashboard.treatmentCompletedDesc": "시술이 완료되었습니다. 감사합니다!",
+    "dashboard.memberStatus": {
+      "approved": "인증멤버",
+      "pending": "검토 중",
+      "rejected": "거절됨",
+      "none": "미신청"
+    },
     
     // Common
     "common.loading": "로딩중...",
@@ -169,17 +270,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("ko");
 
   const t = (key: string, params?: Record<string, string | number>): string => {
-    let translation = translations[language][
-      key as keyof (typeof translations)[typeof language]
-    ] || key;
-    
+    let translation =
+      translations[language][
+        key as keyof (typeof translations)[typeof language]
+      ] || key;
+
     // Handle string interpolation
     if (params) {
       Object.entries(params).forEach(([paramKey, value]) => {
         translation = translation.replace(`{${paramKey}}`, String(value));
       });
     }
-    
+
     return translation;
   };
 

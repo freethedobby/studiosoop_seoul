@@ -1,11 +1,13 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import KYCFormNew from "@/components/KYCFormNew";
 import FirebaseDebug from "@/components/FirebaseDebug";
 import Logo from "@/components/Logo";
+import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import Footer from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -39,6 +41,7 @@ interface KYCData {
 
 export default function KYCPage() {
   const { user, loading } = useAuth();
+  const { t } = useLanguage();
   const router = useRouter();
   const [kycData, setKycData] = useState<KYCData | null>(null);
   const [loadingKyc, setLoadingKyc] = useState(true);
@@ -516,6 +519,10 @@ export default function KYCPage() {
                 </svg>
               </button>
               <Logo variant="header" />
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <CompactLanguageSwitcher />
             </div>
           </div>
         </div>

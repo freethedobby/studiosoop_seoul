@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,6 +32,7 @@ import Link from "next/link";
 import { MembershipBadge } from "@/components/MembershipBadge";
 import Logo from "@/components/Logo";
 import NotificationCenter from "@/components/NotificationCenter";
+import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import LocationDisplay from "@/components/LocationDisplay";
 import TestNotificationButton from "@/components/TestNotificationButton";
 import KYCTermsModal from "@/components/KYCTermsModal";
@@ -81,6 +83,7 @@ interface KYCData {
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
+  const { t } = useLanguage();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNoticeModal, setShowNoticeModal] = useState(false);
@@ -377,6 +380,7 @@ export default function DashboardPage() {
 
             {/* Universal Hamburger Menu */}
             <div className="flex items-center space-x-2">
+              <CompactLanguageSwitcher />
               <NotificationCenter variant="customer" />
 
               <Button
@@ -389,7 +393,7 @@ export default function DashboardPage() {
                 ) : (
                   <Menu className="h-4 w-4" />
                 )}
-                <span className="text-sm">메뉴</span>
+                <span className="text-sm">{t("nav.menu")}</span>
               </Button>
             </div>
           </div>
@@ -410,13 +414,7 @@ export default function DashboardPage() {
                       {user?.email}
                     </span>
                     <span className="text-gray-500 text-xs">
-                      {user?.kycStatus === "approved"
-                        ? "인증멤버"
-                        : user?.kycStatus === "pending"
-                        ? "검토 중"
-                        : user?.kycStatus === "rejected"
-                        ? "거절됨"
-                        : "미신청"}
+                      {t(`dashboard.memberStatus.${user?.kycStatus || "none"}`)}
                     </span>
                   </div>
                 </div>
@@ -429,7 +427,7 @@ export default function DashboardPage() {
                   className="flex items-center justify-start space-x-2"
                 >
                   <DollarSign className="h-4 w-4" />
-                  <span>비용안내</span>
+                  <span>{t("nav.cost")}</span>
                 </Button>
 
                 <Button
@@ -438,7 +436,7 @@ export default function DashboardPage() {
                   className="flex items-center justify-start space-x-2"
                 >
                   <User className="h-4 w-4" />
-                  <span>내정보</span>
+                  <span>{t("nav.myInfo")}</span>
                 </Button>
 
                 {user?.kycStatus === "approved" && (
@@ -448,7 +446,7 @@ export default function DashboardPage() {
                     className="flex items-center justify-start space-x-2"
                   >
                     <Calendar className="h-4 w-4" />
-                    <span>예약하기</span>
+                    <span>{t("nav.reserve")}</span>
                   </Button>
                 )}
 
@@ -458,7 +456,7 @@ export default function DashboardPage() {
                   className="text-red-600 hover:text-red-700 hover:bg-red-50 flex items-center justify-start space-x-2"
                 >
                   <LogOut className="h-4 w-4" />
-                  <span>로그아웃</span>
+                  <span>{t("nav.logout")}</span>
                 </Button>
               </nav>
             </div>
@@ -470,9 +468,9 @@ export default function DashboardPage() {
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
           <div className="mb-8 text-center">
-            <h2 className="text-gray-900 mb-2 text-2xl font-light">내 정보</h2>
+            <h2 className="text-gray-900 mb-2 text-2xl font-light">{t("dashboard.title")}</h2>
             <p className="text-gray-600">
-              고객 등록 상태와 예약 현황을 확인하세요.
+              {t("dashboard.subtitle")}
             </p>
           </div>
 
@@ -480,7 +478,7 @@ export default function DashboardPage() {
             {/* User Info Card */}
             <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">기본 정보</h3>
+                <h3 className="text-lg font-semibold">{t("dashboard.basicInfo")}</h3>
                 <MembershipBadge
                   kycStatus={user.kycStatus || "none"}
                   treatmentDone={user.treatmentDone || false}
@@ -488,24 +486,18 @@ export default function DashboardPage() {
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">이메일</span>
+                  <span className="text-gray-600">{t("dashboard.email")}</span>
                   <span className="font-medium">{user.email}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">상태</span>
+                  <span className="text-gray-600">{t("dashboard.status")}</span>
                   <span className="font-medium">
-                    {user.kycStatus === "approved"
-                      ? "승인됨"
-                      : user.kycStatus === "pending"
-                      ? "검토 중"
-                      : user.kycStatus === "rejected"
-                      ? "거절됨"
-                      : "미신청"}
+                    {t(`dashboard.memberStatus.${user.kycStatus || "none"}`)}
                   </span>
                 </div>
                 {user.kycStatus === "rejected" && user.rejectReason && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">반려 사유</span>
+                    <span className="text-gray-600">{t("dashboard.rejectReason")}</span>
                     <span className="text-red-600 font-medium">
                       {user.rejectReason}
                     </span>

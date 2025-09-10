@@ -286,7 +286,7 @@ export default function AdminManagement() {
             }}
             className="flex items-center gap-2 self-start sm:self-auto"
           >
-{t("nav.userPage")}
+            {t("nav.userPage")}
           </Button>
         </div>
 

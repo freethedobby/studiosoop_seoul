@@ -22,8 +22,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import CountdownTimer from "@/components/CountdownTimer";
+import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import Footer from "@/components/Footer";
 import {
   Calendar,
@@ -64,6 +66,7 @@ interface ReservationData {
 
 export default function UserReservePage() {
   const { user, loading: authLoading } = useAuth();
+  const { t } = useLanguage();
   const router = useRouter();
   const [slots, setSlots] = useState<SlotData[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -766,15 +769,21 @@ export default function UserReservePage() {
       <div className="bg-gradient-to-br from-gray-50 min-h-screen to-white p-2 sm:p-4">
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
-          <div className="mb-6 flex items-center gap-2">
-            <Link href="/dashboard">
-              <button className="hover:bg-gray-50 text-gray-700 shadow-sm border-gray-200 rounded-full border bg-white px-4 py-2 text-sm font-semibold transition-all duration-200">
-                내정보
-              </button>
-            </Link>
-            <h1 className="text-gray-900 mb-0 font-sans text-2xl font-extrabold tracking-tight sm:text-3xl">
-              예약하기
-            </h1>
+          <div className="mb-6 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Link href="/dashboard">
+                <button className="hover:bg-gray-50 text-gray-700 shadow-sm border-gray-200 rounded-full border bg-white px-4 py-2 text-sm font-semibold transition-all duration-200">
+                  {t("nav.myInfo")}
+                </button>
+              </Link>
+              <h1 className="text-gray-900 mb-0 font-sans text-2xl font-extrabold tracking-tight sm:text-3xl">
+                {t("nav.reserve")}
+              </h1>
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <CompactLanguageSwitcher />
+            </div>
           </div>
 
           {/* 예약 마감 메시지 */}
