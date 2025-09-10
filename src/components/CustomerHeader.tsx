@@ -15,6 +15,7 @@ import {
 import { User, Calendar, LogOut, Menu, DollarSign } from "lucide-react";
 import { signOutUser } from "@/lib/firebase";
 import LanguageSwitcher from "./LanguageSwitcher";
+import CompactLanguageSwitcher from "./CompactLanguageSwitcher";
 
 interface CustomerHeaderProps {
   variant?: "default" | "transparent";
@@ -89,9 +90,12 @@ export default function CustomerHeader({
             )}
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            {/* Language Switcher - Always visible */}
+            <CompactLanguageSwitcher />
+            
             {/* Universal Hamburger Menu for All Users */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <NotificationCenter variant="customer" />
               <AdminModeToggle />
 

@@ -70,9 +70,9 @@ export default function Home() {
                       <Link href={user ? "/dashboard" : "/login"}>
                         <Button
                           size="lg"
-                          className="bg-[#A67B5B] shadow-2xl hover:shadow-[#A67B5B]/25 w-48 text-base group relative h-14 transform font-bold text-white transition-all duration-300 hover:scale-105"
+                          className="shadow-2xl w-48 text-base group relative h-14 transform bg-[#A67B5B] font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[#A67B5B]/25"
                         >
-                          <div className="bg-[#8B6B4A] absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                          <div className="absolute inset-0 rounded-2xl bg-[#8B6B4A] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                           <div className="relative flex items-center justify-center">
                             <ArrowRight className="mr-3 h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" />
                             <span>{t("studio.button")}</span>
@@ -113,9 +113,9 @@ export default function Home() {
                 <Link href={user ? "/dashboard" : "/login"}>
                   <Button
                     size="lg"
-                    className="bg-[#A67B5B] shadow-2xl hover:shadow-[#A67B5B]/25 w-40 group relative h-12 transform text-sm font-bold text-white transition-all duration-300 hover:scale-105"
+                    className="shadow-2xl w-40 group relative h-12 transform bg-[#A67B5B] text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[#A67B5B]/25"
                   >
-                    <div className="bg-[#8B6B4A] absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-[#8B6B4A] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                     <div className="relative flex items-center justify-center">
                       <ArrowRight className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                       <span>{t("studio.button")}</span>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import NotificationCenter from "@/components/NotificationCenter";
+import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Calendar, Menu, X, LogOut } from "lucide-react";
 import { auth } from "@/lib/firebase";
@@ -108,7 +109,8 @@ export default function AdminLayout({
               </Button>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <CompactLanguageSwitcher />
               <NotificationCenter variant="admin" />
               <div className="text-gray-600 hidden text-sm sm:block">
                 {user.email}
@@ -141,7 +143,7 @@ export default function AdminLayout({
                   className="flex items-center justify-start space-x-2"
                 >
                   <Calendar className="h-4 w-4" />
-                  <span>예약ㅇ관리</span>
+                  <span>예약관리</span>
                 </Button>
 
                 <div className="mt-2 border-t pt-2">
