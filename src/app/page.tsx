@@ -45,7 +45,7 @@ export default function Home() {
                 <div className="text-left">
                   {/* Main Heading */}
                   <h1 className="text-gray-900 text-6xl font-black leading-tight tracking-tight lg:text-7xl">
-                    <span className="text-amber-200">{t("studio.title")}</span>
+                    <span className="text-[#A67B5B]">{t("studio.title")}</span>
                     <br />
                     <span className="text-gray-900">
                       <AnimatedText
@@ -70,9 +70,9 @@ export default function Home() {
                       <Link href={user ? "/dashboard" : "/login"}>
                         <Button
                           size="lg"
-                          className="bg-amber-600 shadow-2xl hover:shadow-amber-500/25 w-48 text-base group relative h-14 transform font-bold text-white transition-all duration-300 hover:scale-105"
+                          className="bg-[#A67B5B] shadow-2xl hover:shadow-[#A67B5B]/25 w-48 text-base group relative h-14 transform font-bold text-white transition-all duration-300 hover:scale-105"
                         >
-                          <div className="bg-amber-700 absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                          <div className="bg-[#8B6B4A] absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                           <div className="relative flex items-center justify-center">
                             <ArrowRight className="mr-3 h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" />
                             <span>{t("studio.button")}</span>
@@ -90,7 +90,7 @@ export default function Home() {
               <div className="w-full max-w-2xl px-6">
                 <div className="text-center">
                   <h1 className="text-3xl font-black leading-tight tracking-tight text-white drop-shadow-2xl">
-                    <span className="text-amber-200">{t("studio.title")}</span>
+                    <span className="text-[#A67B5B]">{t("studio.title")}</span>
                     <br />
                     <span className="text-white">
                       <AnimatedText
@@ -113,9 +113,9 @@ export default function Home() {
                 <Link href={user ? "/dashboard" : "/login"}>
                   <Button
                     size="lg"
-                    className="bg-amber-600 shadow-2xl hover:shadow-amber-500/25 w-40 group relative h-12 transform text-sm font-bold text-white transition-all duration-300 hover:scale-105"
+                    className="bg-[#A67B5B] shadow-2xl hover:shadow-[#A67B5B]/25 w-40 group relative h-12 transform text-sm font-bold text-white transition-all duration-300 hover:scale-105"
                   >
-                    <div className="bg-amber-700 absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                    <div className="bg-[#8B6B4A] absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                     <div className="relative flex items-center justify-center">
                       <ArrowRight className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                       <span>{t("studio.button")}</span>
