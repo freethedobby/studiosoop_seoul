@@ -391,15 +391,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   const t = (key: string, params?: Record<string, string | number>): string => {
-    let translation =
+    const rawTranslation =
       translations[language][
         key as keyof (typeof translations)[typeof language]
       ] || key;
 
     // Ensure translation is a string before interpolation
-    if (typeof translation !== 'string') {
-      return String(translation);
+    if (typeof rawTranslation !== "string") {
+      return String(rawTranslation);
     }
+
+    let translation: string = rawTranslation;
 
     // Handle string interpolation
     if (params) {
