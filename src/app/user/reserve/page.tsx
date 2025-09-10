@@ -992,7 +992,7 @@ export default function UserReservePage() {
                               100107985905
                             </div>
                             <div className="text-gray-500 text-xs">
-                              예금주: 윤자연 (케이뱅크)
+                              예금주: 정아인 (케이뱅크)
                             </div>
                           </div>
                           <div className="bg-blue-50 border-blue-200 mt-3 rounded-md border p-3">

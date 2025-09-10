@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import NotificationCenter from "@/components/NotificationCenter";
 import AdminModeToggle from "@/components/AdminModeToggle";
 import Logo from "@/components/Logo";
@@ -26,6 +27,7 @@ export default function CustomerHeader({
 }: CustomerHeaderProps) {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const { t } = useLanguage();
 
   const handleLogout = async () => {
     try {
@@ -72,7 +74,7 @@ export default function CustomerHeader({
                     className="flex items-center space-x-1 text-sm"
                   >
                     <User className="h-4 w-4" />
-                    <span>내정보</span>
+                    <span>{t("nav.myInfo")}</span>
                   </Button>
 
                   {user.kycStatus === "approved" && (
@@ -82,7 +84,7 @@ export default function CustomerHeader({
                       className="flex items-center space-x-1 text-sm"
                     >
                       <Calendar className="h-4 w-4" />
-                      <span>예약하기</span>
+                      <span>{t("nav.reserve")}</span>
                     </Button>
                   )}
                 </nav>
@@ -93,7 +95,7 @@ export default function CustomerHeader({
           <div className="flex items-center space-x-1 sm:space-x-2">
             {/* Language Switcher - Always visible */}
             <CompactLanguageSwitcher />
-            
+
             {/* Universal Hamburger Menu for All Users */}
             <div className="flex items-center space-x-1 sm:space-x-2">
               <NotificationCenter variant="customer" />
@@ -116,31 +118,31 @@ export default function CustomerHeader({
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => router.push("/cost")}>
                         <DollarSign className="mr-2 h-4 w-4" />
-                        비용안내
+                        {t("nav.cost")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => router.push("/dashboard")}
                       >
                         <User className="mr-2 h-4 w-4" />
-                        내정보
+                        {t("nav.myInfo")}
                       </DropdownMenuItem>
                       {user.kycStatus === "approved" && (
                         <DropdownMenuItem
                           onClick={() => router.push("/user/reserve")}
                         >
                           <Calendar className="mr-2 h-4 w-4" />
-                          예약하기
+                          {t("nav.reserve")}
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem onClick={handleLogout}>
                         <LogOut className="mr-2 h-4 w-4" />
-                        로그아웃
+                        {t("nav.logout")}
                       </DropdownMenuItem>
                     </>
                   ) : (
                     <>
                       <DropdownMenuItem onClick={() => router.push("/login")}>
-                        로그인
+                        {t("nav.login")}
                       </DropdownMenuItem>
                     </>
                   )}

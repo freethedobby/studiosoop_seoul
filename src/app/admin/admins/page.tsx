@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -44,6 +45,7 @@ interface ConfigStatus {
 
 export default function AdminManagement() {
   const { user, loading } = useAuth();
+  const { t } = useLanguage();
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [admins, setAdmins] = useState<AdminUser[]>([]);
@@ -270,10 +272,10 @@ export default function AdminManagement() {
                 className="flex items-center gap-2 self-start"
               >
                 <ArrowLeft className="h-4 w-4" />
-                뒤로
+                {t("nav.back")}
               </Button>
               <h1 className="text-gray-900 font-sans text-2xl font-extrabold tracking-tight sm:text-3xl">
-                관리자 관리
+                {t("admin.management")}
               </h1>
             </div>
           </div>
@@ -284,7 +286,7 @@ export default function AdminManagement() {
             }}
             className="flex items-center gap-2 self-start sm:self-auto"
           >
-            사용자 페이지로
+{t("nav.userPage")}
           </Button>
         </div>
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import NotificationCenter from "@/components/NotificationCenter";
 import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function AdminLayout({
                 className="flex items-center space-x-2"
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span>사용자 페이지</span>
+                <span>{t("nav.userPage")}</span>
               </Button>
 
               <div className="w-px bg-gray-300 h-6" />
@@ -70,7 +72,7 @@ export default function AdminLayout({
                   className="flex items-center space-x-2"
                 >
                   <Users className="h-4 w-4" />
-                  <span>고객관리</span>
+                  <span>{t("admin.kyc")}</span>
                 </Button>
 
                 <Button
@@ -79,7 +81,7 @@ export default function AdminLayout({
                   className="flex items-center space-x-2"
                 >
                   <Calendar className="h-4 w-4" />
-                  <span>예약관리</span>
+                  <span>{t("admin.slots")}</span>
                 </Button>
               </nav>
             </div>
@@ -92,7 +94,7 @@ export default function AdminLayout({
                 className="flex items-center space-x-1"
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span className="text-sm">사용자</span>
+                <span className="text-sm">{t("nav.userPage")}</span>
               </Button>
 
               <Button
@@ -105,7 +107,7 @@ export default function AdminLayout({
                 ) : (
                   <Menu className="h-4 w-4" />
                 )}
-                <span className="text-sm">메뉴</span>
+                <span className="text-sm">{t("nav.menu")}</span>
               </Button>
             </div>
 
@@ -131,7 +133,7 @@ export default function AdminLayout({
                   className="flex items-center justify-start space-x-2"
                 >
                   <Users className="h-4 w-4" />
-                  <span>고객관리</span>
+                  <span>{t("admin.kyc")}</span>
                 </Button>
 
                 <Button
@@ -143,7 +145,7 @@ export default function AdminLayout({
                   className="flex items-center justify-start space-x-2"
                 >
                   <Calendar className="h-4 w-4" />
-                  <span>예약관리</span>
+                  <span>{t("admin.slots")}</span>
                 </Button>
 
                 <div className="mt-2 border-t pt-2">
@@ -153,7 +155,7 @@ export default function AdminLayout({
                     className="text-red-600 hover:text-red-700 hover:bg-red-50 flex items-center justify-start space-x-2"
                   >
                     <LogOut className="h-4 w-4" />
-                    <span>로그아웃</span>
+                    <span>{t("nav.logout")}</span>
                   </Button>
                 </div>
               </nav>
