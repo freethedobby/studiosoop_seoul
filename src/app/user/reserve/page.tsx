@@ -780,7 +780,7 @@ export default function UserReservePage() {
                 {t("nav.reserve")}
               </h1>
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <CompactLanguageSwitcher />
             </div>

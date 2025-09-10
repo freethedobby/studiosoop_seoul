@@ -520,7 +520,7 @@ export default function KYCPage() {
               </button>
               <Logo variant="header" />
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <CompactLanguageSwitcher />
             </div>

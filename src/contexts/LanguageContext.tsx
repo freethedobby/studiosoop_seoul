@@ -82,7 +82,8 @@ const translations = {
 
     // Dashboard
     "dashboard.title": "My Info",
-    "dashboard.subtitle": "Check your registration status and reservation status.",
+    "dashboard.subtitle":
+      "Check your registration status and reservation status.",
     "dashboard.basicInfo": "Basic Information",
     "dashboard.email": "Email",
     "dashboard.status": "Status",
@@ -91,20 +92,27 @@ const translations = {
     "dashboard.kycSoon": "Customer registration application will start soon.",
     "dashboard.kycOpenIn": "Opens in:",
     "dashboard.kycWaiting": "Waiting for customer registration application",
-    "dashboard.kycClosed": "Customer registration application period has ended.",
+    "dashboard.kycClosed":
+      "Customer registration application period has ended.",
     "dashboard.kycClosedButton": "Customer registration application closed",
-    "dashboard.kycCompleted": "Customer registration application has been completed.",
-    "dashboard.kycRequired": "Complete customer registration application to make reservations.",
+    "dashboard.kycCompleted":
+      "Customer registration application has been completed.",
+    "dashboard.kycRequired":
+      "Complete customer registration application to make reservations.",
     "dashboard.kycViewApplication": "View Application",
     "dashboard.kycApply": "Apply for Customer Registration",
     "dashboard.kycChecking": "Checking",
     "dashboard.reservation": "Reservation",
-    "dashboard.reservationRequired": "Customer registration application required for reservations.",
-    "dashboard.reservationNotice": "Reservations available after reading required notices.",
+    "dashboard.reservationRequired":
+      "Customer registration application required for reservations.",
+    "dashboard.reservationNotice":
+      "Reservations available after reading required notices.",
     "dashboard.reservationInProgress": "Reservation in progress.",
-    "dashboard.reservationAvailable": "Reservations available after customer registration approval.",
+    "dashboard.reservationAvailable":
+      "Reservations available after customer registration approval.",
     "dashboard.noticeRequired": "Required Notice Confirmation",
-    "dashboard.noticeRequiredDesc": "Please read the required notices before making a reservation.",
+    "dashboard.noticeRequiredDesc":
+      "Please read the required notices before making a reservation.",
     "dashboard.noticeCompleted": "Notice Confirmation Completed",
     "dashboard.noticeCompletedDesc": "Reservations are now available.",
     "dashboard.reservationInfo": "Reservation Information",
@@ -121,14 +129,49 @@ const translations = {
     "dashboard.reservationBook": "Make Reservation",
     "dashboard.reservationWaiting": "Waiting for approval",
     "dashboard.treatmentCompleted": "Treatment Completed",
-    "dashboard.treatmentCompletedDesc": "Treatment has been completed. Thank you!",
+    "dashboard.treatmentCompletedDesc":
+      "Treatment has been completed. Thank you!",
+    "dashboard.kycCompletedMessage": "Customer registration application has been completed.",
+    "dashboard.kycRequiredMessage": "Complete customer registration application to make reservations.",
+    "dashboard.reservationRequiredMessage": "Customer registration application required for reservations.",
+    "dashboard.reservationNoticeMessage": "Reservations available after reading required notices.",
+    "dashboard.reservationInProgressMessage": "Reservation in progress.",
+    "dashboard.reservationAvailableMessage": "Reservations available after customer registration approval.",
+    "dashboard.reservationNeededMessage": "Customer registration application required",
+    "dashboard.reservationNoticeCheckMessage": "Check required notices",
+    "dashboard.noDateInfo": "No date information",
     "dashboard.memberStatus": {
-      "approved": "Verified Member",
-      "pending": "Under Review",
-      "rejected": "Rejected",
-      "none": "Not Applied"
+      approved: "Verified Member",
+      pending: "Under Review",
+      rejected: "Rejected",
+      none: "Not Applied",
     },
-    
+    "dashboard.kycStatus": {
+      approved: "Approved",
+      pending: "Under Review", 
+      rejected: "Rejected",
+    },
+    "dashboard.reservationStatus": {
+      approved: "Confirmed",
+      payment_confirmed: "Payment Confirmed",
+      payment_required: "Payment Required",
+      rejected: "Rejected",
+      waiting: "Waiting",
+    },
+    "dashboard.gender": {
+      male: "Male",
+      female: "Female", 
+      other: "Other",
+    },
+    "dashboard.ageGroup": {
+      "10s": "10s",
+      "20s": "20s",
+      "30s": "30s", 
+      "40s": "40s",
+      "50s": "50s",
+      "60s+": "60+",
+    },
+
     // Common
     "common.loading": "Loading...",
     "common.error": "Error",
@@ -228,7 +271,8 @@ const translations = {
     "dashboard.reservationInProgress": "예약이 진행 중입니다.",
     "dashboard.reservationAvailable": "고객 등록 승인 후 예약이 가능합니다.",
     "dashboard.noticeRequired": "필독사항 확인 필수",
-    "dashboard.noticeRequiredDesc": "예약하기 전에 반드시 필독사항을 확인해주세요.",
+    "dashboard.noticeRequiredDesc":
+      "예약하기 전에 반드시 필독사항을 확인해주세요.",
     "dashboard.noticeCompleted": "필독사항 확인 완료",
     "dashboard.noticeCompletedDesc": "예약이 가능합니다.",
     "dashboard.reservationInfo": "예약 정보",
@@ -246,13 +290,47 @@ const translations = {
     "dashboard.reservationWaiting": "승인 대기 중",
     "dashboard.treatmentCompleted": "시술 완료",
     "dashboard.treatmentCompletedDesc": "시술이 완료되었습니다. 감사합니다!",
+    "dashboard.kycCompletedMessage": "고객등록 신청이 완료되었습니다.",
+    "dashboard.kycRequiredMessage": "고객등록 신청을 완료하면 예약이 가능합니다.",
+    "dashboard.reservationRequiredMessage": "고객등록 신청 후 예약이 가능합니다.",
+    "dashboard.reservationNoticeMessage": "필독사항 확인 후 예약이 가능합니다.",
+    "dashboard.reservationInProgressMessage": "예약이 진행 중입니다.",
+    "dashboard.reservationAvailableMessage": "고객 등록 승인 후 예약이 가능합니다.",
+    "dashboard.reservationNeededMessage": "고객등록 신청 필요",
+    "dashboard.reservationNoticeCheckMessage": "필독사항 확인하기",
+    "dashboard.noDateInfo": "날짜 정보 없음",
     "dashboard.memberStatus": {
-      "approved": "인증멤버",
-      "pending": "검토 중",
-      "rejected": "거절됨",
-      "none": "미신청"
+      approved: "인증멤버",
+      pending: "검토 중",
+      rejected: "거절됨",
+      none: "미신청",
     },
-    
+    "dashboard.kycStatus": {
+      approved: "승인됨",
+      pending: "검토중",
+      rejected: "거절됨",
+    },
+    "dashboard.reservationStatus": {
+      approved: "확정",
+      payment_confirmed: "입금확인중",
+      payment_required: "입금대기",
+      rejected: "거절",
+      waiting: "대기",
+    },
+    "dashboard.gender": {
+      male: "남성",
+      female: "여성",
+      other: "기타",
+    },
+    "dashboard.ageGroup": {
+      "10s": "10대",
+      "20s": "20대", 
+      "30s": "30대",
+      "40s": "40대",
+      "50s": "50대",
+      "60s+": "60대 이상",
+    },
+
     // Common
     "common.loading": "로딩중...",
     "common.error": "오류",
@@ -267,7 +345,21 @@ const translations = {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("ko");
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("language");
+      return (saved as Language) || "ko";
+    }
+    return "ko";
+  });
+
+  // Save language to localStorage when it changes
+  const handleSetLanguage = (newLanguage: Language) => {
+    setLanguage(newLanguage);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("language", newLanguage);
+    }
+  };
 
   const t = (key: string, params?: Record<string, string | number>): string => {
     let translation =
@@ -286,7 +378,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

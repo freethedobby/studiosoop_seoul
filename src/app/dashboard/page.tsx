@@ -265,7 +265,7 @@ export default function DashboardPage() {
             console.log("대시보드 - 사용자 이메일이 없음");
             return;
           }
-          
+
           console.log(
             "대시보드 - KYC 데이터 조회 시작 (kyc 컬렉션):",
             user.email
@@ -468,17 +468,19 @@ export default function DashboardPage() {
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
           <div className="mb-8 text-center">
-            <h2 className="text-gray-900 mb-2 text-2xl font-light">{t("dashboard.title")}</h2>
-            <p className="text-gray-600">
-              {t("dashboard.subtitle")}
-            </p>
+            <h2 className="text-gray-900 mb-2 text-2xl font-light">
+              {t("dashboard.title")}
+            </h2>
+            <p className="text-gray-600">{t("dashboard.subtitle")}</p>
           </div>
 
           <div className="space-y-6">
             {/* User Info Card */}
             <div className="shadow-sm hover:shadow-md rounded-2xl border border-border bg-card p-6 transition-all duration-300">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">{t("dashboard.basicInfo")}</h3>
+                <h3 className="text-lg font-semibold">
+                  {t("dashboard.basicInfo")}
+                </h3>
                 <MembershipBadge
                   kycStatus={user.kycStatus || "none"}
                   treatmentDone={user.treatmentDone || false}
@@ -497,7 +499,9 @@ export default function DashboardPage() {
                 </div>
                 {user.kycStatus === "rejected" && user.rejectReason && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t("dashboard.rejectReason")}</span>
+                    <span className="text-gray-600">
+                      {t("dashboard.rejectReason")}
+                    </span>
                     <span className="text-red-600 font-medium">
                       {user.rejectReason}
                     </span>
@@ -566,8 +570,8 @@ export default function DashboardPage() {
 
                     <p className="text-gray-600 text-sm">
                       {kycData
-                        ? "고객등록 신청이 완료되었습니다."
-                        : "고객등록 신청을 완료하면 예약이 가능합니다."}
+                        ? t("dashboard.kycCompletedMessage")
+                        : t("dashboard.kycRequiredMessage")}
                     </p>
 
                     {kycData ? (
@@ -590,11 +594,7 @@ export default function DashboardPage() {
                                 : "bg-yellow-100 text-yellow-800 border-yellow-300"
                             }`}
                           >
-                            {kycData.status === "approved"
-                              ? "승인됨"
-                              : kycData.status === "rejected"
-                              ? "거절됨"
-                              : "검토중"}
+                            {t(`dashboard.kycStatus.${kycData.status}`)}
                           </Badge>
                         </div>
 
@@ -666,8 +666,8 @@ export default function DashboardPage() {
                           disabled={user.kycStatus === "pending"}
                         >
                           {user.kycStatus === "pending"
-                            ? "확인중"
-                            : "고객등록 신청하기"}
+                            ? t("dashboard.kycChecking")
+                            : t("dashboard.kycApply")}
                         </Button>
                       </Link>
                     )}
@@ -685,14 +685,14 @@ export default function DashboardPage() {
                 </div>
                 <p className="text-gray-600 mb-4 text-sm">
                   {isLocked
-                    ? "고객등록 신청 후 예약이 가능합니다."
+                    ? t("dashboard.reservationRequiredMessage")
                     : user.kycStatus === "approved" && !user.noticeConfirmed
-                    ? "필독사항 확인 후 예약이 가능합니다."
+                    ? t("dashboard.reservationNoticeMessage")
                     : reservation &&
                       reservation.status !== "cancelled" &&
                       reservation.status !== "rejected"
-                    ? "예약이 진행 중입니다."
-                    : "고객 등록 승인 후 예약이 가능합니다."}
+                    ? t("dashboard.reservationInProgressMessage")
+                    : t("dashboard.reservationAvailableMessage")}
                 </p>
 
                 {user.kycStatus === "approved" && !user.noticeConfirmed && (
@@ -785,15 +785,7 @@ export default function DashboardPage() {
                                 : "outline"
                             }
                           >
-                            {reservation.status === "approved"
-                              ? "확정"
-                              : reservation.status === "payment_confirmed"
-                              ? "입금확인중"
-                              : reservation.status === "payment_required"
-                              ? "입금대기"
-                              : reservation.status === "rejected"
-                              ? "거절"
-                              : "대기"}
+                            {t(`dashboard.reservationStatus.${reservation.status}`)}
                           </Badge>
                           <div className="text-gray-400 group-hover:text-gray-600 transition-colors">
                             <svg
@@ -1149,12 +1141,12 @@ export default function DashboardPage() {
                     onClick={handleReservationClick}
                   >
                     {isLocked
-                      ? "고객등록 신청 필요"
+                      ? t("dashboard.reservationNeededMessage")
                       : user.kycStatus === "approved" && !user.noticeConfirmed
-                      ? "필독사항 확인하기"
+                      ? t("dashboard.reservationNoticeCheckMessage")
                       : user.kycStatus === "approved"
-                      ? "예약하기"
-                      : "승인 대기 중"}
+                      ? t("dashboard.reservationBook")
+                      : t("dashboard.reservationWaiting")}
                   </Button>
                 )}
               </div>
@@ -1195,7 +1187,7 @@ export default function DashboardPage() {
           <DialogHeader>
             <DialogTitle>신청 내용 확인</DialogTitle>
           </DialogHeader>
-          {kycData && <KYCDataViewer kycData={kycData} />}
+          {kycData && <KYCDataViewer kycData={kycData} t={t} />}
         </DialogContent>
       </Dialog>
 
@@ -1205,37 +1197,13 @@ export default function DashboardPage() {
 }
 
 // KYC 데이터 뷰어 컴포넌트
-function KYCDataViewer({ kycData }: { kycData: KYCData }) {
+function KYCDataViewer({ kycData, t }: { kycData: KYCData; t: (key: string) => string }) {
   const getGenderText = (gender: string) => {
-    switch (gender) {
-      case "male":
-        return "남성";
-      case "female":
-        return "여성";
-      case "other":
-        return "기타";
-      default:
-        return gender;
-    }
+    return t(`dashboard.gender.${gender}`) || gender;
   };
 
   const getAgeGroupText = (ageGroup: string) => {
-    switch (ageGroup) {
-      case "10s":
-        return "10대";
-      case "20s":
-        return "20대";
-      case "30s":
-        return "30대";
-      case "40s":
-        return "40대";
-      case "50s":
-        return "50대";
-      case "60s+":
-        return "60대 이상";
-      default:
-        return ageGroup;
-    }
+    return t(`dashboard.ageGroup.${ageGroup}`) || ageGroup;
   };
 
   return (
@@ -1375,7 +1343,7 @@ function KYCDataViewer({ kycData }: { kycData: KYCData }) {
               </label>
               <p className="text-gray-900 text-base">
                 {kycData.submittedAt?.toDate?.()?.toLocaleDateString() ||
-                  "날짜 정보 없음"}
+                  t("dashboard.noDateInfo")}
               </p>
             </div>
             <div className="space-y-1">
