@@ -396,6 +396,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         key as keyof (typeof translations)[typeof language]
       ] || key;
 
+    // Ensure translation is a string before interpolation
+    if (typeof translation !== 'string') {
+      return String(translation);
+    }
+
     // Handle string interpolation
     if (params) {
       Object.entries(params).forEach(([paramKey, value]) => {
