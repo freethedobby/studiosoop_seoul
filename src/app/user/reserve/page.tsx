@@ -990,7 +990,7 @@ export default function UserReservePage() {
                               예약금
                             </span>
                             <span className="text-gray-900 text-xl font-bold">
-                              200,000원
+                              50,000원
                             </span>
                           </div>
                           <div className="bg-gray-50 rounded-md p-3">
@@ -998,10 +998,10 @@ export default function UserReservePage() {
                               입금 계좌 정보
                             </div>
                             <div className="text-gray-800 font-mono text-sm">
-                              100107985905
+                              1005-604-420605
                             </div>
                             <div className="text-gray-500 text-xs">
-                              예금주: 정아인 (케이뱅크)
+                              예금주: 정아인 (우리은행)
                             </div>
                           </div>
                           <div className="bg-blue-50 border-blue-200 mt-3 rounded-md border p-3">
