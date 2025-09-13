@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['natureseoul.com', 'www.natureseoul.com'],
+    domains: ['studiosoopseoul.com', 'www.studiosoopseoul.com'],
   },
   async headers() {
     return [

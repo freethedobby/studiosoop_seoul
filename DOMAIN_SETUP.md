@@ -1,8 +1,8 @@
-# 🌐 natureseoul.com Domain Setup Guide
+# 🌐 studiosoopseoul.com Domain Setup Guide
 
 ## Overview
 
-This guide will help you set up your custom domain `natureseoul.com` with your Vercel deployment.
+This guide will help you set up your custom domain `studiosoopseoul.com` with your Vercel deployment.
 
 ## Step 1: Vercel Dashboard Configuration
 
@@ -12,25 +12,25 @@ This guide will help you set up your custom domain `natureseoul.com` with your V
 2. Select your `nature_seoul` project
 3. Go to **Settings** → **Domains**
 4. Click **"Add Domain"**
-5. Enter `natureseoul.com`
+5. Enter `studiosoopseoul.com`
 6. Click **"Add"**
 
 ### 1.2 Configure Domain Settings
 
-- **Primary Domain**: Set `natureseoul.com` as your primary domain
-- **Redirects**: Enable automatic redirect from `www.natureseoul.com` to `natureseoul.com`
+- **Primary Domain**: Set `studiosoopseoul.com` as your primary domain
+- **Redirects**: Enable automatic redirect from `www.studiosoopseoul.com` to `studiosoopseoul.com`
 
 ## Step 2: DNS Configuration
 
 ### 2.1 Where to Configure DNS
 
-- Go to your domain registrar (where you purchased natureseoul.com)
+- Go to your domain registrar (where you purchased studiosoopseoul.com)
 - Find the DNS management section
 - Add the following records:
 
 ### 2.2 Required DNS Records
 
-#### For Root Domain (natureseoul.com)
+#### For Root Domain (studiosoopseoul.com)
 
 ```
 Type: A
@@ -39,7 +39,7 @@ Value: 76.76.19.36
 TTL: 3600 (or default)
 ```
 
-#### For www Subdomain (www.natureseoul.com)
+#### For www Subdomain (www.studiosoopseoul.com)
 
 ```
 Type: CNAME
@@ -74,7 +74,7 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 
 # Admin Configuration
-ADMIN_EMAILS=admin1@natureseoul.com,admin2@natureseoul.com
+ADMIN_EMAILS=admin1@studiosoopseoul.com,admin2@studiosoopseoul.com
 ```
 
 ## Step 4: SSL Certificate
@@ -94,7 +94,7 @@ ADMIN_EMAILS=admin1@natureseoul.com,admin2@natureseoul.com
 
 ### 5.1 Basic Functionality
 
-1. Visit `https://natureseoul.com`
+1. Visit `https://studiosoopseoul.com`
 2. Test all main features:
    - User registration/login
    - KYC submission
@@ -115,17 +115,17 @@ Update your `src/app/layout.tsx` with proper meta tags:
 
 ```tsx
 export const metadata = {
-  title: "Nature Seoul - 당신의 눈썹을 더 아름답게",
+  title: "Studio Soop Seoul - 당신의 눈썹을 더 아름답게",
   description: "개인 맞춤형 디자인으로 당신만의 완벽한 눈썹을 만들어드립니다.",
-  keywords: "눈썹, 반영구, 서울, 용산, nature seoul",
+  keywords: "눈썹, 반영구, 서울, 용산, studio soop seoul",
   openGraph: {
-    title: "Nature Seoul",
+    title: "Studio Soop Seoul",
     description: "당신의 눈썹을 더 아름답게",
-    url: "https://natureseoul.com",
-    siteName: "Nature Seoul",
+    url: "https://studiosoopseoul.com",
+    siteName: "Studio Soop Seoul",
     images: [
       {
-        url: "https://natureseoul.com/og-image.jpg",
+        url: "https://studiosoopseoul.com/og-image.jpg",
         width: 1200,
         height: 630,
       },

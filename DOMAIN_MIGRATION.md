@@ -1,12 +1,12 @@
-# 🌐 Domain Migration Guide: natureseoul.com
+# 🌐 Domain Migration Guide: studiosoopseoul.com
 
 ## Overview
 
-This guide covers all the configurations needed to migrate your application from the Vercel preview domain to your custom domain `natureseoul.com`.
+This guide covers all the configurations needed to migrate your application from the Vercel preview domain to your custom domain `studiosoopseoul.com`.
 
 ## ✅ Domain Status
 
-- ✅ Domain: natureseoul.com
+- ✅ Domain: studiosoopseoul.com
 - ✅ Vercel DNS: Configured
 - ✅ SSL Certificate: Active (or pending)
 
@@ -21,8 +21,8 @@ This guide covers all the configurations needed to migrate your application from
 3. Go to **Authentication** → **Settings** → **Authorized domains**
 4. Add these domains:
    ```
-   natureseoul.com
-   www.natureseoul.com
+   studiosoopseoul.com
+   www.studiosoopseoul.com
    ```
 5. Remove any old Vercel preview domains if no longer needed
 
@@ -34,15 +34,15 @@ This guide covers all the configurations needed to migrate your application from
 4. Find your OAuth 2.0 Client ID
 5. Add to **Authorized JavaScript origins**:
    ```
-   https://natureseoul.com
-   https://www.natureseoul.com
+   https://studiosoopseoul.com
+   https://www.studiosoopseoul.com
    ```
 6. Add to **Authorized redirect URIs**:
    ```
-   https://natureseoul.com
-   https://natureseoul.com/
-   https://www.natureseoul.com
-   https://www.natureseoul.com/
+   https://studiosoopseoul.com
+   https://studiosoopseoul.com/
+   https://www.studiosoopseoul.com
+   https://www.studiosoopseoul.com/
    ```
 
 ### 2. Vercel Environment Variables
@@ -61,10 +61,10 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 
 # Admin Configuration
-ADMIN_EMAILS=admin@natureseoul.com,your_admin_emails
+ADMIN_EMAILS=admin@studiosoopseoul.com,your_admin_emails
 
 # Domain Configuration
-NEXT_PUBLIC_SITE_URL=https://natureseoul.com
+NEXT_PUBLIC_SITE_URL=https://studiosoopseoul.com
 ```
 
 ### 3. Email Configuration
@@ -78,13 +78,13 @@ If you're using email notifications, update all email templates to use the new d
 https://your-vercel-domain.vercel.app
 
 // To:
-https://natureseoul.com
+https://studiosoopseoul.com
 ```
 
 #### 3.2 Email Provider Configuration
 
 - Update any email service configurations
-- Update sender addresses to use @natureseoul.com domain
+- Update sender addresses to use @studiosoopseoul.com domain
 - Update webhook URLs if using email webhooks
 
 ### 4. Third-Party Services
@@ -99,7 +99,7 @@ https://natureseoul.com
 #### 4.2 Google Search Console
 
 1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Add new property: `https://natureseoul.com`
+2. Add new property: `https://studiosoopseoul.com`
 3. Verify ownership
 4. Submit sitemap
 
@@ -118,7 +118,7 @@ Search your codebase for any hardcoded URLs and update them:
 const baseUrl = "https://your-vercel-domain.vercel.app";
 
 // New
-const baseUrl = "https://natureseoul.com";
+const baseUrl = "https://studiosoopseoul.com";
 ```
 
 #### 5.2 Update API Routes
@@ -138,10 +138,10 @@ Ensure all API routes work with the new domain:
 
 Already configured in `src/app/layout.tsx`:
 
-- ✅ Title: "Nature Seoul - 당신의 눈썹을 더 아름답게"
+- ✅ Title: "Studio Soop Seoul - 당신의 눈썹을 더 아름답게"
 - ✅ Description: Updated for new domain
-- ✅ Open Graph: Configured for natureseoul.com
-- ✅ Canonical URLs: Set to natureseoul.com
+- ✅ Open Graph: Configured for studiosoopseoul.com
+- ✅ Canonical URLs: Set to studiosoopseoul.com
 
 #### 6.2 Sitemap
 
@@ -157,7 +157,7 @@ Update CSP headers if you have any to include new domain:
 // In next.config.ts or vercel.json
 {
   "key": "Content-Security-Policy",
-  "value": "default-src 'self' https://natureseoul.com"
+  "value": "default-src 'self' https://studiosoopseoul.com"
 }
 ```
 
@@ -190,7 +190,7 @@ Update CSP headers if you have any to include new domain:
 
 #### 9.1 Uptime Monitoring
 
-- Set up monitoring for natureseoul.com
+- Set up monitoring for studiosoopseoul.com
 - Monitor response times
 - Set up alerts for downtime
 
@@ -217,7 +217,7 @@ Update CSP headers if you have any to include new domain:
 
 ### Step 1: Update Firebase
 
-1. Add natureseoul.com to authorized domains
+1. Add studiosoopseoul.com to authorized domains
 2. Update Google OAuth settings
 3. Test authentication
 
@@ -297,4 +297,4 @@ If you encounter issues:
 - [ ] Monitoring set up
 - [ ] Backup plan in place
 
-**Your natureseoul.com domain is now ready for production!** 🌐✨
+**Your studiosoopseoul.com domain is now ready for production!** 🌐✨

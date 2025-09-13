@@ -2,7 +2,7 @@
 
 ## ✅ Your Application is Ready!
 
-The time scheduling application is **live** at **https://natureseoul.com**!
+The time scheduling application is **live** at **https://studiosoopseoul.com**!
 
 ## 🎯 What You Have
 
@@ -81,11 +81,11 @@ npm run lint
 
 ## 🌐 Access Your Application
 
-- **Main Site**: https://natureseoul.com
-- **Login**: https://natureseoul.com/login
-- **Dashboard**: https://natureseoul.com/dashboard
-- **Admin**: https://natureseoul.com/admin
-- **KYC Form**: https://natureseoul.com/kyc
+- **Main Site**: https://studiosoopseoul.com
+- **Login**: https://studiosoopseoul.com/login
+- **Dashboard**: https://studiosoopseoul.com/dashboard
+- **Admin**: https://studiosoopseoul.com/admin
+- **KYC Form**: https://studiosoopseoul.com/kyc
 
 ## 🎨 Design Features
 

@@ -107,7 +107,7 @@ export default function LoginPage() {
             <div className="mb-8 text-center">
               <h1 className="mb-2 text-2xl font-bold">로그인</h1>
               <p className="text-gray-600">
-                nature.seoul의 서비스를 이용하시려면 로그인해주세요.
+                studiosoop.seoul의 서비스를 이용하시려면 로그인해주세요.
               </p>
             </div>
 

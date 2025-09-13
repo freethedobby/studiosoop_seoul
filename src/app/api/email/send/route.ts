@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
                 문의사항이 있으시면 언제든 연락주세요.
               </p>
               <p style="font-size: 14px; color: #666; margin: 0;">
-                📧 이메일: info@natureseoul.com<br>
+                📧 이메일: info@studiosoopseoul.com<br>
                 📞 전화: 02-1234-5678
               </p>
             </div>
@@ -207,7 +207,7 @@ export async function POST(request: NextRequest) {
                 문의사항이 있으시면 언제든 연락주세요.
               </p>
               <p style="font-size: 14px; color: #666; margin: 0;">
-                📧 이메일: info@natureseoul.com<br>
+                📧 이메일: info@studiosoopseoul.com<br>
                 📞 전화: 02-1234-5678
               </p>
             </div>

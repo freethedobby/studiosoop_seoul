@@ -339,7 +339,7 @@ export default function AdminDashboard() {
       <div className="container mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            {/* Nature Seoul Logo */}
+            {/* Studio Soop Seoul Logo */}
             <div className="flex items-center gap-3">
               <div className="flex flex-col">
                 <h1 className="text-black text-xl font-light tracking-wide">

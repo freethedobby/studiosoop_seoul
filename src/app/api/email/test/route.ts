@@ -101,29 +101,29 @@ async function sendWithGmail(to: string, testType: string) {
 function getEmailContent(testType: string) {
   if (testType === "kyc") {
     return {
-      subject: "🎉 KYC 승인 완료 - Nature Seoul",
+      subject: "🎉 KYC 승인 완료 - Studio Soop Seoul",
       text: `안녕하세요!
 
 축하합니다! 귀하의 KYC(고객확인)가 성공적으로 승인되었습니다.
 
-이제 Nature Seoul의 모든 서비스를 이용하실 수 있습니다.
+이제 Studio Soop Seoul의 모든 서비스를 이용하실 수 있습니다.
 
 감사합니다.
-Nature Seoul 팀`,
+Studio Soop Seoul 팀`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #28a745;">🎉 KYC 승인 완료</h2>
           <p>안녕하세요!</p>
           <p>축하합니다! 귀하의 KYC(고객확인)가 성공적으로 승인되었습니다.</p>
-          <p>이제 Nature Seoul의 모든 서비스를 이용하실 수 있습니다.</p>
+          <p>이제 Studio Soop Seoul의 모든 서비스를 이용하실 수 있습니다.</p>
           <hr style="margin: 20px 0;">
-          <p style="color: #666;">감사합니다.<br>Nature Seoul 팀</p>
+          <p style="color: #666;">감사합니다.<br>Studio Soop Seoul 팀</p>
         </div>
       `,
     };
   } else {
     return {
-      subject: "❌ KYC 반려 안내 - Nature Seoul",
+      subject: "❌ KYC 반려 안내 - Studio Soop Seoul",
       text: `안녕하세요!
 
 죄송합니다. 귀하의 KYC(고객확인) 신청이 반려되었습니다.
@@ -138,7 +138,7 @@ Nature Seoul 팀`,
 문의사항이 있으시면 언제든 연락주세요.
 
 감사합니다.
-Nature Seoul 팀`,
+Studio Soop Seoul 팀`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #dc3545;">❌ KYC 반려 안내</h2>
@@ -153,7 +153,7 @@ Nature Seoul 팀`,
           </ul>
           <p>문의사항이 있으시면 언제든 연락주세요.</p>
           <hr style="margin: 20px 0;">
-          <p style="color: #666;">감사합니다.<br>Nature Seoul 팀</p>
+          <p style="color: #666;">감사합니다.<br>Studio Soop Seoul 팀</p>
         </div>
       `,
     };
