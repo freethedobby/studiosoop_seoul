@@ -234,6 +234,7 @@ const translations = {
     "kyc.nameGenderAge": "Name/Gender/Age Group",
     "kyc.namePlaceholder": "Please enter your name",
     "kyc.genderSelection": "Please select gender",
+    "kyc.ageGroup": "Age Group",
     "kyc.ageGroupSelection": "Please select age group",
     "kyc.permanentExperience": "Permanent Makeup Experience",
     "kyc.permanentExperienceSelection":
@@ -276,7 +277,7 @@ const translations = {
       waiting: "Waiting",
     },
     "dashboard.gender.male": "Male",
-    "dashboard.gender.female": "Female", 
+    "dashboard.gender.female": "Female",
     "dashboard.gender.other": "Other",
     "dashboard.ageGroup.10s": "10s",
     "dashboard.ageGroup.20s": "20s",
