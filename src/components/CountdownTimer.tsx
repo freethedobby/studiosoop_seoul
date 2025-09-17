@@ -350,9 +350,7 @@ export default function CountdownTimer({
             isCritical ? "text-red-600" : "text-yellow-600"
           }`}
         >
-          {isCritical
-            ? t("common.urgent")
-            : t("common.timeRunningOut")}
+          {isCritical ? t("common.urgent") : t("common.timeRunningOut")}
         </p>
       )}
 

@@ -329,7 +329,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         {/* 1. 희망 시술 항목 */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">1. {t("kyc.desiredServices")}</CardTitle>
+            <CardTitle className="text-lg">
+              1. {t("kyc.desiredServices")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -354,7 +356,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         {/* 2. 성함 / 성별 / 연령대 */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">2. {t("kyc.nameGenderAge")}</CardTitle>
+            <CardTitle className="text-lg">
+              2. {t("kyc.nameGenderAge")}
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -459,7 +463,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="yes" id="hasExperience" />
-                  <Label htmlFor="hasExperience">{t("kyc.treatment.yes")}</Label>
+                  <Label htmlFor="hasExperience">
+                    {t("kyc.treatment.yes")}
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="no" id="noExperience" />
@@ -475,7 +481,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
 
             {hasPermanentExperience === "yes" && (
               <div>
-                <Label htmlFor="lastPermanentDate">{t("kyc.lastPermanentDate")}</Label>
+                <Label htmlFor="lastPermanentDate">
+                  {t("kyc.lastPermanentDate")}
+                </Label>
                 <Input
                   id="lastPermanentDate"
                   type="date"
@@ -556,7 +564,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         {/* 4. 예약 경로 */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">4. {t("kyc.reservationRoute")}</CardTitle>
+            <CardTitle className="text-lg">
+              4. {t("kyc.reservationRoute")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -581,7 +591,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         {/* 5. 필독사항 동의 */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">5. 필독사항 동의</CardTitle>
+            <CardTitle className="text-lg">5. {t("kyc.termsAgreementTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -594,7 +604,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                   }
                 />
                 <Label htmlFor="termsAgreed" className="text-sm">
-                  필독사항을 모두 확인하고 동의합니다
+                  {t("kyc.termsAgreementText")}
                 </Label>
                 <Button
                   type="button"
@@ -604,7 +614,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                   className="ml-2"
                 >
                   <Eye className="mr-1 h-4 w-4" />
-                  필독사항 읽기
+                  {t("kyc.termsReadButton")}
                 </Button>
               </div>
               {errors.termsAgreed && (
