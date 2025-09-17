@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 type Language = "en" | "ko";
 
@@ -8,6 +8,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  isHydrated: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -1032,13 +1033,20 @@ By proceeding with treatment, you acknowledge that you have read, understood, an
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
+  // Always start with "ko" to ensure server/client consistency
+  const [language, setLanguage] = useState<Language>("ko");
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Handle client-side hydration
+  useEffect(() => {
+    setIsHydrated(true);
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("language");
-      return (saved as Language) || "ko";
+      if (saved && (saved === "en" || saved === "ko")) {
+        setLanguage(saved as Language);
+      }
     }
-    return "ko";
-  });
+  }, []);
 
   // Save language to localStorage when it changes
   const handleSetLanguage = (newLanguage: Language) => {
@@ -1073,7 +1081,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <LanguageContext.Provider
-      value={{ language, setLanguage: handleSetLanguage, t }}
+      value={{ language, setLanguage: handleSetLanguage, t, isHydrated }}
     >
       {children}
     </LanguageContext.Provider>
