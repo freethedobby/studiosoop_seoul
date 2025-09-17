@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SoopTermsModalProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ export default function SoopTermsModal({
   isOpen,
   onClose,
 }: SoopTermsModalProps) {
+  const { t } = useLanguage();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 8;
 
@@ -32,61 +34,15 @@ export default function SoopTermsModal({
 
   const termsContent = [
     {
-      title: "1. 시술 전 주의사항 및 준비사항",
-      content: `【시술 전 24시간 주의사항】
-• 알코올 섭취 절대 금지 (혈액순환 촉진으로 출혈 위험)
-• 아스피린, 이부프로펜 등 혈액응고 방해 약물 복용 금지
-• 비타민E, 은행잎 추출물 등 혈액순환 촉진 보조제 복용 금지
-• 카페인 섭취 최소화 (과도한 섭취 시 떨림 현상 발생 가능)
-
-【시술 당일 준비사항】
-• 충분한 수면 취하기 (최소 6시간 이상)
-• 가벼운 식사 후 방문 (공복 상태 피하기)
-• 편안한 복장 착용 (목 부분이 넉넉한 옷)
-• 시술 부위 화장 완전 제거
-• 스트레스 해소 및 안정된 마음가짐
-
-【사전 상담 필수 대상】
-• 임신 중이거나 수유 중인 경우
-• 임신 계획이 있는 경우
-• 심장질환, 당뇨, 고혈압 등 만성질환자
-• 혈액응고장애가 있는 경우
-• 면역력이 저하된 상태
-• 시술 부위에 염증이나 상처가 있는 경우
-• 과거 반영구 시술에서 부작용이 있었던 경우
-• 알레르기 체질이거나 특이 체질인 경우`,
+      title: t("terms.page1.title"),
+      content: t("terms.page1.content"),
     },
     {
-      title: "2. 시술 과정 및 소요시간 상세 안내",
-      content: `【1단계: 상담 및 디자인 결정 (30-40분)】
-• 개인별 얼굴형, 눈 모양, 피부톤 분석
-• 원하는 스타일과 자연스러운 디자인 상담
-• 시술 후 예상 결과 설명 및 사진 자료 제공
-• 개인별 맞춤 디자인 그리기 및 확인
-• 시술 과정 및 주의사항 상세 설명
-
-【2단계: 마취 및 디자인 그리기 (20-30분)】
-• 시술 부위 소독 및 마취제 도포
-• 마취 효과 확인 (통증 테스트)
-• 최종 디자인 그리기 및 고객 재확인
-• 시술 도구 준비 및 소독
-
-【3단계: 반영구 시술 진행 (60-120분)】
-• 1차 시술: 기본 라인 작업 (30-40분)
-• 2차 시술: 색상 작업 및 채색 (30-40분)
-• 3차 시술: 마무리 작업 및 디테일 보완 (20-30분)
-• 중간 중간 고객 상태 확인 및 휴식 제공
-
-【4단계: 마무리 및 관리법 안내 (10-15분)】
-• 시술 부위 소독 및 연고 도포
-• 상세한 시술 후 관리법 설명
-• 약물 사용법 및 주의사항 안내
-• 재방문 일정 및 후속 관리 계획 수립
-
-【총 소요시간: 약 2-3시간 (개인차 있음)】`,
+      title: t("terms.page2.title"),
+      content: t("terms.page2.content"),
     },
     {
-      title: "3. 시술 후 관리법 상세 가이드",
+      title: t("terms.page3.title") || "3. 시술 후 관리법 상세 가이드",
       content: `【시술 직후 즉시 관리 (0-3시간)】
 • 시술 부위를 절대 만지거나 긁지 말 것
 • 얼음팩으로 부종 완화 (5분씩 간헐적으로)
@@ -312,7 +268,7 @@ export default function SoopTermsModal({
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-hidden">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-bold">
-            필독사항
+            {t("terms.title")}
           </DialogTitle>
         </DialogHeader>
 
@@ -357,7 +313,7 @@ export default function SoopTermsModal({
         {/* 닫기 버튼 */}
         <div className="flex justify-center pt-4">
           <Button onClick={onClose} className="w-32">
-            닫기
+            {t("terms.close")}
           </Button>
         </div>
       </DialogContent>
