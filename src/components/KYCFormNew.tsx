@@ -638,10 +638,10 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
             {isSubmitting ? (
               <>
                 <Loader2 className="animate-spin mr-2 h-4 w-4" />
-                제출 중...
+                {t("kyc.submitting")}
               </>
             ) : (
-              "신청하기"
+              {t("kyc.apply")}
             )}
           </Button>
         </div>

@@ -250,6 +250,8 @@ const translations = {
     "kyc.treatment.yes": "Yes",
     "kyc.treatment.no": "No",
     "kyc.reservationRouteExample": "Ex: Instagram ad, referral, etc.",
+    "kyc.apply": "Apply",
+    "kyc.submitting": "Submitting...",
     "terms.title": "Terms and Conditions",
     "terms.close": "Close",
     "terms.page1.title": "1. Precautions and Preparations Before Treatment",
@@ -302,6 +304,161 @@ const translations = {
 • Follow-up visit schedule and subsequent management planning
 
 【Total Duration: Approximately 2-3 hours (varies by individual)】`,
+    "terms.page3.title": "3. Post-Treatment Care Detailed Guide",
+    "terms.page3.content": `【Immediate Post-Treatment Care (0-3 hours)】
+• Do not touch or scratch the treatment area
+• Use ice pack to reduce swelling (5 minutes intermittently)
+• Apply prescribed ointment thinly (3-4 times a day)
+• Avoid excessive movement or talking
+
+【First 24 Hours】
+• Keep the treatment area clean and dry
+• Apply ointment as directed by the specialist
+• Avoid hot water, sauna, or excessive sweating
+• Sleep with head elevated to reduce swelling
+
+【First Week (Days 1-7)】
+• Continue ointment application as prescribed
+• Avoid makeup on the treatment area
+• Do not pick at scabs or peeling skin
+• Avoid direct sunlight and wear sunglasses
+• Gentle cleansing with recommended products only
+
+【Second Week (Days 8-14)】
+• Scabbing and peeling may occur (normal process)
+• Continue gentle care and ointment application
+• Avoid swimming, sauna, or hot tubs
+• Use sunscreen if going outside
+
+【Long-term Care (After 2 weeks)】
+• Complete healing takes 4-6 weeks
+• Avoid excessive sun exposure
+• Use gentle skincare products
+• Follow up appointments as scheduled`,
+    "terms.page4.title": "4. Possible Side Effects and Precautions",
+    "terms.page4.content": `【Common Temporary Side Effects】
+• Swelling and redness (normal for 2-3 days)
+• Mild discomfort or tenderness
+• Scabbing and peeling (healing process)
+• Color may appear darker initially
+
+【Rare Side Effects】
+• Allergic reactions to pigments
+• Infection (if proper care not followed)
+• Uneven color or fading
+• Scarring (very rare)
+
+【When to Contact Us】
+• Severe swelling lasting more than 3 days
+• Signs of infection (pus, excessive redness)
+• Allergic reactions (rash, difficulty breathing)
+• Any concerns about healing process
+
+【Precautions to Avoid】
+• Do not pick at scabs or peeling skin
+• Avoid swimming for 2 weeks
+• No sauna or hot tubs for 2 weeks
+• Avoid excessive sun exposure
+• Do not use harsh skincare products`,
+    "terms.page5.title": "5. Color Fading and Touch-up Information",
+    "terms.page5.content": `【Color Fading Process】
+• Initial color may appear darker (normal)
+• Gradual lightening over 2-4 weeks
+• Final color settles after 4-6 weeks
+• Individual skin type affects color retention
+
+【Factors Affecting Color Retention】
+• Skin type (oily skin fades faster)
+• Sun exposure (UV rays cause fading)
+• Skincare routine (harsh products cause fading)
+• Individual healing process
+• Lifestyle factors (smoking, alcohol)
+
+【Touch-up Schedule】
+• First touch-up: 4-6 weeks after initial treatment
+• Second touch-up: 6-12 months later
+• Annual touch-ups recommended for maintenance
+• Individual needs may vary
+
+【Touch-up Process】
+• Shorter session than initial treatment
+• Focus on areas that need color refresh
+• Same aftercare instructions apply
+• Cost varies based on work needed`,
+    "terms.page6.title": "6. Payment and Cancellation Policy",
+    "terms.page6.content": `【Payment Information】
+• Full payment required before treatment
+• We accept cash, card, and bank transfer
+• No refunds after treatment completion
+• Touch-up sessions charged separately
+
+【Cancellation Policy】
+• Free cancellation up to 24 hours before appointment
+• 50% charge for cancellations within 24 hours
+• No-show appointments charged full amount
+• Rescheduling allowed with 24-hour notice
+
+【Deposit Policy】
+• 50,000 KRW deposit required for booking
+• Deposit applied to total treatment cost
+• Deposit non-refundable for no-shows
+• Deposit transferable to rescheduled appointments
+
+【Refund Policy】
+• No refunds after treatment completion
+• Partial refunds only for medical emergencies
+• Documentation required for medical refunds
+• Refund processing takes 5-7 business days`,
+    "terms.page7.title": "7. Privacy and Personal Information",
+    "terms.page7.content": `【Information Collection】
+• Purpose: Treatment consultation, appointment management, service provision
+• Items: Name, contact information, date of birth, gender, treatment history
+• Retention period: 3 years after treatment completion
+• Third-party sharing: Not provided in principle
+
+【Photo Usage】
+• Before/after photos may be taken for treatment records
+• Photos used only for treatment planning and follow-up
+• Written consent required for promotional use
+• Photos stored securely and deleted after retention period
+
+【Data Protection】
+• Personal information encrypted and stored securely
+• Access limited to authorized personnel only
+• Regular security updates and monitoring
+• Compliance with personal information protection laws
+
+【Your Rights】
+• Right to access your personal information
+• Right to request correction of inaccurate information
+• Right to request deletion of personal information
+• Right to withdraw consent at any time`,
+    "terms.page8.title": "8. Agreement and Consent",
+    "terms.page8.content": `【Treatment Agreement】
+• I understand the treatment process and possible side effects
+• I agree to follow all aftercare instructions provided
+• I understand that results may vary by individual
+• I consent to the treatment being performed
+
+【Risk Acknowledgment】
+• I understand that semi-permanent makeup is a cosmetic procedure
+• I acknowledge that individual results may vary
+• I understand the importance of following aftercare instructions
+• I accept responsibility for my healing process
+
+【Consent to Terms】
+• I have read and understood all terms and conditions
+• I agree to the privacy policy and data collection practices
+• I understand the payment and cancellation policies
+• I consent to treatment based on this agreement
+
+【Contact Information】
+• For questions or concerns, contact us immediately
+• Emergency contact: [Phone number]
+• Business hours: [Hours]
+• Email: [Email address]
+
+By proceeding with treatment, you acknowledge that you have read, understood, and agree to all terms and conditions outlined in this document.`,
     "kyc.photoRequired":
       "Please attach eyebrow photos if you have permanent makeup experience",
     "common.days": "days",
@@ -576,6 +733,8 @@ const translations = {
     "kyc.treatment.yes": "있음",
     "kyc.treatment.no": "없음",
     "kyc.reservationRouteExample": "예: 인스타 광고, 소개 등",
+    "kyc.apply": "신청하기",
+    "kyc.submitting": "제출 중...",
     "terms.title": "필독사항",
     "terms.close": "닫기",
     "terms.page1.title": "1. 시술 전 주의사항 및 준비사항",
@@ -628,6 +787,161 @@ const translations = {
 • 재방문 일정 및 후속 관리 계획 수립
 
 【총 소요시간: 약 2-3시간 (개인차 있음)】`,
+    "terms.page3.title": "3. 시술 후 관리법 상세 가이드",
+    "terms.page3.content": `【시술 직후 즉시 관리 (0-3시간)】
+• 시술 부위를 절대 만지거나 긁지 말 것
+• 얼음팩으로 부종 완화 (5분씩 간헐적으로)
+• 처방된 연고를 얇게 도포 (하루 3-4회)
+• 과도한 움직임이나 말하기 자제
+
+【첫 24시간】
+• 시술 부위를 깨끗하고 건조하게 유지
+• 전문가 지시에 따라 연고 도포
+• 뜨거운 물, 사우나, 과도한 땀 흘리기 금지
+• 부종 완화를 위해 머리를 높여서 수면
+
+【첫 주 (1-7일)】
+• 처방된 연고 계속 도포
+• 시술 부위에 화장품 사용 금지
+• 딱지나 각질을 뜯지 말 것
+• 직사광선 피하고 선글라스 착용
+• 권장 제품으로만 부드럽게 세정
+
+【두 번째 주 (8-14일)】
+• 딱지와 각질이 생길 수 있음 (정상 과정)
+• 부드러운 관리와 연고 도포 계속
+• 수영, 사우나, 온천 금지
+• 외출 시 자외선 차단제 사용
+
+【장기 관리 (2주 후)】
+• 완전한 치유는 4-6주 소요
+• 과도한 햇볕 노출 피하기
+• 부드러운 스킨케어 제품 사용
+• 예정된 후속 방문 지키기`,
+    "terms.page4.title": "4. 가능한 부작용 및 주의사항",
+    "terms.page4.content": `【일반적인 일시적 부작용】
+• 부종과 발적 (2-3일간 정상)
+• 가벼운 불편감이나 통증
+• 딱지와 각질 (치유 과정)
+• 초기에는 색상이 더 진하게 보일 수 있음
+
+【드문 부작용】
+• 색소에 대한 알레르기 반응
+• 감염 (적절한 관리 미이행 시)
+• 색상 불균일 또는 퇴색
+• 흉터 (매우 드뭄)
+
+【연락해야 할 경우】
+• 3일 이상 지속되는 심한 부종
+• 감염 징후 (고름, 과도한 발적)
+• 알레르기 반응 (발진, 호흡곤란)
+• 치유 과정에 대한 우려사항
+
+【피해야 할 주의사항】
+• 딱지나 각질을 뜯지 말 것
+• 2주간 수영 금지
+• 2주간 사우나나 온천 금지
+• 과도한 햇볕 노출 피하기
+• 거친 스킨케어 제품 사용 금지`,
+    "terms.page5.title": "5. 색상 퇴색 및 터치업 정보",
+    "terms.page5.content": `【색상 퇴색 과정】
+• 초기 색상이 더 진하게 보일 수 있음 (정상)
+• 2-4주에 걸쳐 점진적으로 밝아짐
+• 4-6주 후 최종 색상으로 안정화
+• 개인 피부 타입이 색상 지속에 영향
+
+【색상 지속에 영향을 주는 요인】
+• 피부 타입 (지성 피부는 더 빨리 퇴색)
+• 햇볕 노출 (자외선이 퇴색 원인)
+• 스킨케어 루틴 (거친 제품이 퇴색 원인)
+• 개인 치유 과정
+• 생활습관 (흡연, 음주)
+
+【터치업 일정】
+• 첫 터치업: 초기 시술 후 4-6주
+• 두 번째 터치업: 6-12개월 후
+• 유지 관리를 위해 연간 터치업 권장
+• 개인 필요에 따라 다를 수 있음
+
+【터치업 과정】
+• 초기 시술보다 짧은 세션
+• 색상 보충이 필요한 부위에 집중
+• 동일한 사후 관리 지침 적용
+• 작업량에 따라 비용 차이`,
+    "terms.page6.title": "6. 결제 및 취소 정책",
+    "terms.page6.content": `【결제 정보】
+• 시술 전 전액 결제 필요
+• 현금, 카드, 계좌이체 모두 가능
+• 시술 완료 후 환불 불가
+• 터치업 세션은 별도 요금
+
+【취소 정책】
+• 예약 24시간 전까지 무료 취소
+• 24시간 이내 취소 시 50% 요금
+• 노쇼 시 전액 요금
+• 24시간 전 통보 시 일정 변경 가능
+
+【예약금 정책】
+• 예약 시 5만원 예약금 필요
+• 예약금은 총 시술비에 포함
+• 노쇼 시 예약금 환불 불가
+• 일정 변경 시 예약금 이전 가능
+
+【환불 정책】
+• 시술 완료 후 환불 불가
+• 의료적 응급상황에만 부분 환불
+• 의료 환불 시 서류 제출 필요
+• 환불 처리 5-7 영업일 소요`,
+    "terms.page7.title": "7. 개인정보 보호 및 처리",
+    "terms.page7.content": `【정보 수집】
+• 목적: 시술 상담, 예약 관리, 서비스 제공
+• 항목: 이름, 연락처, 생년월일, 성별, 시술 이력
+• 보유기간: 시술 완료 후 3년간
+• 제3자 제공: 원칙적으로 제공하지 않음
+
+【사진 사용】
+• 시술 기록을 위한 전후 사진 촬영 가능
+• 사진은 시술 계획 및 후속 관리용으로만 사용
+• 홍보용 사용 시 서면 동의 필요
+• 보유기간 후 안전하게 삭제
+
+【데이터 보호】
+• 개인정보 암호화하여 안전하게 저장
+• 승인된 직원만 접근 가능
+• 정기적인 보안 업데이트 및 모니터링
+• 개인정보보호법 준수
+
+【귀하의 권리】
+• 개인정보 열람 권리
+• 잘못된 정보 정정 요청 권리
+• 개인정보 삭제 요청 권리
+• 언제든지 동의 철회 권리`,
+    "terms.page8.title": "8. 동의 및 합의",
+    "terms.page8.content": `【시술 동의】
+• 시술 과정과 가능한 부작용을 이해합니다
+• 제공된 모든 사후 관리 지침을 따를 것에 동의합니다
+• 결과는 개인에 따라 다를 수 있음을 이해합니다
+• 시술 수행에 동의합니다
+
+【위험 인정】
+• 반영구 화장은 미용 시술임을 이해합니다
+• 개인 결과가 다를 수 있음을 인정합니다
+• 사후 관리 지침 준수의 중요성을 이해합니다
+• 치유 과정에 대한 책임을 수용합니다
+
+【약관 동의】
+• 모든 약관을 읽고 이해했습니다
+• 개인정보 처리방침 및 데이터 수집에 동의합니다
+• 결제 및 취소 정책을 이해했습니다
+• 이 합의에 기반하여 시술에 동의합니다
+
+【연락처 정보】
+• 질문이나 우려사항이 있으면 즉시 연락하세요
+• 응급 연락처: [전화번호]
+• 영업시간: [시간]
+• 이메일: [이메일 주소]
+
+시술을 진행함으로써 이 문서에 명시된 모든 약관을 읽고, 이해하며, 동의했음을 인정합니다.`,
     "kyc.photoRequired": "반영구 경험이 있으시면 눈썹 사진을 첨부해주세요",
     "common.days": "일",
     "common.hours": "시간",
