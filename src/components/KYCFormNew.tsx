@@ -209,7 +209,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
 
   const onSubmit = async (data: KYCFormData) => {
     if (!user?.email) {
-      setSubmitError("로그인이 필요합니다.");
+      setSubmitError(t("kyc.loginRequired"));
       return;
     }
 
@@ -217,8 +217,8 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
     setSubmitError(null);
 
     try {
-      console.log("KYC 제출 시작:", { user: user.email, data });
-      console.log("Firebase 연결 상태:", { db, user: user.uid });
+      console.log(t("kyc.submitStart"), { user: user.email, data });
+      console.log(t("kyc.firebaseConnection"), { db, user: user.uid });
 
       // Google Analytics 이벤트
       event({
@@ -263,9 +263,8 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
       await createNotification({
         userId: user.uid,
         type: "kyc_submitted",
-        title: "KYC 신청 완료",
-        message:
-          "고객등록 신청이 완료되었습니다. 검토 후 결과를 알려드리겠습니다.",
+        title: t("kyc.submitComplete"),
+        message: t("kyc.submitCompleteMessage"),
         data: { kycId: user.email },
       });
       console.log("알림 생성 완료");
@@ -290,8 +289,8 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         data: data,
       });
       setSubmitError(
-        `제출 중 오류가 발생했습니다: ${
-          error instanceof Error ? error.message : "알 수 없는 오류"
+        `${t("kyc.submitError")} ${
+          error instanceof Error ? error.message : t("kyc.unknownError")
         }`
       );
     } finally {
@@ -306,11 +305,10 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
           <div className="text-center">
             <CheckCircle className="text-green-600 mx-auto mb-4 h-12 w-12" />
             <h3 className="text-green-800 mb-2 text-lg font-semibold">
-              신청이 완료되었습니다!
+              {t("kyc.applicationSuccess")}
             </h3>
             <p className="text-green-700 text-sm">
-              고객등록 신청이 완료되었습니다. 관리자 검토 후 결과를
-              알려드리겠습니다.
+              {t("kyc.applicationSuccessDesc")}
             </p>
           </div>
         </CardContent>
@@ -641,7 +639,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
                 {t("kyc.submitting")}
               </>
             ) : (
-              {t("kyc.apply")}
+              t("kyc.apply")
             )}
           </Button>
         </div>
