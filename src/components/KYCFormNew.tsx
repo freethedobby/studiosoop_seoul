@@ -413,27 +413,27 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="10s" id="10s" />
-                  <Label htmlFor="10s">{t("kyc.ageGroup.10s")}</Label>
+                  <Label htmlFor="10s">{t("dashboard.ageGroup.10s")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="20s" id="20s" />
-                  <Label htmlFor="20s">{t("kyc.ageGroup.20s")}</Label>
+                  <Label htmlFor="20s">{t("dashboard.ageGroup.20s")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="30s" id="30s" />
-                  <Label htmlFor="30s">{t("kyc.ageGroup.30s")}</Label>
+                  <Label htmlFor="30s">{t("dashboard.ageGroup.30s")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="40s" id="40s" />
-                  <Label htmlFor="40s">{t("kyc.ageGroup.40s")}</Label>
+                  <Label htmlFor="40s">{t("dashboard.ageGroup.40s")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="50s" id="50s" />
-                  <Label htmlFor="50s">{t("kyc.ageGroup.50s")}</Label>
+                  <Label htmlFor="50s">{t("dashboard.ageGroup.50s")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="60s+" id="60s+" />
-                  <Label htmlFor="60s+">{t("kyc.ageGroup.60s")}</Label>
+                  <Label htmlFor="60s+">{t("dashboard.ageGroup.60s")}</Label>
                 </div>
               </RadioGroup>
               {errors.ageGroup && (
@@ -575,7 +575,7 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
               </Label>
               <Input
                 id="reservationSource"
-                placeholder="예: 인스타 광고, 소개 등"
+                placeholder={t("kyc.reservationRouteExample")}
                 {...register("reservationSource")}
                 className={cn(errors.reservationSource && "border-red-500")}
               />
@@ -591,7 +591,9 @@ export default function KYCFormNew({ onSuccess }: KYCFormNewProps) {
         {/* 5. 필독사항 동의 */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">5. {t("kyc.termsAgreementTitle")}</CardTitle>
+            <CardTitle className="text-lg">
+              5. {t("kyc.termsAgreementTitle")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
