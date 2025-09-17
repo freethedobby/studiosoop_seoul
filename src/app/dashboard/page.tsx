@@ -118,13 +118,13 @@ export default function DashboardPage() {
     const seconds = totalSeconds % 60;
 
     if (days > 0) {
-      return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+      return `${days}${t("common.days")} ${hours}${t("common.hours")} ${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
     } else if (hours > 0) {
-      return `${hours}시간 ${minutes}분 ${seconds}초`;
+      return `${hours}${t("common.hours")} ${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
     } else if (minutes > 0) {
-      return `${minutes}분 ${seconds}초`;
+      return `${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
     } else {
-      return `${seconds}초`;
+      return `${seconds}${t("common.seconds")}`;
     }
   };
 

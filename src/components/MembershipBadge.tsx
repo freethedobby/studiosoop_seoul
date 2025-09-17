@@ -10,45 +10,50 @@ import {
 import { HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface MembershipBadgeProps {
   kycStatus: "pending" | "approved" | "rejected" | "none";
   treatmentDone?: boolean;
 }
 
-const MEMBERSHIP_INFO = {
+const createMembershipInfo = (t: (key: string) => string) => ({
   traveler: {
     icon: "🔓",
-    label: "미인증 고객",
-    description: "인증 완료 후 예약이 가능해요.",
+    label: t("membership.unverifiedCustomer"),
+    description: t("membership.verifyDescription"),
     variant: "secondary" as const,
   },
   private: {
     icon: "✅",
-    label: "예약가능 회원",
-    description: "정식 인증을 마친 고객님입니다. 예약 기능이 활성화돼요.",
+    label: t("membership.reservableMember"),
+    description: t("membership.verifiedDescription"),
     variant: "outline" as const,
   },
   signature: {
     icon: "🌟",
-    label: "시그니처 멤버",
-    description: "시술까지 마친 VIP 고객님입니다. 재방문 혜택이 제공돼요.",
+    label: t("membership.signatureMember"),
+    description: t("membership.vipDescription"),
     variant: "default" as const,
   },
-};
+});
 
 export function MembershipBadge({
   kycStatus,
   treatmentDone = false,
 }: MembershipBadgeProps) {
+  const { t } = useLanguage();
+  
+  const membershipInfoMap = createMembershipInfo(t);
+  
   const getMembershipInfo = () => {
     if (treatmentDone && kycStatus === "approved") {
-      return MEMBERSHIP_INFO.signature;
+      return membershipInfoMap.signature;
     }
     if (kycStatus === "approved") {
-      return MEMBERSHIP_INFO.private;
+      return membershipInfoMap.private;
     }
-    return MEMBERSHIP_INFO.traveler;
+    return membershipInfoMap.traveler;
   };
 
   const membershipInfo = getMembershipInfo();
@@ -80,7 +85,7 @@ export function MembershipBadge({
       {(kycStatus === "none" || kycStatus === "rejected") && (
         <Link href="/kyc">
           <Button variant="default" size="sm" className="whitespace-nowrap">
-            인증하기
+            {t("membership.verify")}
           </Button>
         </Link>
       )}
