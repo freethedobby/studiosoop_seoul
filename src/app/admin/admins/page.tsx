@@ -535,7 +535,7 @@ export default function AdminManagement() {
                                 : "bg-gray-100 text-gray-600"
                             }
                           >
-                            {admin.isActive ? "활성" : "비활성"}
+                            {admin.isActive ? t("admin.active") : t("admin.inactive")}
                           </Badge>
 
                           {/* Additional badges */}
