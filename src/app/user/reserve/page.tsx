@@ -484,7 +484,7 @@ export default function UserReservePage() {
     // 이미 활성 예약이 있는지 확인
     if (reservation && reservation.status !== "cancelled") {
       alert(
-        "이미 활성 예약이 있습니다. 기존 예약을 취소한 후 새로운 예약을 진행해주세요."
+        t("reservation.alreadyActiveReservation")
       );
       return;
     }
@@ -617,7 +617,7 @@ export default function UserReservePage() {
   const handleCancel = async () => {
     if (!reservation || !user) return;
 
-    if (!confirm("정말로 예약을 취소하시겠습니까?")) return;
+    if (!confirm(t("reservation.cancelConfirm"))) return;
 
     setCanceling(true);
     try {
@@ -637,13 +637,13 @@ export default function UserReservePage() {
       await createNotification({
         userId: "admin",
         type: "admin_reservation_cancelled",
-        title: "예약 취소",
+        title: t("reservation.cancelTitle"),
         message: `${
           user.displayName || user.email
-        }님이 ${reservationDate} ${reservationTime} 예약을 취소했습니다.`,
+        }{t("reservation.cancelMessage")} ${reservationDate} ${reservationTime}`,
       });
     } catch {
-      alert("예약 취소에 실패했습니다. 다시 시도해주세요.");
+      alert(t("reservation.cancelFailed"));
     } finally {
       setCanceling(false);
     }
@@ -670,7 +670,7 @@ export default function UserReservePage() {
         title: "입금 시간 만료",
         message: `${
           user?.displayName || user?.email
-        }님의 예약이 입금 시간 만료로 자동 취소되었습니다.`,
+        }{t("reservation.autoCancelled")}`,
       });
     } catch (error) {
       console.error("자동 취소 실패:", error);
@@ -700,7 +700,7 @@ export default function UserReservePage() {
     // 이미 활성 예약이 있는지 확인
     if (reservation && reservation.status !== "cancelled") {
       alert(
-        "이미 활성 예약이 있습니다. 기존 예약을 취소한 후 새로운 예약을 진행해주세요."
+        t("reservation.alreadyActiveReservation")
       );
       return;
     }
@@ -827,7 +827,7 @@ export default function UserReservePage() {
               </button>
             </Link>
             <h1 className="text-gray-900 mb-0 font-sans text-2xl font-extrabold tracking-tight sm:text-3xl">
-              예약하기
+              {t("reservation.title")}
             </h1>
           </div>
 
@@ -897,7 +897,7 @@ export default function UserReservePage() {
             </button>
           </Link>
           <h1 className="text-gray-900 mb-0 font-sans text-2xl font-extrabold tracking-tight sm:text-3xl">
-            예약하기
+            {t("reservation.title")}
           </h1>
           <button
             className="bg-green-50 hover:bg-green-100 text-green-700 border-green-200 ml-auto rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200"
@@ -1043,7 +1043,7 @@ export default function UserReservePage() {
                               <span>처리중...</span>
                             </div>
                           ) : (
-                            "입금확인요청"
+                            t("reservation.paymentConfirmationRequired")
                           )}
                         </button>
                       </div>
@@ -1058,7 +1058,7 @@ export default function UserReservePage() {
                         </div>
                         <div>
                           <h3 className="text-gray-800 text-lg font-semibold">
-                            관리자 확인 대기
+                            {t("reservation.adminConfirmationWaiting")}
                           </h3>
                           <p className="text-gray-600 text-sm">
                             입금 확인 요청이 완료되었습니다
@@ -1066,7 +1066,7 @@ export default function UserReservePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-sm">
-                        관리자 확인 후 예약이 확정됩니다
+                        {t("reservation.adminConfirmationDesc")}
                       </p>
                     </div>
                   )}
@@ -1079,10 +1079,10 @@ export default function UserReservePage() {
                         </div>
                         <div>
                           <h3 className="text-green-800 text-lg font-semibold">
-                            예약 확정
+                            {t("reservation.reservationConfirmed")}
                           </h3>
                           <p className="text-green-600 text-sm">
-                            예약이 확정되었습니다
+                            {t("reservation.reservationConfirmedDesc")}
                           </p>
                         </div>
                       </div>
@@ -1096,7 +1096,7 @@ export default function UserReservePage() {
                       onClick={handleCancel}
                       disabled={canceling}
                     >
-                      {canceling ? "취소 중..." : "예약 취소"}
+                      {canceling ? t("reservation.canceling") : t("reservation.cancelReservation")}
                     </button>
                   </div>
                 </div>
@@ -1357,9 +1357,9 @@ export default function UserReservePage() {
                           ? "이미 예약한 시간입니다."
                           : isBookedByOthers
                           ? hasApprovedReservation && !isTimePassed
-                            ? "확정된 예약이 있습니다."
-                            : "다른 사용자가 예약했습니다."
-                          : "예약하기"
+                            ? t("reservation.hasApprovedReservation")
+                            : t("reservation.bookedByOthers")
+                          : t("reservation.makeReservation")
                       }
                     >
                       {slot.start.toLocaleTimeString("ko-KR", {
@@ -1397,7 +1397,7 @@ export default function UserReservePage() {
                             className="bg-gray-100 hover:bg-gray-200 text-gray-700 flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-200"
                             onClick={() => setShowReserveBtn(null)}
                           >
-                            취소
+                            {t("reservation.cancel")}
                           </button>
                         </div>
                       </div>
@@ -1422,14 +1422,14 @@ export default function UserReservePage() {
           >
             <div className="text-center">
               <p className="text-gray-700 mb-3 text-sm font-medium">
-                확정하시겠습니까?
+                {t("reservation.confirmMessage")}
               </p>
               <button
                 className="bg-red-500 hover:bg-red-600 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-all duration-200"
                 onClick={handleConfirmReserve}
                 disabled={reserving}
               >
-                {reserving ? "예약중..." : "확정"}
+                {reserving ? t("reservation.reserving") : t("reservation.confirm")}
               </button>
             </div>
           </div>
