@@ -272,14 +272,13 @@ export default function KYCPage() {
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="text-green-600 h-5 w-5" />
                   <CardTitle className="text-green-800 text-lg">
-                    신청 완료
+                    {t("kyc.applicationCompleted")}
                   </CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-green-700 text-sm">
-                  고객등록 신청이 완료되었습니다. 관리자 검토 후 결과를
-                  알려드리겠습니다.
+                  {t("kyc.applicationCompletedDesc")}
                 </p>
 
                 <div className="flex items-center justify-between">
@@ -304,7 +303,7 @@ export default function KYCPage() {
                     className="text-green-700 border-green-300 hover:bg-green-100"
                   >
                     <Eye className="mr-2 h-4 w-4" />
-                    신청 내용 보기
+                    {t("kyc.viewApplicationContent")}
                   </Button>
                 </div>
               </CardContent>
@@ -355,10 +354,10 @@ export default function KYCPage() {
           <div className="mx-auto max-w-2xl">
             <div className="mb-8 text-center">
               <h2 className="text-gray-900 mb-2 text-2xl font-light">
-                신청 내용 확인
+                {t("kyc.applicationContentTitle")}
               </h2>
               <p className="text-gray-600">
-                제출하신 고객등록 신청 내용을 확인하실 수 있습니다.
+                {t("kyc.applicationContentDesc")}
               </p>
             </div>
 
@@ -376,7 +375,7 @@ export default function KYCPage() {
                   </div>
                   <div>
                     <label className="text-gray-700 text-sm font-medium">
-                      성별
+                      {t("kyc.gender")}
                     </label>
                     <p className="text-gray-900 font-bold">
                       {t(`dashboard.gender.${kycData.gender}`)}
@@ -425,7 +424,7 @@ export default function KYCPage() {
               <CardContent className="space-y-4">
                 <div>
                   <label className="text-gray-700 text-sm font-medium">
-                    이전 시술 경험
+                    {t("kyc.previousTreatmentExperience")}
                   </label>
                   <p className="text-gray-900 font-bold">
                     {t(`kyc.treatment.${kycData.hasPreviousTreatment}`)}
@@ -514,15 +513,15 @@ export default function KYCPage() {
                 <CardHeader>
                   <CardTitle className="text-gray-900 text-xl">
                     {timeUntilOpen
-                      ? "고객등록 신청 오픈 예정"
-                      : "고객등록 신청 마감"}
+                      ? t("kyc.applicationOpenSoon")
+                      : t("kyc.applicationClosed")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {timeUntilOpen ? (
                     <>
                       <p className="text-gray-600">
-                        고객등록 신청이 곧 시작됩니다. 오픈까지 남은 시간:
+                        {t("kyc.applicationOpenSoonDesc")}
                       </p>
                       <div className="bg-blue-50 border-blue-200 rounded-lg border p-4">
                         <div className="text-blue-900 text-2xl font-bold">
@@ -537,11 +536,11 @@ export default function KYCPage() {
                   ) : (
                     <>
                       <p className="text-gray-600">
-                        고객등록 신청 기간이 마감되었습니다.
+                        {t("kyc.applicationClosedDesc")}
                       </p>
                       <div className="bg-gray-50 border-gray-200 rounded-lg border p-4">
                         <p className="text-gray-700">
-                          신청 기간: {kycOpenSettings.startDate}{" "}
+                          {t("kyc.applicationPeriod")}: {kycOpenSettings.startDate}{" "}
                           {kycOpenSettings.startTime} ~{" "}
                           {kycOpenSettings.endDate} {kycOpenSettings.endTime}
                         </p>
@@ -577,7 +576,7 @@ export default function KYCPage() {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-green-800 font-medium">
-                            고객등록 신청 오픈 중
+                            {t("kyc.applicationOpenActive")}
                           </p>
                           <p className="text-green-600 text-sm">
                             마감까지: {formatTime(timeUntilClose)}

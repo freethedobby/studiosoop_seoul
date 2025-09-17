@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { signInWithGoogle } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 
 export default function LoginPage() {
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
+  const { t } = useLanguage();
 
   console.log(
     "LoginPage render - user:",
@@ -84,7 +86,7 @@ export default function LoginPage() {
         setError(error.message);
       } else {
         // Fallback for unknown errors
-        setError("로그인에 실패했습니다. 다시 시도해주세요.");
+        setError(t("login.loginFailed"));
       }
     } finally {
       setLoading(false);
@@ -105,9 +107,9 @@ export default function LoginPage() {
 
           <div className="mx-auto max-w-md">
             <div className="mb-8 text-center">
-              <h1 className="mb-2 text-2xl font-bold">로그인</h1>
+              <h1 className="mb-2 text-2xl font-bold">{t("login.title")}</h1>
               <p className="text-gray-600">
-                studiosoop.seoul의 서비스를 이용하시려면 로그인해주세요.
+                {t("login.subtitle")}
               </p>
             </div>
 
@@ -143,7 +145,7 @@ export default function LoginPage() {
                     />
                   </svg>
                 </div>
-                {loading ? "로그인 중..." : "Google로 로그인"}
+                {loading ? t("login.loggingIn") : t("login.googleLogin")}
               </Button>
 
               <p className="text-gray-400 text-center text-xs">
@@ -151,8 +153,7 @@ export default function LoginPage() {
               </p>
 
               <p className="text-gray-500 text-center text-sm">
-                로그인 시 개인정보처리방침 및 서비스 약관에 동의하는 것으로
-                간주됩니다
+                {t("login.privacyNotice")}
               </p>
             </div>
           </div>

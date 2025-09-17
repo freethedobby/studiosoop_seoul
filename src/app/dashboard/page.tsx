@@ -518,14 +518,14 @@ export default function DashboardPage() {
                   <div className="bg-beige-800 mr-3 rounded-lg p-2">
                     <User className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold">고객등록 신청</h3>
+                  <h3 className="text-lg font-semibold">{t("dashboard.kycApplicationTitle")}</h3>
                 </div>
 
                 {/* KYC 오픈 상태에 따른 다른 UI 표시 - 테스트 모드에서는 항상 접근 가능 */}
                 {!isKycOpen && timeUntilOpen && !isTestMode() ? (
                   <div className="space-y-3">
                     <p className="text-gray-600 text-sm">
-                      고객등록 신청이 곧 시작됩니다.
+                      {t("dashboard.kycSoonMessage")}
                     </p>
                     <div className="bg-beige-200 border-beige-300 rounded-lg border p-3">
                       <p className="text-beige-800 text-sm font-medium">
@@ -533,7 +533,7 @@ export default function DashboardPage() {
                       </p>
                     </div>
                     <Button variant="default" className="w-full" disabled>
-                      고객등록 신청 대기중
+                      {t("dashboard.kycWaitingButton")}
                     </Button>
                   </div>
                 ) : !isKycOpen &&
@@ -542,10 +542,10 @@ export default function DashboardPage() {
                   !isTestMode() ? (
                   <div className="space-y-3">
                     <p className="text-gray-600 text-sm">
-                      고객등록 신청 기간이 마감되었습니다.
+                      {t("dashboard.kycClosedMessage")}
                     </p>
                     <Button variant="default" className="w-full" disabled>
-                      고객등록 신청 마감
+                      {t("dashboard.kycClosedButton")}
                     </Button>
                   </div>
                 ) : (
@@ -581,7 +581,7 @@ export default function DashboardPage() {
                           <div className="flex items-center space-x-2">
                             <Check className="text-green-600 h-5 w-5" />
                             <span className="text-green-800 font-medium">
-                              신청 완료
+                              {t("dashboard.kycCompletedStatus")}
                             </span>
                           </div>
                           <Badge
@@ -655,7 +655,7 @@ export default function DashboardPage() {
                           }}
                         >
                           <Eye className="mr-2 h-4 w-4" />
-                          신청내용보기
+                          {t("dashboard.kycViewApplicationButton")}
                         </Button>
                       </div>
                     ) : (
@@ -681,7 +681,7 @@ export default function DashboardPage() {
                   <div className="bg-beige-800 mr-3 rounded-lg p-2">
                     <Clock className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold">예약</h3>
+                  <h3 className="text-lg font-semibold">{t("dashboard.reservationTitle")}</h3>
                 </div>
                 <p className="text-gray-600 mb-4 text-sm">
                   {isLocked
@@ -707,7 +707,7 @@ export default function DashboardPage() {
                           필독사항 확인 필수
                         </p>
                         <p className="text-orange-700 group-hover:text-orange-800 mt-1 text-xs transition-colors">
-                          예약하기 전에 반드시 필독사항을 확인해주세요.
+                          {t("dashboard.reservationNoticeDesc")}
                         </p>
                       </div>
                       <div className="text-orange-400 group-hover:text-orange-600 transition-colors">
@@ -741,7 +741,7 @@ export default function DashboardPage() {
                           필독사항 확인 완료
                         </p>
                         <p className="text-green-700 group-hover:text-green-800 mt-1 text-xs transition-colors">
-                          예약이 가능합니다.
+                          {t("dashboard.reservationAvailableDesc")}
                         </p>
                       </div>
                       <div className="text-green-400 group-hover:text-green-600 transition-colors">
@@ -773,7 +773,7 @@ export default function DashboardPage() {
                     >
                       <div className="mb-2 flex items-center justify-between">
                         <span className="text-gray-800 group-hover:text-gray-900 text-sm font-medium transition-colors">
-                          예약 정보
+                          {t("dashboard.reservationInfoTitle")}
                         </span>
                         <div className="flex items-center space-x-2">
                           <Badge
@@ -812,7 +812,7 @@ export default function DashboardPage() {
                         </div>
                         {reservation.status === "payment_required" && (
                           <div className="text-gray-600 mt-1 text-xs">
-                            💰 예약금 20만원 입금 필요
+                            {t("dashboard.paymentRequiredDesc")}
                           </div>
                         )}
                         {reservation.status === "payment_required" &&
@@ -822,7 +822,7 @@ export default function DashboardPage() {
                                 deadline={reservation.paymentDeadline}
                                 onExpired={async () => {
                                   // 타이머 만료 시 예약 취소 처리
-                                  console.log("예약 타이머 만료");
+                                  console.log(t("dashboard.reservationTimerExpired"));
 
                                   if (!reservation) return;
 
@@ -841,7 +841,7 @@ export default function DashboardPage() {
                                       title: "입금 시간 만료",
                                       message: `${
                                         user?.displayName || user?.email
-                                      }님의 예약이 입금 시간 만료로 자동 취소되었습니다.`,
+                                      }{t("dashboard.reservationAutoCancelled")}`,
                                     });
                                   } catch (error) {
                                     console.error("자동 취소 실패:", error);
@@ -1126,7 +1126,7 @@ export default function DashboardPage() {
                         )}
                         {reservation.status === "rejected" && (
                           <div className="text-gray-600 mt-1 text-xs">
-                            ❌ 예약이 거절되었습니다
+                            {t("dashboard.reservationRejectedDesc")}
                           </div>
                         )}
                       </div>
@@ -1187,7 +1187,7 @@ export default function DashboardPage() {
       <Dialog open={showKycData} onOpenChange={setShowKycData}>
         <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>신청 내용 확인</DialogTitle>
+            <DialogTitle>{t("dashboard.kycViewApplicationTitle")}</DialogTitle>
           </DialogHeader>
           {kycData && <KYCDataViewer kycData={kycData} t={t} />}
         </DialogContent>
@@ -1298,7 +1298,7 @@ function KYCDataViewer({
       {/* 예약 경로 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-gray-800 text-lg">예약 경로</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">{t("dashboard.reservationSourceTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-gray-900 border-gray-200 text-base rounded-lg border bg-white p-4 font-medium">
