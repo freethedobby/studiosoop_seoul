@@ -108,9 +108,7 @@ export default function LoginPage() {
           <div className="mx-auto max-w-md">
             <div className="mb-8 text-center">
               <h1 className="mb-2 text-2xl font-bold">{t("login.title")}</h1>
-              <p className="text-gray-600">
-                {t("login.subtitle")}
-              </p>
+              <p className="text-gray-600">{t("login.subtitle")}</p>
             </div>
 
             <div className="space-y-6">

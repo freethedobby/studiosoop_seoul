@@ -356,20 +356,18 @@ export default function KYCPage() {
               <h2 className="text-gray-900 mb-2 text-2xl font-light">
                 {t("kyc.applicationContentTitle")}
               </h2>
-              <p className="text-gray-600">
-                {t("kyc.applicationContentDesc")}
-              </p>
+              <p className="text-gray-600">{t("kyc.applicationContentDesc")}</p>
             </div>
 
             <Card className="space-y-6">
               <CardHeader>
-                <CardTitle className="text-lg">기본 정보</CardTitle>
+                <CardTitle className="text-lg">{t("kyc.basicInfo")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
                     <label className="text-gray-700 text-sm font-medium">
-                      이름
+                      {t("kyc.name")}
                     </label>
                     <p className="text-gray-900 font-bold">{kycData.name}</p>
                   </div>
@@ -391,13 +389,13 @@ export default function KYCPage() {
                   </div>
                   <div>
                     <label className="text-gray-700 text-sm font-medium">
-                      연락처
+                      {t("kyc.contact")}
                     </label>
                     <p className="text-gray-900 font-bold">{kycData.contact}</p>
                   </div>
                   <div>
                     <label className="text-gray-700 text-sm font-medium">
-                      주소
+                      {t("kyc.address")}
                     </label>
                     <p className="text-gray-900 font-bold">
                       {kycData.province} {kycData.district} {kycData.dong}
@@ -419,7 +417,7 @@ export default function KYCPage() {
 
             <Card className="space-y-6">
               <CardHeader>
-                <CardTitle className="text-lg">시술 정보</CardTitle>
+                <CardTitle className="text-lg">{t("kyc.treatmentInfo")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -540,7 +538,8 @@ export default function KYCPage() {
                       </p>
                       <div className="bg-gray-50 border-gray-200 rounded-lg border p-4">
                         <p className="text-gray-700">
-                          {t("kyc.applicationPeriod")}: {kycOpenSettings.startDate}{" "}
+                          {t("kyc.applicationPeriod")}:{" "}
+                          {kycOpenSettings.startDate}{" "}
                           {kycOpenSettings.startTime} ~{" "}
                           {kycOpenSettings.endDate} {kycOpenSettings.endTime}
                         </p>
@@ -579,7 +578,7 @@ export default function KYCPage() {
                             {t("kyc.applicationOpenActive")}
                           </p>
                           <p className="text-green-600 text-sm">
-                            마감까지: {formatTime(timeUntilClose)}
+                            {t("common.untilClosing")}: {formatTime(timeUntilClose)}
                           </p>
                         </div>
                         <div className="text-green-600">

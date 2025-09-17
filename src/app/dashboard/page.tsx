@@ -518,7 +518,9 @@ export default function DashboardPage() {
                   <div className="bg-beige-800 mr-3 rounded-lg p-2">
                     <User className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold">{t("dashboard.kycApplicationTitle")}</h3>
+                  <h3 className="text-lg font-semibold">
+                    {t("dashboard.kycApplicationTitle")}
+                  </h3>
                 </div>
 
                 {/* KYC 오픈 상태에 따른 다른 UI 표시 - 테스트 모드에서는 항상 접근 가능 */}
@@ -563,7 +565,7 @@ export default function DashboardPage() {
                     {timeUntilClose && !isTestMode() && (
                       <div className="bg-beige-200 border-beige-300 rounded-lg border p-3">
                         <p className="text-beige-800 text-xs">
-                          마감까지: {formatTime(timeUntilClose)}
+                          {t("common.untilClosing")}: {formatTime(timeUntilClose)}
                         </p>
                       </div>
                     )}
@@ -681,7 +683,9 @@ export default function DashboardPage() {
                   <div className="bg-beige-800 mr-3 rounded-lg p-2">
                     <Clock className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold">{t("dashboard.reservationTitle")}</h3>
+                  <h3 className="text-lg font-semibold">
+                    {t("dashboard.reservationTitle")}
+                  </h3>
                 </div>
                 <p className="text-gray-600 mb-4 text-sm">
                   {isLocked
@@ -822,7 +826,9 @@ export default function DashboardPage() {
                                 deadline={reservation.paymentDeadline}
                                 onExpired={async () => {
                                   // 타이머 만료 시 예약 취소 처리
-                                  console.log(t("dashboard.reservationTimerExpired"));
+                                  console.log(
+                                    t("dashboard.reservationTimerExpired")
+                                  );
 
                                   if (!reservation) return;
 
@@ -1298,7 +1304,9 @@ function KYCDataViewer({
       {/* 예약 경로 */}
       <Card className="border-gray-200 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-gray-800 text-lg">{t("dashboard.reservationSourceTitle")}</CardTitle>
+          <CardTitle className="text-gray-800 text-lg">
+            {t("dashboard.reservationSourceTitle")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-gray-900 border-gray-200 text-base rounded-lg border bg-white p-4 font-medium">

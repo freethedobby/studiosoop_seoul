@@ -483,9 +483,7 @@ export default function UserReservePage() {
 
     // 이미 활성 예약이 있는지 확인
     if (reservation && reservation.status !== "cancelled") {
-      alert(
-        t("reservation.alreadyActiveReservation")
-      );
+      alert(t("reservation.alreadyActiveReservation"));
       return;
     }
 
@@ -699,9 +697,7 @@ export default function UserReservePage() {
   const handleReserveClick = (slot: SlotData) => {
     // 이미 활성 예약이 있는지 확인
     if (reservation && reservation.status !== "cancelled") {
-      alert(
-        t("reservation.alreadyActiveReservation")
-      );
+      alert(t("reservation.alreadyActiveReservation"));
       return;
     }
 
@@ -882,7 +878,7 @@ export default function UserReservePage() {
             <div className="flex items-center justify-center text-center">
               <Check className="text-green-600 mr-2 h-4 w-4" />
               <span className="text-green-800 text-sm font-medium">
-                예약 신청 오픈 중 - 마감까지:{" "}
+                예약 신청 오픈 중 - {t("common.untilClosing")}:{" "}
                 {formatTime(timeUntilReservationClose)}
               </span>
             </div>
@@ -1096,7 +1092,9 @@ export default function UserReservePage() {
                       onClick={handleCancel}
                       disabled={canceling}
                     >
-                      {canceling ? t("reservation.canceling") : t("reservation.cancelReservation")}
+                      {canceling
+                        ? t("reservation.canceling")
+                        : t("reservation.cancelReservation")}
                     </button>
                   </div>
                 </div>
@@ -1429,7 +1427,9 @@ export default function UserReservePage() {
                 onClick={handleConfirmReserve}
                 disabled={reserving}
               >
-                {reserving ? t("reservation.reserving") : t("reservation.confirm")}
+                {reserving
+                  ? t("reservation.reserving")
+                  : t("reservation.confirm")}
               </button>
             </div>
           </div>
