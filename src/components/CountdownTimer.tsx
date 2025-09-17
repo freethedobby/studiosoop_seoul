@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Clock, AlertTriangle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface CountdownTimerProps {
   deadline: Date | { toDate: () => Date } | number; // Firestore Timestamp or Date or number
@@ -16,6 +17,7 @@ export default function CountdownTimer({
   compact = false,
   testMode = false,
 }: CountdownTimerProps) {
+  const { t } = useLanguage();
   const [timeLeft, setTimeLeft] = useState<{
     hours: number;
     minutes: number;
@@ -308,7 +310,7 @@ export default function CountdownTimer({
           >
             {String(timeLeft.hours).padStart(2, "0")}
           </div>
-          <div className="text-gray-500 text-xs">시간</div>
+          <div className="text-gray-500 text-xs">{t("common.hours")}</div>
         </div>
         <div className="text-gray-400 text-xl">:</div>
         <div className="text-center">
@@ -323,7 +325,7 @@ export default function CountdownTimer({
           >
             {String(timeLeft.minutes).padStart(2, "0")}
           </div>
-          <div className="text-gray-500 text-xs">분</div>
+          <div className="text-gray-500 text-xs">{t("common.minutes")}</div>
         </div>
         <div className="text-gray-400 text-xl">:</div>
         <div className="text-center">
@@ -338,7 +340,7 @@ export default function CountdownTimer({
           >
             {String(timeLeft.seconds).padStart(2, "0")}
           </div>
-          <div className="text-gray-500 text-xs">초</div>
+          <div className="text-gray-500 text-xs">{t("common.seconds")}</div>
         </div>
       </div>
 
@@ -349,8 +351,8 @@ export default function CountdownTimer({
           }`}
         >
           {isCritical
-            ? "⚠️ 긴급: 입금 시간이 곧 만료됩니다!"
-            : "⏰ 입금 시간이 얼마 남지 않았습니다."}
+            ? t("common.urgent")
+            : t("common.timeRunningOut")}
         </p>
       )}
 

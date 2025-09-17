@@ -565,7 +565,8 @@ export default function DashboardPage() {
                     {timeUntilClose && !isTestMode() && (
                       <div className="bg-beige-200 border-beige-300 rounded-lg border p-3">
                         <p className="text-beige-800 text-xs">
-                          {t("common.untilClosing")}: {formatTime(timeUntilClose)}
+                          {t("common.untilClosing")}:{" "}
+                          {formatTime(timeUntilClose)}
                         </p>
                       </div>
                     )}

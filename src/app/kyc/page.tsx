@@ -417,7 +417,9 @@ export default function KYCPage() {
 
             <Card className="space-y-6">
               <CardHeader>
-                <CardTitle className="text-lg">{t("kyc.treatmentInfo")}</CardTitle>
+                <CardTitle className="text-lg">
+                  {t("kyc.treatmentInfo")}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -578,7 +580,8 @@ export default function KYCPage() {
                             {t("kyc.applicationOpenActive")}
                           </p>
                           <p className="text-green-600 text-sm">
-                            {t("common.untilClosing")}: {formatTime(timeUntilClose)}
+                            {t("common.untilClosing")}:{" "}
+                            {formatTime(timeUntilClose)}
                           </p>
                         </div>
                         <div className="text-green-600">
