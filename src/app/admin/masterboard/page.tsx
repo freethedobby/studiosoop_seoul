@@ -77,6 +77,9 @@ interface UserData {
   };
   eyebrowProcedure: "not_started" | "in_progress" | "completed";
   adminComments: string;
+  languagePreference?: "ko" | "en";
+  isKoreanResident?: boolean;
+  languageSetAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -227,6 +230,9 @@ export default function Masterboard() {
           latestReservation: data.latestReservation,
           eyebrowProcedure: data.eyebrowProcedure || "not_started",
           adminComments: data.adminComments || "",
+          languagePreference: data.languagePreference,
+          isKoreanResident: data.isKoreanResident,
+          languageSetAt: data.languageSetAt?.toDate(),
           createdAt: data.createdAt?.toDate() || new Date(),
           updatedAt: data.updatedAt?.toDate() || new Date(),
         } as UserData;
@@ -515,6 +521,31 @@ export default function Masterboard() {
       alert(
         `사용자 정보 업데이트 중 오류가 발생했습니다.\n\n오류 내용: ${errorMessage}\n\n문제가 지속되면 관리자에게 문의하세요.`
       );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle language change
+  const handleChangeLanguage = async (userId: string, newLanguage: "ko" | "en") => {
+    if (!confirm(`정말로 이 사용자의 언어 설정을 ${newLanguage === "ko" ? "한국어" : "영어"}로 변경하시겠습니까?`)) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, {
+        languagePreference: newLanguage,
+        isKoreanResident: newLanguage === "ko",
+        languageSetAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+
+      alert(`사용자의 언어 설정이 ${newLanguage === "ko" ? "한국어" : "영어"}로 변경되었습니다.`);
+    } catch (error) {
+      console.error("Error changing language:", error);
+      alert("언어 설정 변경 중 오류가 발생했습니다.");
     } finally {
       setIsSubmitting(false);
     }
@@ -834,6 +865,48 @@ export default function Masterboard() {
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      {/* Language Setting */}
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-gray-700">언어 설정:</span>
+                          <span className={`text-sm font-medium ${
+                            user.languagePreference === "ko" 
+                              ? "text-blue-600" 
+                              : user.languagePreference === "en" 
+                              ? "text-green-600" 
+                              : "text-gray-500"
+                          }`}>
+                            {user.languagePreference === "ko" 
+                              ? "🇰🇷 한국어" 
+                              : user.languagePreference === "en" 
+                              ? "🌍 English" 
+                              : "❓ 미설정"}
+                          </span>
+                        </div>
+                        {user.languagePreference && (
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleChangeLanguage(user.id, "ko")}
+                              disabled={isSubmitting || user.languagePreference === "ko"}
+                              className="text-xs px-3 py-1 h-7"
+                            >
+                              한국어
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleChangeLanguage(user.id, "en")}
+                              disabled={isSubmitting || user.languagePreference === "en"}
+                              className="text-xs px-3 py-1 h-7"
+                            >
+                              English
+                            </Button>
+                          </div>
+                        )}
                       </div>
 
                       {/* Status Badges */}
@@ -1164,6 +1237,7 @@ export default function Masterboard() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>기본 정보</TableHead>
+                    <TableHead>언어 설정</TableHead>
                     <TableHead>KYC 상태</TableHead>
                     <TableHead>예약 상태</TableHead>
                     <TableHead>시술 진행</TableHead>
@@ -1189,6 +1263,49 @@ export default function Masterboard() {
                             <Phone className="h-3 w-3" />
                             {user.contact || user.phone}
                           </div>
+                        </div>
+                      </TableCell>
+
+                      {/* Language Setting */}
+                      <TableCell>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-sm font-medium ${
+                              user.languagePreference === "ko" 
+                                ? "text-blue-600" 
+                                : user.languagePreference === "en" 
+                                ? "text-green-600" 
+                                : "text-gray-500"
+                            }`}>
+                              {user.languagePreference === "ko" 
+                                ? "🇰🇷 한국어" 
+                                : user.languagePreference === "en" 
+                                ? "🌍 English" 
+                                : "❓ 미설정"}
+                            </span>
+                          </div>
+                          {user.languagePreference && (
+                            <div className="flex gap-1">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleChangeLanguage(user.id, "ko")}
+                                disabled={isSubmitting || user.languagePreference === "ko"}
+                                className="text-xs px-2 py-1 h-6"
+                              >
+                                한국어
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleChangeLanguage(user.id, "en")}
+                                disabled={isSubmitting || user.languagePreference === "en"}
+                                className="text-xs px-2 py-1 h-6"
+                              >
+                                English
+                              </Button>
+                            </div>
+                          )}
                         </div>
                       </TableCell>
 

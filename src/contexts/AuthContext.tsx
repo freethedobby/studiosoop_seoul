@@ -11,6 +11,9 @@ export interface User extends FirebaseUser {
   rejectReason?: string;
   noticeConfirmed?: boolean;
   noticeConfirmedAt?: Date;
+  languagePreference?: "ko" | "en";
+  isKoreanResident?: boolean;
+  languageSetAt?: Date;
 }
 
 interface AuthContextType {
@@ -19,6 +22,8 @@ interface AuthContextType {
   isAdminMode: boolean;
   setIsAdminMode: (mode: boolean) => void;
   isAdmin: boolean;
+  showLanguageSelection: boolean;
+  setShowLanguageSelection: (show: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -27,6 +32,8 @@ const AuthContext = createContext<AuthContextType>({
   isAdminMode: false,
   setIsAdminMode: () => {},
   isAdmin: false,
+  showLanguageSelection: false,
+  setShowLanguageSelection: () => {},
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -34,6 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showLanguageSelection, setShowLanguageSelection] = useState(false);
 
   useEffect(() => {
     let unsubscribeFirestore: (() => void) | null = null;
@@ -80,10 +88,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 rejectReason: userData.rejectReason || "",
                 noticeConfirmed: userData.noticeConfirmed || false,
                 noticeConfirmedAt: userData.noticeConfirmedAt || undefined,
+                languagePreference: userData.languagePreference,
+                isKoreanResident: userData.isKoreanResident,
+                languageSetAt: userData.languageSetAt?.toDate(),
               };
               console.log("Merged user object:", mergedUser);
               console.log("Final kycStatus:", mergedUser.kycStatus);
+              console.log("Language preference:", mergedUser.languagePreference);
               setUser(mergedUser);
+
+              // Check if language selection is needed
+              if (!userData.languagePreference) {
+                setShowLanguageSelection(true);
+              }
             } else {
               console.log(
                 "No Firestore document found for user:",
@@ -99,7 +116,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 rejectReason: "",
                 noticeConfirmed: false,
                 noticeConfirmedAt: undefined,
+                languagePreference: undefined,
+                isKoreanResident: undefined,
+                languageSetAt: undefined,
               });
+              
+              // Show language selection for new users
+              setShowLanguageSelection(true);
             }
           },
           (error) => {
@@ -110,12 +133,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               ...firebaseUser,
               kycStatus: "none",
               treatmentDone: false,
+              languagePreference: undefined,
+              isKoreanResident: undefined,
+              languageSetAt: undefined,
             });
+            
+            // Show language selection if Firestore fails
+            setShowLanguageSelection(true);
           }
         );
       } else {
         setUser(null);
         setLoading(false);
+        setShowLanguageSelection(false);
       }
     });
 
@@ -155,7 +185,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, isAdminMode, setIsAdminMode, isAdmin }}
+      value={{ 
+        user, 
+        loading, 
+        isAdminMode, 
+        setIsAdminMode, 
+        isAdmin, 
+        showLanguageSelection, 
+        setShowLanguageSelection 
+      }}
     >
       {children}
     </AuthContext.Provider>

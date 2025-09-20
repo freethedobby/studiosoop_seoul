@@ -32,7 +32,7 @@ export default function Logo({
           priority
         />
         {variant === "footer" && (
-          <span className="ml-3 text-black font-light tracking-wide text-lg">
+          <span className="text-black ml-3 text-lg font-light tracking-wide">
             studiosoop.seoul
           </span>
         )}

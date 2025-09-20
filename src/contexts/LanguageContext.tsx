@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 type Language = "en" | "ko";
 
@@ -1058,22 +1059,28 @@ By proceeding with treatment, you acknowledge that you have read, understood, an
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
   // Always start with "ko" to ensure server/client consistency
   const [language, setLanguage] = useState<Language>("ko");
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Handle client-side hydration
+  // Handle client-side hydration and user language preference
   useEffect(() => {
     setIsHydrated(true);
-    if (typeof window !== "undefined") {
+    
+    // If user is logged in and has language preference, use it
+    if (user?.languagePreference) {
+      setLanguage(user.languagePreference);
+    } else if (typeof window !== "undefined") {
+      // Fallback to localStorage for non-logged in users
       const saved = localStorage.getItem("language");
       if (saved && (saved === "en" || saved === "ko")) {
         setLanguage(saved as Language);
       }
     }
-  }, []);
+  }, [user?.languagePreference]);
 
-  // Save language to localStorage when it changes
+  // Save language to localStorage when it changes (for non-logged in users)
   const handleSetLanguage = (newLanguage: Language) => {
     setLanguage(newLanguage);
     if (typeof window !== "undefined") {

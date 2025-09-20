@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Script from "next/script";
 import { GA_TRACKING_ID } from "@/lib/gtag";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import LanguageSelectionWrapper from "@/components/LanguageSelectionWrapper";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -91,6 +92,7 @@ export default function RootLayout({
         <AuthProvider>
           <LanguageProvider>
             <GoogleAnalytics />
+            <LanguageSelectionWrapper />
             {children}
           </LanguageProvider>
         </AuthProvider>
