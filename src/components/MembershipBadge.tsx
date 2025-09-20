@@ -43,9 +43,9 @@ export function MembershipBadge({
   treatmentDone = false,
 }: MembershipBadgeProps) {
   const { t } = useLanguage();
-  
+
   const membershipInfoMap = createMembershipInfo(t);
-  
+
   const getMembershipInfo = () => {
     if (treatmentDone && kycStatus === "approved") {
       return membershipInfoMap.signature;

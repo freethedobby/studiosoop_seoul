@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface LogoProps {
   variant?: "header" | "footer" | "hero";
@@ -10,22 +11,27 @@ export default function Logo({
   className = "",
 }: LogoProps) {
   const baseClasses =
-    "flex flex-col items-center transition-opacity hover:opacity-80";
+    "flex items-center transition-opacity hover:opacity-80";
 
   const sizeClasses = {
-    header: "text-sm sm:text-base",
-    footer: "text-base",
-    hero: "text-lg sm:text-xl",
+    header: "h-8 w-auto",
+    footer: "h-10 w-auto",
+    hero: "h-12 w-auto sm:h-14",
   };
 
-  const classes = `${baseClasses} ${sizeClasses[variant]} ${className}`;
+  const classes = `${baseClasses} ${className}`;
 
   return (
     <Link href="/" className={classes}>
-      <div className="flex flex-col items-center">
-        <span className="text-black font-light tracking-wide">
-          studiosoop_seoul
-        </span>
+      <div className="flex items-center">
+        <Image
+          src="/studiosoop logo.png"
+          alt="Studio Soop Seoul"
+          width={variant === "hero" ? 120 : variant === "footer" ? 100 : 80}
+          height={variant === "hero" ? 40 : variant === "footer" ? 35 : 30}
+          className={`${sizeClasses[variant]} object-contain`}
+          priority
+        />
       </div>
     </Link>
   );

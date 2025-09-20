@@ -118,11 +118,17 @@ export default function DashboardPage() {
     const seconds = totalSeconds % 60;
 
     if (days > 0) {
-      return `${days}${t("common.days")} ${hours}${t("common.hours")} ${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
+      return `${days}${t("common.days")} ${hours}${t(
+        "common.hours"
+      )} ${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
     } else if (hours > 0) {
-      return `${hours}${t("common.hours")} ${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
+      return `${hours}${t("common.hours")} ${minutes}${t(
+        "common.minutes"
+      )} ${seconds}${t("common.seconds")}`;
     } else if (minutes > 0) {
-      return `${minutes}${t("common.minutes")} ${seconds}${t("common.seconds")}`;
+      return `${minutes}${t("common.minutes")} ${seconds}${t(
+        "common.seconds"
+      )}`;
     } else {
       return `${seconds}${t("common.seconds")}`;
     }

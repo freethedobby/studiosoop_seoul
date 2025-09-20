@@ -481,11 +481,14 @@ By proceeding with treatment, you acknowledge that you have read, understood, an
     "dashboard.verify": "Verify",
     "dashboard.memberStatus.none": "Not a member",
     "membership.unverifiedCustomer": "Unverified Customer",
-    "membership.verifyDescription": "Reservations are available after verification is complete.",
+    "membership.verifyDescription":
+      "Reservations are available after verification is complete.",
     "membership.reservableMember": "Reservable Member",
-    "membership.verifiedDescription": "You are a verified customer. Reservation features are activated.",
+    "membership.verifiedDescription":
+      "You are a verified customer. Reservation features are activated.",
     "membership.signatureMember": "Signature Member",
-    "membership.vipDescription": "You are a VIP customer who has completed treatment. Revisit benefits are provided.",
+    "membership.vipDescription":
+      "You are a VIP customer who has completed treatment. Revisit benefits are provided.",
     "membership.verify": "Verify",
     "common.urgent": "⚠️ Urgent: Payment deadline is about to expire!",
     "common.timeRunningOut": "⏰ Payment time is running out.",
@@ -986,9 +989,11 @@ By proceeding with treatment, you acknowledge that you have read, understood, an
     "membership.unverifiedCustomer": "미인증 고객",
     "membership.verifyDescription": "인증 완료 후 예약이 가능해요.",
     "membership.reservableMember": "예약가능 회원",
-    "membership.verifiedDescription": "정식 인증을 마친 고객님입니다. 예약 기능이 활성화돼요.",
+    "membership.verifiedDescription":
+      "정식 인증을 마친 고객님입니다. 예약 기능이 활성화돼요.",
     "membership.signatureMember": "시그니처 멤버",
-    "membership.vipDescription": "시술까지 마친 VIP 고객님입니다. 재방문 혜택이 제공돼요.",
+    "membership.vipDescription":
+      "시술까지 마친 VIP 고객님입니다. 재방문 혜택이 제공돼요.",
     "membership.verify": "인증하기",
     "common.urgent": "⚠️ 긴급: 입금 시간이 곧 만료됩니다!",
     "common.timeRunningOut": "⏰ 입금 시간이 얼마 남지 않았습니다.",
