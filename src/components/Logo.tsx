@@ -13,7 +13,7 @@ export default function Logo({
   const baseClasses = "flex items-center transition-opacity hover:opacity-80";
 
   const sizeClasses = {
-    header: "h-12 w-auto sm:h-14",
+    header: "h-16 w-auto sm:h-20",
     footer: "h-16 w-auto",
     hero: "h-20 w-auto sm:h-24",
   };
@@ -26,11 +26,16 @@ export default function Logo({
         <Image
           src="/studiosoop logo.png"
           alt="Studio Soop Seoul"
-          width={variant === "hero" ? 200 : variant === "footer" ? 160 : 120}
-          height={variant === "hero" ? 60 : variant === "footer" ? 50 : 40}
+          width={variant === "hero" ? 200 : variant === "footer" ? 160 : 160}
+          height={variant === "hero" ? 60 : variant === "footer" ? 50 : 50}
           className={`${sizeClasses[variant]} object-contain`}
           priority
         />
+        {variant === "footer" && (
+          <span className="ml-3 text-black font-light tracking-wide text-lg">
+            studiosoop.seoul
+          </span>
+        )}
       </div>
     </Link>
   );
