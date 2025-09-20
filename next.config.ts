@@ -3,7 +3,16 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['studiosoopseoul.com', 'www.studiosoopseoul.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'studiosoopseoul.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.studiosoopseoul.com',
+      },
+    ],
   },
   async headers() {
     return [

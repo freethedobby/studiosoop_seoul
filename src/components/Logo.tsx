@@ -10,13 +10,12 @@ export default function Logo({
   variant = "header",
   className = "",
 }: LogoProps) {
-  const baseClasses =
-    "flex items-center transition-opacity hover:opacity-80";
+  const baseClasses = "flex items-center transition-opacity hover:opacity-80";
 
   const sizeClasses = {
-    header: "h-8 w-auto",
-    footer: "h-10 w-auto",
-    hero: "h-12 w-auto sm:h-14",
+    header: "h-12 w-auto sm:h-14",
+    footer: "h-16 w-auto",
+    hero: "h-20 w-auto sm:h-24",
   };
 
   const classes = `${baseClasses} ${className}`;
@@ -27,8 +26,8 @@ export default function Logo({
         <Image
           src="/studiosoop logo.png"
           alt="Studio Soop Seoul"
-          width={variant === "hero" ? 120 : variant === "footer" ? 100 : 80}
-          height={variant === "hero" ? 40 : variant === "footer" ? 35 : 30}
+          width={variant === "hero" ? 200 : variant === "footer" ? 160 : 120}
+          height={variant === "hero" ? 60 : variant === "footer" ? 50 : 40}
           className={`${sizeClasses[variant]} object-contain`}
           priority
         />
