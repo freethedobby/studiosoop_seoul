@@ -94,7 +94,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               };
               console.log("Merged user object:", mergedUser);
               console.log("Final kycStatus:", mergedUser.kycStatus);
-              console.log("Language preference:", mergedUser.languagePreference);
+              console.log(
+                "Language preference:",
+                mergedUser.languagePreference
+              );
               setUser(mergedUser);
 
               // Check if language selection is needed
@@ -120,7 +123,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 isKoreanResident: undefined,
                 languageSetAt: undefined,
               });
-              
+
               // Show language selection for new users
               setShowLanguageSelection(true);
             }
@@ -137,7 +140,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               isKoreanResident: undefined,
               languageSetAt: undefined,
             });
-            
+
             // Show language selection if Firestore fails
             setShowLanguageSelection(true);
           }
@@ -185,14 +188,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ 
-        user, 
-        loading, 
-        isAdminMode, 
-        setIsAdminMode, 
-        isAdmin, 
-        showLanguageSelection, 
-        setShowLanguageSelection 
+      value={{
+        user,
+        loading,
+        isAdminMode,
+        setIsAdminMode,
+        isAdmin,
+        showLanguageSelection,
+        setShowLanguageSelection,
       }}
     >
       {children}

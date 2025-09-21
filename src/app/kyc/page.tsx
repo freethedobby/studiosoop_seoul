@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import KYCFormNew from "@/components/KYCFormNew";
 import FirebaseDebug from "@/components/FirebaseDebug";
 import Logo from "@/components/Logo";
-import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import Footer from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -497,7 +496,6 @@ export default function KYCPage() {
             </div>
 
             <div className="flex items-center space-x-2">
-              <CompactLanguageSwitcher />
             </div>
           </div>
         </div>

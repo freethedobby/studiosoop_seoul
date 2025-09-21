@@ -25,7 +25,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import CountdownTimer from "@/components/CountdownTimer";
-import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import Footer from "@/components/Footer";
 import {
   Calendar,
@@ -778,7 +777,6 @@ export default function UserReservePage() {
             </div>
 
             <div className="flex items-center space-x-2">
-              <CompactLanguageSwitcher />
             </div>
           </div>
 

@@ -1067,7 +1067,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   // Handle client-side hydration and user language preference
   useEffect(() => {
     setIsHydrated(true);
-    
+
     // If user is logged in and has language preference, use it
     if (user?.languagePreference) {
       setLanguage(user.languagePreference);

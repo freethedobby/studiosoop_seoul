@@ -527,8 +527,17 @@ export default function Masterboard() {
   };
 
   // Handle language change
-  const handleChangeLanguage = async (userId: string, newLanguage: "ko" | "en") => {
-    if (!confirm(`정말로 이 사용자의 언어 설정을 ${newLanguage === "ko" ? "한국어" : "영어"}로 변경하시겠습니까?`)) {
+  const handleChangeLanguage = async (
+    userId: string,
+    newLanguage: "ko" | "en"
+  ) => {
+    if (
+      !confirm(
+        `정말로 이 사용자의 언어 설정을 ${
+          newLanguage === "ko" ? "한국어" : "영어"
+        }로 변경하시겠습니까?`
+      )
+    ) {
       return;
     }
 
@@ -542,7 +551,11 @@ export default function Masterboard() {
         updatedAt: serverTimestamp(),
       });
 
-      alert(`사용자의 언어 설정이 ${newLanguage === "ko" ? "한국어" : "영어"}로 변경되었습니다.`);
+      alert(
+        `사용자의 언어 설정이 ${
+          newLanguage === "ko" ? "한국어" : "영어"
+        }로 변경되었습니다.`
+      );
     } catch (error) {
       console.error("Error changing language:", error);
       alert("언어 설정 변경 중 오류가 발생했습니다.");
@@ -870,18 +883,22 @@ export default function Masterboard() {
                       {/* Language Setting */}
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-gray-700">언어 설정:</span>
-                          <span className={`text-sm font-medium ${
-                            user.languagePreference === "ko" 
-                              ? "text-blue-600" 
-                              : user.languagePreference === "en" 
-                              ? "text-green-600" 
-                              : "text-gray-500"
-                          }`}>
-                            {user.languagePreference === "ko" 
-                              ? "🇰🇷 한국어" 
-                              : user.languagePreference === "en" 
-                              ? "🌍 English" 
+                          <span className="text-gray-700 text-sm font-medium">
+                            언어 설정:
+                          </span>
+                          <span
+                            className={`text-sm font-medium ${
+                              user.languagePreference === "ko"
+                                ? "text-blue-600"
+                                : user.languagePreference === "en"
+                                ? "text-green-600"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {user.languagePreference === "ko"
+                              ? "🇰🇷 한국어"
+                              : user.languagePreference === "en"
+                              ? "🌍 English"
                               : "❓ 미설정"}
                           </span>
                         </div>
@@ -890,18 +907,26 @@ export default function Masterboard() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => handleChangeLanguage(user.id, "ko")}
-                              disabled={isSubmitting || user.languagePreference === "ko"}
-                              className="text-xs px-3 py-1 h-7"
+                              onClick={() =>
+                                handleChangeLanguage(user.id, "ko")
+                              }
+                              disabled={
+                                isSubmitting || user.languagePreference === "ko"
+                              }
+                              className="h-7 px-3 py-1 text-xs"
                             >
                               한국어
                             </Button>
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => handleChangeLanguage(user.id, "en")}
-                              disabled={isSubmitting || user.languagePreference === "en"}
-                              className="text-xs px-3 py-1 h-7"
+                              onClick={() =>
+                                handleChangeLanguage(user.id, "en")
+                              }
+                              disabled={
+                                isSubmitting || user.languagePreference === "en"
+                              }
+                              className="h-7 px-3 py-1 text-xs"
                             >
                               English
                             </Button>
@@ -1270,17 +1295,19 @@ export default function Masterboard() {
                       <TableCell>
                         <div className="space-y-2">
                           <div className="flex items-center gap-2">
-                            <span className={`text-sm font-medium ${
-                              user.languagePreference === "ko" 
-                                ? "text-blue-600" 
-                                : user.languagePreference === "en" 
-                                ? "text-green-600" 
-                                : "text-gray-500"
-                            }`}>
-                              {user.languagePreference === "ko" 
-                                ? "🇰🇷 한국어" 
-                                : user.languagePreference === "en" 
-                                ? "🌍 English" 
+                            <span
+                              className={`text-sm font-medium ${
+                                user.languagePreference === "ko"
+                                  ? "text-blue-600"
+                                  : user.languagePreference === "en"
+                                  ? "text-green-600"
+                                  : "text-gray-500"
+                              }`}
+                            >
+                              {user.languagePreference === "ko"
+                                ? "🇰🇷 한국어"
+                                : user.languagePreference === "en"
+                                ? "🌍 English"
                                 : "❓ 미설정"}
                             </span>
                           </div>
@@ -1289,18 +1316,28 @@ export default function Masterboard() {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleChangeLanguage(user.id, "ko")}
-                                disabled={isSubmitting || user.languagePreference === "ko"}
-                                className="text-xs px-2 py-1 h-6"
+                                onClick={() =>
+                                  handleChangeLanguage(user.id, "ko")
+                                }
+                                disabled={
+                                  isSubmitting ||
+                                  user.languagePreference === "ko"
+                                }
+                                className="h-6 px-2 py-1 text-xs"
                               >
                                 한국어
                               </Button>
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleChangeLanguage(user.id, "en")}
-                                disabled={isSubmitting || user.languagePreference === "en"}
-                                className="text-xs px-2 py-1 h-6"
+                                onClick={() =>
+                                  handleChangeLanguage(user.id, "en")
+                                }
+                                disabled={
+                                  isSubmitting ||
+                                  user.languagePreference === "en"
+                                }
+                                className="h-6 px-2 py-1 text-xs"
                               >
                                 English
                               </Button>

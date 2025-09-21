@@ -28,7 +28,9 @@ export default function LanguageSelectionModal({
   const { user } = useAuth();
   const { setLanguage } = useLanguage();
   const router = useRouter();
-  const [selectedLanguage, setSelectedLanguage] = useState<"ko" | "en" | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<"ko" | "en" | null>(
+    null
+  );
 
   const handleLanguageSelect = async (language: "ko" | "en") => {
     if (!user?.uid) return;
@@ -73,9 +75,9 @@ export default function LanguageSelectionModal({
 
         <div className="space-y-4 py-4">
           <Card
-            className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+            className={`hover:shadow-lg cursor-pointer transition-all duration-200 ${
               selectedLanguage === "ko"
-                ? "ring-2 ring-blue-500 bg-blue-50"
+                ? "ring-blue-500 bg-blue-50 ring-2"
                 : "hover:bg-gray-50"
             }`}
             onClick={() => handleLanguageSelect("ko")}
@@ -86,22 +88,20 @@ export default function LanguageSelectionModal({
                   <div className="text-2xl">🇰🇷</div>
                   <div>
                     <h3 className="text-lg font-semibold">Yes, I am Korean</h3>
-                    <p className="text-sm text-gray-600">
-                      Korean pricing and language
-                    </p>
+                    <p className="text-gray-600 text-sm">Korean language</p>
                   </div>
                 </div>
                 {selectedLanguage === "ko" && (
-                  <CheckCircle className="h-6 w-6 text-blue-500" />
+                  <CheckCircle className="text-blue-500 h-6 w-6" />
                 )}
               </div>
             </CardContent>
           </Card>
 
           <Card
-            className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+            className={`hover:shadow-lg cursor-pointer transition-all duration-200 ${
               selectedLanguage === "en"
-                ? "ring-2 ring-blue-500 bg-blue-50"
+                ? "ring-blue-500 bg-blue-50 ring-2"
                 : "hover:bg-gray-50"
             }`}
             onClick={() => handleLanguageSelect("en")}
@@ -111,22 +111,22 @@ export default function LanguageSelectionModal({
                 <div className="flex items-center space-x-3">
                   <div className="text-2xl">🌍</div>
                   <div>
-                    <h3 className="text-lg font-semibold">No, I am not Korean</h3>
-                    <p className="text-sm text-gray-600">
-                      International pricing and English
-                    </p>
+                    <h3 className="text-lg font-semibold">
+                      No, I am not Korean
+                    </h3>
+                    <p className="text-gray-600 text-sm">English language</p>
                   </div>
                 </div>
                 {selectedLanguage === "en" && (
-                  <CheckCircle className="h-6 w-6 text-blue-500" />
+                  <CheckCircle className="text-blue-500 h-6 w-6" />
                 )}
               </div>
             </CardContent>
           </Card>
         </div>
 
-        <div className="text-center text-sm text-gray-500">
-          <Globe className="inline h-4 w-4 mr-1" />
+        <div className="text-gray-500 text-center text-sm">
+          <Globe className="mr-1 inline h-4 w-4" />
           This setting can only be changed by an administrator
         </div>
       </DialogContent>

@@ -32,7 +32,6 @@ import Link from "next/link";
 import { MembershipBadge } from "@/components/MembershipBadge";
 import Logo from "@/components/Logo";
 import NotificationCenter from "@/components/NotificationCenter";
-import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import LocationDisplay from "@/components/LocationDisplay";
 import TestNotificationButton from "@/components/TestNotificationButton";
 import KYCTermsModal from "@/components/KYCTermsModal";
@@ -386,7 +385,6 @@ export default function DashboardPage() {
 
             {/* Universal Hamburger Menu */}
             <div className="flex items-center space-x-2">
-              <CompactLanguageSwitcher />
               <NotificationCenter variant="customer" />
 
               <Button

@@ -15,8 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User, Calendar, LogOut, Menu, DollarSign } from "lucide-react";
 import { signOutUser } from "@/lib/firebase";
-import LanguageSwitcher from "./LanguageSwitcher";
-import CompactLanguageSwitcher from "./CompactLanguageSwitcher";
 
 interface CustomerHeaderProps {
   variant?: "default" | "transparent";
@@ -94,7 +92,6 @@ export default function CustomerHeader({
 
           <div className="flex items-center space-x-1 sm:space-x-2">
             {/* Language Switcher - Always visible */}
-            <CompactLanguageSwitcher />
 
             {/* Universal Hamburger Menu for All Users */}
             <div className="flex items-center space-x-1 sm:space-x-2">
@@ -148,7 +145,6 @@ export default function CustomerHeader({
                   )}
                   {/* Language Switcher */}
                   <div className="px-2 py-1">
-                    <LanguageSwitcher />
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>

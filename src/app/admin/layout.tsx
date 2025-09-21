@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import NotificationCenter from "@/components/NotificationCenter";
-import CompactLanguageSwitcher from "@/components/CompactLanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Calendar, Menu, X, LogOut } from "lucide-react";
 import { auth } from "@/lib/firebase";
@@ -112,7 +111,6 @@ export default function AdminLayout({
             </div>
 
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <CompactLanguageSwitcher />
               <NotificationCenter variant="admin" />
               <div className="text-gray-600 hidden text-sm sm:block">
                 {user.email}
